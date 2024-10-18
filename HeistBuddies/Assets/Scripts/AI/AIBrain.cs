@@ -3,36 +3,38 @@ using System.Collections.Generic;
 
 public enum AIStateType
 {
-    Idle,
-    Patrol,
+    Patrol
 }
 
 
 public class AIBrain : MonoBehaviour
 {
-    public AIStateType initialStateType = AIStateType.Idle;
+    [Header("Brain Settings")]
+    [SerializeField] private AIStateType initialStateType = AIStateType.Patrol;
     private Dictionary<AIStateType, AIState> stateDictionary = new Dictionary<AIStateType, AIState>();
     private AIState currentState;
 
-    void Awake()
+    public Transform targetPlayer { get; private set; }
+
+    private void Awake()
     {
         // Find and cache all AIState components attached to this GameObject
         AIState[] stateComponents = GetComponents<AIState>();
         foreach (AIState state in stateComponents)
         {
             stateDictionary[state.StateType] = state;
-            state.enabled = false; // Disable all states initially
+            state.enabled = false;
         }
     }
 
-    void Start()
+    private void Start()
     {
         TransitionToState(initialStateType);
     }
 
-    void Update()
+    private void Update()
     {
-        currentState?.StateUpdate();
+        currentState?.OnStateUpdate();
     }
 
     public void TransitionToState(AIStateType newStateType)
@@ -53,6 +55,11 @@ public class AIBrain : MonoBehaviour
         {
             Debug.LogError($"State {newStateType} not found on {gameObject.name}");
         }
+    }
+
+    public void SetTargetPlayer(Transform playerTransform)
+    {
+        targetPlayer = playerTransform;
     }
 }
 

@@ -6,12 +6,12 @@ public abstract class AIState : MonoBehaviour
 
     protected AIBrain brain;
 
-    void Awake()
+    private void Awake()
     {
         brain = GetComponent<AIBrain>();
     }
 
     public virtual void OnStateEnter() { }
-    public virtual void StateUpdate() { }
+    public virtual void OnStateUpdate() { }
     public virtual void OnStateExit() { }
 }
