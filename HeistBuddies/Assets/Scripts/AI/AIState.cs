@@ -6,7 +6,7 @@ public abstract class AIState : MonoBehaviour
 
     protected AIBrain brain;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         brain = GetComponent<AIBrain>();
     }

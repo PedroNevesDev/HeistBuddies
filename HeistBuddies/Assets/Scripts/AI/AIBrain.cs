@@ -3,27 +3,44 @@ using System.Collections.Generic;
 
 public enum AIStateType
 {
-    Patrol
+    None,
+    Patrol,
+    Chase,
+    Confusion,
+    Investigate
 }
-
 
 public class AIBrain : MonoBehaviour
 {
     [Header("Brain Settings")]
     [SerializeField] private AIStateType initialStateType = AIStateType.Patrol;
+
+    [Header("AI Modules")]
+    [SerializeField] private List<AIModule> aiModules = new List<AIModule>();
+
     private Dictionary<AIStateType, AIState> stateDictionary = new Dictionary<AIStateType, AIState>();
     private AIState currentState;
 
-    public Transform targetPlayer { get; private set; }
+    public AIStateType CurrentStateType => currentState != null ? currentState.StateType : AIStateType.None;
+
+    public Transform TargetPlayer { get; private set; }
 
     private void Awake()
     {
-        // Find and cache all AIState components attached to this GameObject
+        // Initialize AI States
         AIState[] stateComponents = GetComponents<AIState>();
         foreach (AIState state in stateComponents)
         {
             stateDictionary[state.StateType] = state;
             state.enabled = false;
+        }
+
+        // Initialize AI Modules
+        AIModule[] moduleComponents = GetComponents<AIModule>();
+        foreach (AIModule module in moduleComponents)
+        {
+            aiModules.Add(module);
+            module.InitializeModule(this);
         }
     }
 
@@ -57,9 +74,19 @@ public class AIBrain : MonoBehaviour
         }
     }
 
+    public T GetModule<T>() where T : AIModule
+    {
+        foreach (AIModule module in aiModules)
+        {
+            if (module is T)
+                return module as T;
+        }
+        return null;
+    }
+
     public void SetTargetPlayer(Transform playerTransform)
     {
-        targetPlayer = playerTransform;
+        TargetPlayer = playerTransform;
     }
 }
 
