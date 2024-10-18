@@ -52,7 +52,7 @@ public class DetectionModule : AIModule
             float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
             // Check line of sight
-            if (CheckLineOfSight(player.position))
+            if (AIHelpers.CheckLineOfSight(player.position, transform, obstacleLayer))
             {
                 // Check for grabbing range first
                 if (distanceToPlayer <= grabbingRadius && angleToPlayer < fieldOfView / 2f)
@@ -82,19 +82,6 @@ public class DetectionModule : AIModule
                 Debug.Log("Player detected but blocked by an obstacle.");
             }
         }
-    }
-
-    private bool CheckLineOfSight(Vector3 targetPosition)
-    {
-        Vector3 directionToTarget = (targetPosition - transform.position).normalized;
-        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
-
-        if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleLayer))
-        {
-            return true;
-        }
-
-        return false;
     }
 
     private void OnDrawGizmos()
