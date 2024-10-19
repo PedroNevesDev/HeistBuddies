@@ -28,7 +28,7 @@ public class PlayerInputs : ScriptableObject
     {
         actionMap.Disable();
         actionMap.FindAction("Move").performed-=OnMove;
-        actionMap.FindAction("Move").canceled+=OnMove;
+        actionMap.FindAction("Move").canceled-=OnMove;
     }
 
     public void OnMove(InputAction.CallbackContext context)
