@@ -23,6 +23,8 @@ public class ChaseState : AIState
     public override void OnStateEnter()
     {
         agent.isStopped = false;
+
+        brain.EnableAlertPanel();
     }
 
     public override void OnStateUpdate()
@@ -49,6 +51,8 @@ public class ChaseState : AIState
     public override void OnStateExit()
     {
         agent.isStopped = true;
+
+        brain.DisableAlertPanel();
     }
 }
 

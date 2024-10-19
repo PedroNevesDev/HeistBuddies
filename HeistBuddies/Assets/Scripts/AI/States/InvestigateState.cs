@@ -49,6 +49,8 @@ public class InvestigateState : AIState
         {
             agent.isStopped = true;
         }
+
+        brain.EnableAlertPanel();
     }
 
     public override void OnStateUpdate()
@@ -78,5 +80,7 @@ public class InvestigateState : AIState
     public override void OnStateExit()
     {
         agent.isStopped = true;
+
+        brain.DisableAlertPanel();
     }
 }

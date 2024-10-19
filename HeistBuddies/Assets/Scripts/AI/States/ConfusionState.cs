@@ -39,6 +39,8 @@ public class ConfusionState : AIState
         {
             agent.isStopped = true;
         }
+
+        brain.EnableConfusionPanel();
     }
 
     public override void OnStateUpdate()
@@ -68,5 +70,7 @@ public class ConfusionState : AIState
     public override void OnStateExit()
     {
         confusionTimer = 0f;
+
+        brain.DisableConfusionPanel();
     }
 }

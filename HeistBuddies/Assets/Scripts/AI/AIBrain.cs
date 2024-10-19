@@ -14,12 +14,15 @@ public class AIBrain : MonoBehaviour
 {
     [Header("Brain Settings")]
     [SerializeField] private AIStateType initialStateType = AIStateType.Patrol;
+    private Dictionary<AIStateType, AIState> stateDictionary = new Dictionary<AIStateType, AIState>();
+    private AIState currentState;
 
     [Header("AI Modules")]
     [SerializeField] private List<AIModule> aiModules = new List<AIModule>();
 
-    private Dictionary<AIStateType, AIState> stateDictionary = new Dictionary<AIStateType, AIState>();
-    private AIState currentState;
+    [Header("UI Panels")]
+    [SerializeField] private GameObject alertPanel;
+    [SerializeField] private GameObject confusionPanel;
 
     public AIStateType CurrentStateType => currentState != null ? currentState.StateType : AIStateType.None;
 
@@ -84,9 +87,14 @@ public class AIBrain : MonoBehaviour
         return null;
     }
 
-    public void SetTargetPlayer(Transform playerTransform)
-    {
-        TargetPlayer = playerTransform;
-    }
+    public void SetTargetPlayer(Transform playerTransform) => TargetPlayer = playerTransform;
+
+    public void EnableAlertPanel() => alertPanel.SetActive(true);
+
+    public void DisableAlertPanel() => alertPanel.SetActive(false);
+
+    public void EnableConfusionPanel() => confusionPanel.SetActive(true);
+
+    public void DisableConfusionPanel() => confusionPanel.SetActive(false);
 }
 
