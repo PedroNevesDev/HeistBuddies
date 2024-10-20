@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc9805f06fd0704196be2d8ac5cfabf, type: 3}
   m_Name: Player2InputSO
   m_EditorClassIdentifier: 
+  actionMap:
+    m_Name: Action Map
+    m_Id: 877e20ca-c3e3-46bb-b344-a6f6652e39b4
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
   moveInput: {x: 0, y: 0}
-  state: 0

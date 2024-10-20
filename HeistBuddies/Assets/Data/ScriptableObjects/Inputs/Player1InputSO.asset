@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc9805f06fd0704196be2d8ac5cfabf, type: 3}
+  m_Name: Player1InputSO
+  m_EditorClassIdentifier: 
+  actionMap:
+    m_Name: SinglePlayer1Map
+    m_Id: b89ea6a3-2e66-4fbc-8d55-f4ec2f7e823a
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: e2a7e92c-7ae1-45d6-a743-811f02ece1f9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 1
+    - m_Name: LeftGrab
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: d46d8311-e264-4077-ad09-cbc60c565c48
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: RightGrab
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 03c2356a-69fc-4850-99a6-6b0b5eb1cc56
+      m_Processors: 
+      m_Interactions: Hold
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: SlowWalking
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 1c994e37-94de-4732-83bc-b56c19d2eb16
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Interact
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 45fec2d0-4c67-4433-87ab-2e54102f02ce
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Run
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 4f3bdd1a-5c39-4471-9028-04670307ddc5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: SupressBreathing
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 6b51b7da-aea8-4a8f-bbd5-c26f005e1781
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 79256bda-0b25-485e-9730-93a5269b2b36
+      m_Path: <Gamepad>/leftStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Gamepad
+      m_Action: Move
+      m_Flags: 0
+    - m_Name: WASD
+      m_Id: 06f69ad7-4cbf-4597-af63-359621b07c66
+      m_Path: Dpad
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: fad5a993-20b4-4387-b470-09b070979ffc
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Keyboard&Mouse
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 781c6d49-33f8-46ee-a194-04421eaf3253
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Keyboard&Mouse
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: d4f3b733-ffce-451e-a904-b3a2872e66eb
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Keyboard&Mouse
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: e5a1ef3e-e00b-45dd-8333-f2b6462f95a2
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Keyboard&Mouse
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: 
+      m_Id: 3e5c964e-b0b4-4e8b-9e96-ce49fba17f18
+      m_Path: <DualShockGamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Gamepad
+      m_Action: Interact
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 673ec4be-906f-4f79-b6ac-19975968fe64
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Keyboard&Mouse
+      m_Action: Interact
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 99549a34-0071-4960-b1d6-88ef978a3b3d
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Gamepad
+      m_Action: RightGrab
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 92c85623-ed75-4b8c-abef-2b4e0905e3f5
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Keyboard&Mouse
+      m_Action: RightGrab
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 90d224a2-d8d6-4dbc-84ec-81de533aaac0
+      m_Path: <XRController>/{Primary2DAxis}
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: XR
+      m_Action: Move
+      m_Flags: 0
+    - m_Name: 
+      m_Id: f40f5599-dc61-4276-be41-26be8da5538b
+      m_Path: <Joystick>/stick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Joystick
+      m_Action: Move
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 36990f52-eec4-47c3-a0dd-debd5a5e6633
+      m_Path: <Gamepad>/leftShoulder
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: ;Gamepad
+      m_Action: LeftGrab
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 19343351-1d23-4ba0-b95a-6c12e2d280fb
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Keyboard&Mouse
+      m_Action: LeftGrab
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 635955e9-1213-4180-a8c5-48f747967bcf
+      m_Path: <DualShockGamepad>/buttonNorth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Keyboard&Mouse
+      m_Action: SupressBreathing
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 43b58207-f2f9-4f41-8f1c-00fba141b59d
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Gamepad
+      m_Action: SupressBreathing
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 380c7e00-ce1a-42fe-bd78-00e9dfd545ed
+      m_Path: <DualShockGamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Keyboard&Mouse
+      m_Action: Run
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ee0ef8a9-3d73-4f34-90a2-fe87d154bd3d
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Gamepad
+      m_Action: Run
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ec84eab9-ac25-4737-aeb7-b42302df7c14
+      m_Path: <DualShockGamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Gamepad
+      m_Action: SlowWalking
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 94948be5-522e-4344-b44a-ed04cffc3e88
+      m_Path: <Keyboard>/ctrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: Keyboard&Mouse
+      m_Action: SlowWalking
+      m_Flags: 0
+  moveInput: {x: 0, y: 0}
