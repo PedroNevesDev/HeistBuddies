@@ -11,7 +11,12 @@ public class PlayerController : MonoBehaviour
 
     public PlayerInputs myInputs;
 
+    private Camera myCam;
 
+    private void Start()
+    {
+        myCam = Camera.main;
+    }
     public void EnableInput(PlayerInputs newInputs)
     {
         myInputs=newInputs;
@@ -38,8 +43,13 @@ public class PlayerController : MonoBehaviour
     {
         if(!myInputs)
             return;
-        // Convert 2D movement input to 3D movement direction
-        Vector3 move = new Vector3(myInputs.moveInput.x, 0, myInputs.moveInput.y);
+
+        //This line creates a rotation equal to the current rotation value of the main camera
+    Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0);
+    //This line applies the rotation to the input direction, making it relative to the camera direction
+    Vector3 move = (rotation*new Vector3(myInputs.moveInput.x, 0, myInputs.moveInput.y)).normalized;
+
+        
         move = transform.TransformDirection(move); // Transform to local space
         characterController.Move(move * moveSpeed * Time.deltaTime); // Move the character
 

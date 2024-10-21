@@ -352,8 +352,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Console\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 913
-    y: 566
+    x: 1
+    y: 511
     width: 267
     height: 420
   m_SerializedDataModeController:
@@ -388,8 +388,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1554
-    y: 79
+    x: 1555
+    y: 24
     width: 365
     height: 907
   m_SerializedDataModeController:
@@ -437,8 +437,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1182
-    y: 79
+    x: 1183
+    y: 24
     width: 370
     height: 907
   m_SerializedDataModeController:
@@ -482,7 +482,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 4aaa0000
     m_LastClickedID: 43594
-    m_ExpandedIDs: 00000000e0a90000e2a90000e4a90000e6a90000e8a90000eaa9000000ca9a3b
+    m_ExpandedIDs: 000000000eac000010ac000012ac000014ac000016ac000018ac0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -511,7 +511,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e0a90000e2a90000e4a90000e6a90000e8a90000eaa90000
+    m_ExpandedIDs: 000000000eac000010ac000012ac000014ac000016ac000018ac0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 912
     height: 461
   m_SerializedDataModeController:
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 566
+    y: 511
     width: 912
     height: 420
   m_SerializedDataModeController:
@@ -1263,6 +1263,20 @@ MonoBehaviour:
       layout: 4
       size: {x: 0, y: 0}
       sizeOverridden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      displayed: 0
+      id: unity-spline-inspector
+      index: 12
+      contents: '{"m_Layout":4,"m_Collapsed":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
     m_ContainerData:
     - containerId: overlay-toolbar__top
       scrollOffset: 0
@@ -1290,7 +1304,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -6, y: 0.5, z: 66}
+    m_Target: {x: 77.42837, y: -35.003574, z: 6.4650373}
     speed: 2
     m_Value: {x: -6, y: 0.5, z: 66}
   m_RenderMode: 0
@@ -1338,11 +1352,11 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.04331941, y: 0.9545549, z: -0.23846847, w: -0.17340356}
+    m_Target: {x: -0.15694873, y: -0.6139237, z: 0.12624681, w: -0.76323205}
     speed: 2
     m_Value: {x: -0.04331968, y: 0.9545608, z: -0.23846994, w: -0.17340463}
   m_Size:
-    m_Target: 12.124355
+    m_Target: 54.62544
     speed: 2
     m_Value: 12.124355
   m_Ortho:
@@ -1396,8 +1410,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 913
-    y: 79
+    x: 1
+    y: 24
     width: 267
     height: 461
   m_SerializedDataModeController:
