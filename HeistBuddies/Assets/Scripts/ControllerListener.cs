@@ -29,7 +29,7 @@ public class ControllerListener : MonoBehaviour
     {
         for(int playerCount = 0; playerCount<2; playerCount++)
         {
-            PlayerController newCharacterController=Instantiate(playerPrefab,mapSpawnPoint.position,mapSpawnPoint.rotation);
+            PlayerController newCharacterController=Instantiate(playerPrefab,mapSpawnPoint.position+new Vector3(playerCount*1,0,0),mapSpawnPoint.rotation);
             myTargetGroup.AddMember(newCharacterController.transform,1,1);
             newCharacterController.EnableInput(playerInputs[playerCount]);
         }

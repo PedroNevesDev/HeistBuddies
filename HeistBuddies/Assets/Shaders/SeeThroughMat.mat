@@ -55,11 +55,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Opacity: 0.766
+    - _Opacity: 0.7
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Size: 0.0005243094
-    - _Smoothness: 0.3
+    - _Smoothness: 0.5
     m_Colors:
     - _Position: {r: 0.6615895, g: 0.45243892, b: 16.137592, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
