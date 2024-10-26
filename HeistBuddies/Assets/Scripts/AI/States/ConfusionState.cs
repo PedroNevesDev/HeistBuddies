@@ -8,10 +8,10 @@ public class ConfusionState : AIState
     [Header("Confusion Settings")]
     [SerializeField] private float confusionDuration = 5f;
     private float confusionTimer = 0f;
-    private Vector3 searchPosition;
+    private Vector3 searchPosition = Vector3.zero;
 
-    private NavMeshAgent agent;
-    private DetectionModule detectionModule;
+    private NavMeshAgent agent = null;
+    private DetectionModule detectionModule = null;
 
     protected override void Awake()
     {

@@ -43,7 +43,7 @@ public class AIBrain : MonoBehaviour
         foreach (AIModule module in moduleComponents)
         {
             aiModules.Add(module);
-            module.InitializeModule(this);
+            module.Initialize(this);
         }
     }
 
