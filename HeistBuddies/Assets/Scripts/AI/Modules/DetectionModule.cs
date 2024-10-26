@@ -7,6 +7,10 @@ public class DetectionModule : AIModule
 
     [Header("Player Detection Settings")]
     [SerializeField] private float detectionRadius = 15f;
+    private Transform detectedPlayer = null;
+    private Vector3 lastKnownPlayerPosition = Vector3.zero;
+    private bool isPlayerVisible = false;
+    private bool isPlayerGrabbable = false;
 
     [Header("Grabbing Detection Settings")]
     [SerializeField] private float grabbingRadius = 15f;
@@ -15,17 +19,15 @@ public class DetectionModule : AIModule
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask obstacleLayer;
 
-    public Transform DetectedPlayer { get; private set; }
+    private AIBrain brain = null;
 
-    public Vector3 LastKnownPlayerPosition { get; private set; } = Vector3.zero;
+    public Transform DetectedPlayer { get => detectedPlayer; private set => detectedPlayer = value; }
+    public Vector3 LastKnownPlayerPosition { get => lastKnownPlayerPosition; private set => lastKnownPlayerPosition = value; }
+    public bool IsPlayerVisible { get => isPlayerVisible; private set => isPlayerVisible = value; }
+    public bool IsPlayerGrabbable { get => isPlayerGrabbable; private set => isPlayerGrabbable = value; }
 
-    public bool IsPlayerVisible { get; private set; }
 
-    public bool IsPlayerGrabbable { get; private set; }
-
-    private AIBrain brain;
-
-    public override void InitializeModule(AIBrain brain)
+    public override void Initialize(AIBrain brain)
     {
         this.brain = brain;
     }
@@ -37,9 +39,9 @@ public class DetectionModule : AIModule
 
     private void HandleDetection()
     {
-        DetectedPlayer = null;
-        IsPlayerVisible = false;
-        IsPlayerGrabbable = false;
+        detectedPlayer = null;
+        isPlayerVisible = false;
+        isPlayerGrabbable = false;
 
         float maxRadius = Mathf.Max(detectionRadius, grabbingRadius);
         Collider[] hits = Physics.OverlapSphere(transform.position, maxRadius, playerLayer);
@@ -51,26 +53,22 @@ public class DetectionModule : AIModule
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
             float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
-            // Check line of sight
             if (AIHelpers.CheckLineOfSight(player.position, transform, obstacleLayer))
             {
-                // Check for grabbing range first
                 if (distanceToPlayer <= grabbingRadius && angleToPlayer < fieldOfView / 2f)
                 {
-                    IsPlayerGrabbable = true;
-                    DetectedPlayer = player;
+                    isPlayerGrabbable = true;
+                    detectedPlayer = player;
                     Debug.Log("Player is within grabbing range!");
-                    return; // Early return since grabbing takes precedence
+                    return;
                 }
 
-                // Check for detection range and field of view
                 if (distanceToPlayer <= detectionRadius && angleToPlayer < fieldOfView / 2f)
                 {
-                    IsPlayerVisible = true;
-                    DetectedPlayer = player;
-                    LastKnownPlayerPosition = player.position;
+                    isPlayerVisible = true;
+                    detectedPlayer = player;
+                    lastKnownPlayerPosition = player.position;
                     Debug.Log("Player detected and visible!");
-                    // Continue to check other players if needed
                 }
                 else
                 {

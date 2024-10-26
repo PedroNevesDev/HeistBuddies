@@ -8,11 +8,11 @@ public class InvestigateState : AIState
     [Header("Investigate Settings")]
     [SerializeField] private float investigationDuration = 5f;
     private float investigationTimer = 0f;
-    private Vector3 investigatePosition;
+    private Vector3 investigatePosition = Vector3.zero;
 
-    private NavMeshAgent agent;
-    private HearingModule hearingModule;
-    private DetectionModule detectionModule;
+    private NavMeshAgent agent = null;
+    private HearingModule hearingModule = null;
+    private DetectionModule detectionModule = null;
 
     protected override void Awake()
     {

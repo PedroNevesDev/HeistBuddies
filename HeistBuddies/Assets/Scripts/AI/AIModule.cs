@@ -2,6 +2,6 @@ using UnityEngine;
 
 public abstract class AIModule : MonoBehaviour
 {
-    public abstract void InitializeModule(AIBrain brain);
+    public abstract void Initialize(AIBrain brain);
 }
 

@@ -5,8 +5,8 @@ public class ChaseState : AIState
 {
     public override AIStateType StateType => AIStateType.Chase;
 
-    private NavMeshAgent agent;
-    private DetectionModule detectionModule;
+    private NavMeshAgent agent = null;
+    private DetectionModule detectionModule = null;
 
     protected override void Awake()
     {
@@ -33,7 +33,7 @@ public class ChaseState : AIState
         {
             if (detectionModule.IsPlayerGrabbable)
             {
-                // Transition to GrabState
+                // TODO: IMPLEMENT GRABBING
                 Debug.Log("Grabbing Player");
                 return;
             }

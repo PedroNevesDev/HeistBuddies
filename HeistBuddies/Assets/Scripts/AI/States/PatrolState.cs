@@ -16,9 +16,9 @@ public class PatrolState : AIState
     private float idleTimer = 0f;
     private float idleDuration = 0f;
 
-    private NavMeshAgent agent;
-    private DetectionModule detectionModule;
-    private HearingModule hearingModule;
+    private NavMeshAgent agent = null;
+    private DetectionModule detectionModule = null;
+    private HearingModule hearingModule = null;
 
     protected override void Awake()
     {

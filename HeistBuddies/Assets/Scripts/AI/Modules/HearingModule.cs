@@ -6,30 +6,32 @@ public class HearingModule : AIModule
     [SerializeField] private float hearingRadius = 20f;
     [SerializeField] private LayerMask obstacleLayer;
 
-    private AIBrain brain;
-    public Vector3 SoundSourcePosition { get; private set; }
-    public bool HasHeardSound { get; private set; }
+    private Vector3 soundSourcePosition = Vector3.zero;
+    private bool hasHeardSound = false;
 
-    public override void InitializeModule(AIBrain brain)
+    private AIBrain brain = null;
+
+    public Vector3 SoundSourcePosition { get => soundSourcePosition; private set => soundSourcePosition = value; }
+    public bool HasHeardSound { get => hasHeardSound; private set => hasHeardSound = value; }
+
+    public override void Initialize(AIBrain brain)
     {
         this.brain = brain;
     }
 
     public void OnSoundHeard(Vector3 soundPosition)
     {
-        HasHeardSound = false;
-        SoundSourcePosition = Vector3.zero;
+        hasHeardSound = false;
+        soundSourcePosition = Vector3.zero;
 
-        // Check if the soundPosition is within the hearing radius
         float distanceToSound = Vector3.Distance(transform.position, soundPosition);
         if (distanceToSound <= hearingRadius)
         {
-            // Check for obstacles blocking the sound
             Vector3 directionToSound = (soundPosition - transform.position).normalized;
             if (!Physics.Raycast(transform.position, directionToSound, distanceToSound, obstacleLayer))
             {
-                HasHeardSound = true;
-                SoundSourcePosition = soundPosition;
+                hasHeardSound = true;
+                soundSourcePosition = soundPosition;
                 Debug.Log($"{gameObject.name} heard sound at position: {soundPosition}");
             }
             else
@@ -41,8 +43,8 @@ public class HearingModule : AIModule
 
     public void ResetHearing()
     {
-        HasHeardSound = false;
-        SoundSourcePosition = Vector3.zero;
+        hasHeardSound = false;
+        soundSourcePosition = Vector3.zero;
     }
 
     private void OnDrawGizmos()

@@ -1,0 +1,14 @@
+{
+    "variants": [
+        {
+            "variantName": "NewVariant",
+            "mesh": {
+                "instanceID": 720
+            },
+            "material": {
+                "instanceID": 43812
+            },
+            "prefabPath": "Assets/Prefabs/NewVariant.prefab"
+        }
+    ]
+}
