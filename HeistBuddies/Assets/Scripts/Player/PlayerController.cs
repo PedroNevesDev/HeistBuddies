@@ -5,13 +5,20 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController; // Using CharacterController for 3D movement
 
+    [SerializeField] Rigidbody mainBody;
     public float moveSpeed = 5f; // Movement speed
     private Vector3 velocity; // To track the player's velocity
-    private float gravity = -9.81f; // Gravity value
 
+    [SerializeField] private Transform mesh;
+    
+
+    [Header("GroundCheck")]
+    bool isGrounded;
     public PlayerInputs myInputs;
 
     private Camera myCam;
+
+    [SerializeField] Animator animator;
 
     private void Start()
     {
@@ -33,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
         Move(); // Call Move method every frame
     }
 
@@ -45,26 +53,25 @@ public class PlayerController : MonoBehaviour
             return;
 
         //This line creates a rotation equal to the current rotation value of the main camera
-    Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0);
-    //This line applies the rotation to the input direction, making it relative to the camera direction
-    Vector3 move = (rotation*new Vector3(myInputs.moveInput.x, 0, myInputs.moveInput.y)).normalized;
+        Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0);
+        //This line applies the rotation to the input direction, making it relative to the camera direction
+        Vector3 move = (rotation*new Vector3(myInputs.moveInput.x, 0, myInputs.moveInput.y)).normalized;
 
         
         move = transform.TransformDirection(move); // Transform to local space
-        characterController.Move(move * moveSpeed * Time.deltaTime); // Move the character
-
-        // Handle gravity
-        if (characterController.isGrounded)
+        if(move!=Vector3.zero)
         {
-            velocity.y = 0; // Reset vertical velocity if grounded
-            if (Input.GetButtonDown("Jump")) // Ensure you have "Jump" mapped in your Input System
-            {
-                velocity.y = Mathf.Sqrt(2f * -gravity); // Calculate jump velocity
-            }
+            mesh.forward = Vector3.Lerp(mesh.forward ,move,15f*Time.deltaTime);
+
+            animator.SetBool("Moving",true);
+        }
+        else
+        {
+            animator.SetBool("Moving",false);
         }
 
-        // Apply gravity
-        velocity.y += gravity * Time.deltaTime; // Update vertical velocity
-        characterController.Move(velocity * Time.deltaTime); // Apply gravity to the character
+        mainBody.AddForce(move * moveSpeed * Time.deltaTime,ForceMode.VelocityChange); // Move the character
+
+ 
     }
 }
