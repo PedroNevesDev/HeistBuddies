@@ -14,6 +14,7 @@ public class ActiveRagdoll : MonoBehaviour
         foreach(AnimatedJoint j in joints)
         {
             startRots.Add(j.AnimatedCounterpart.localRotation);
+
         }
 
     }
@@ -26,8 +27,12 @@ public class ActiveRagdoll : MonoBehaviour
         {
             j.Joint.targetRotation = j.AnimatedCounterpart.transform.localRotation * Quaternion.Inverse(startRots[joints.IndexOf(j)]);
             j.Joint.transform.localScale = j.AnimatedCounterpart.localScale;
+
         }
     }
+
+	
+
     [System.Serializable]
     public struct AnimatedJoint
     {
@@ -36,4 +41,5 @@ public class ActiveRagdoll : MonoBehaviour
         public ConfigurableJoint Joint { get => joint; set => joint = value; }
         public Transform AnimatedCounterpart { get => animatedCounterpart; set => animatedCounterpart = value; }
     }
+    
 }
