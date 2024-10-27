@@ -33,8 +33,8 @@ public class ChaseState : AIState
         {
             if (detectionModule.IsPlayerGrabbable)
             {
-                // TODO: IMPLEMENT GRABBING
-                Debug.Log("Grabbing Player");
+                PlayerController player = detectionModule.DetectedPlayer.GetComponentInParent<PlayerController>();
+                player.CanMove = false;
                 return;
             }
             else if (detectionModule.IsPlayerVisible)

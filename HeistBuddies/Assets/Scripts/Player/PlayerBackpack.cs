@@ -9,18 +9,18 @@ public class PlayerBackpack : MonoBehaviour
 
     public void AddItemToBackPack(Item item)
     {
-        bool itemExists = items.Any(existingItem => existingItem.ItemData.id != item.ItemData.id);
+        bool itemExists = items.Any(existingItem => existingItem.Id == item.Id);
 
         if (!itemExists)
         {
             items.Add(item);
-            Debug.Log($"{item.ItemData.name} with the ID {item.ItemData.id} was added to the backpack");
+            Debug.Log($"{item.Data.Name} with the ID {item.Id} was added to the backpack");
         }
     }
 
     public int ClearItemsFromBackpack()
     {
-        int totalPoints = items.Sum(item => item.ItemData.points);
+        int totalPoints = items.Sum(item => item.Data.Points);
 
         items.Clear();
 

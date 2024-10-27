@@ -5,12 +5,14 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController; // Using CharacterController for 3D movement
 
-    [SerializeField] Rigidbody mainBody;
+    [Header("Player Movement Settings")]
     public float moveSpeed = 5f; // Movement speed
+    [SerializeField] private bool canMove;
+
+    [SerializeField] Rigidbody mainBody;
     private Vector3 velocity; // To track the player's velocity
 
     [SerializeField] private Transform mesh;
-    
 
     [Header("GroundCheck")]
     bool isGrounded;
@@ -20,9 +22,21 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    [Header("Grab Detection Box Settings")]
+    [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
+    [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
+    [SerializeField] private LayerMask detectionLayer;
+    private IGrabbable currentGrabbable;
+
+    private PlayerBackpack _Backpack;
+
+    public bool CanMove { get => canMove; set => canMove = value; }
+
     private void Start()
     {
         myCam = Camera.main;
+
+        _Backpack = GetComponent<PlayerBackpack>();
     }
     public void EnableInput(PlayerInputs newInputs)
     {
@@ -40,8 +54,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove) return;
 
         Move(); // Call Move method every frame
+        CheckForGrabbable();
+
+        if (myInputs.isGrabbing && currentGrabbable != null)
+        {
+            Grab();
+        }
     }
 
     // This function will be called by the Input System when the move action is triggered for Player 1
@@ -73,5 +94,52 @@ public class PlayerController : MonoBehaviour
         mainBody.AddForce(move * moveSpeed * Time.deltaTime,ForceMode.VelocityChange); // Move the character
 
  
+    }
+
+    private void CheckForGrabbable()
+    {
+        Vector3 boxCenter = mainBody.position + mainBody.transform.TransformDirection(boxOffset);
+        Collider[] hits = Physics.OverlapBox(boxCenter, boxSize / 2, mainBody.transform.rotation, detectionLayer);
+
+        if (hits.Length > 0)
+        {
+            IGrabbable grabbable = hits[0].GetComponent<IGrabbable>();
+            if (grabbable != null)
+            {
+                if (currentGrabbable != grabbable)
+                {
+                    if (currentGrabbable != null)
+                    {
+                        currentGrabbable.DisableUI();
+                    }
+
+                    currentGrabbable = grabbable;
+                    currentGrabbable.EnableUI();
+                }
+                return;
+            }
+        }
+
+        if (currentGrabbable != null)
+        {
+            currentGrabbable.DisableUI();
+            currentGrabbable = null;
+        }
+    }
+
+    private void Grab()
+    {
+        Item item = currentGrabbable as Item;
+        _Backpack.AddItemToBackPack(item);
+
+        currentGrabbable.Grab();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Vector3 boxCenter = mainBody.transform.position + mainBody.transform.TransformDirection(boxOffset);
+        Gizmos.matrix = Matrix4x4.TRS(boxCenter, mainBody.transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
     }
 }

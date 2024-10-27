@@ -11,6 +11,7 @@ public class PlayerInputs : ScriptableObject
     public InputSystem_Actions playerInputs;
     public InputActionMap actionMap;  // Reference the generated class
     public Vector2 moveInput;
+    public bool isGrabbing;
 
     public void Init()
     {
@@ -22,13 +23,19 @@ public class PlayerInputs : ScriptableObject
         actionMap = GetActiveActionMap(playerInputs);
         actionMap.FindAction("Move").performed+=OnMove;
         actionMap.FindAction("Move").canceled+=OnMove;
-     }
+
+        actionMap.FindAction("LeftGrab").performed += OnGrab;
+        actionMap.FindAction("LeftGrab").canceled += OnGrab;
+    }
 
     public void Cancel()
     {
         actionMap.Disable();
         actionMap.FindAction("Move").performed-=OnMove;
         actionMap.FindAction("Move").canceled-=OnMove;
+
+        actionMap.FindAction("LeftGrab").performed -= OnGrab;
+        actionMap.FindAction("LeftGrab").canceled -= OnGrab;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -40,6 +47,18 @@ public class PlayerInputs : ScriptableObject
         else if (context.canceled)
         {
             moveInput = Vector2.zero;
+        }
+    }
+
+    public void OnGrab(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isGrabbing = true;
+        }
+        else if (context.canceled)
+        {
+            isGrabbing = false;
         }
     }
 
