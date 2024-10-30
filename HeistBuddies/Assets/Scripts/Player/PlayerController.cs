@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator animator; // Animator of the animated rig. Lets you change the animation
 
     [SerializeField]BodyPartOwner[] bodyParts; // All bodyparts can be here if needed. Used to store a reference into player controller owner
-    PlayerInputs myInputs; // SO with the player inputs
+    //PlayerInputs myInputs; // SO with the player inputs
+
+    
     private Camera myCam; // Variable mean't to save up the main camera
     
 	[Header("Grab Detection Box Settings")]
@@ -26,6 +28,11 @@ public class PlayerController : MonoBehaviour
     public Rigidbody Rb { get => rb; set => rb = value; }
     public PlayerBackpack Backpack { get => _Backpack; set => _Backpack = value; }
 
+
+    Vector2 moveInput = Vector2.zero;
+    public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
+    public void OnGrab() => Grab();
+
     private void Start()
     {
         myCam = Camera.main; // Getting main camera for latter use
@@ -35,15 +42,6 @@ public class PlayerController : MonoBehaviour
             bodyPart.MyOwner = this;
         }
     }
-    public void EnableInput(PlayerInputs newInputs) // Called by the controller listener to assign and change player inputs when needed. Importent for changing between singleplayer inputs and multyplayer inputs
-    {
-        if(myInputs)
-            myInputs.Cancel(); // Deactivate old one
-
-        myInputs=newInputs; // Assign new one
-
-        myInputs.Init(); // Activate new one
-    }
 
     private void Update()
     {
@@ -51,20 +49,12 @@ public class PlayerController : MonoBehaviour
 
         Move(); // Call Move method every frame
         CheckForGrabbable();
-
-        if (myInputs.isGrabbing && currentGrabbable != null)
-        {
-            Grab();
-        }
     }
     private void Move()
     {
-        if(!myInputs) // Leaves the function if there is no input scriptable object linked to this character
-            return;
-
         Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0); //Getting the main camera directions
         
-        Vector3 move = (rotation*new Vector3(myInputs.moveInput.x, 0, myInputs.moveInput.y)).normalized; // Applying the camera directions to the the inputs to get a better feel
+        Vector3 move = (rotation*new Vector3(moveInput.x, 0, moveInput.y)).normalized; // Applying the camera directions to the the inputs to get a better feel
 
         move = transform.TransformDirection(move); //Transform to local space
 
@@ -113,6 +103,9 @@ public class PlayerController : MonoBehaviour
 
     private void Grab()
     {
+        if(currentGrabbable == null)
+            return;
+    
         Item item = currentGrabbable as Item;
         _Backpack.AddItemToBackPack(item);
 
