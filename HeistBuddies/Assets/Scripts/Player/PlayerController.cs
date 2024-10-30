@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput = Vector2.zero;
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
-    public void OnGrab() => Grab();
+    public void OnGrab(InputAction.CallbackContext context) => Grab();
 
     private void Start()
     {

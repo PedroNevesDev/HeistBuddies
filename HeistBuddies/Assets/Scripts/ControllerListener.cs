@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
+
 
 
 
 public class ControllerListener : MonoBehaviour
 {
-    public PlayerInputs[] playerInputs;
     public PlayerController playerPrefab;
 
     public CinemachineTargetGroup myTargetGroup;
