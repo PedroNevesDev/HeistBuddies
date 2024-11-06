@@ -765,7 +765,6 @@ GameObject:
   m_Component:
   - component: {fileID: 918417915}
   - component: {fileID: 918417914}
-  - component: {fileID: 918417916}
   m_Layer: 0
   m_Name: ControllerListener
   m_TagString: Untagged
@@ -785,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6c31c1956666c4fb3d209aca31b312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: -1583520621189726305, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
+  playerPrefab: {fileID: 7823575494001143626, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
   myTargetGroup: {fileID: 289038698}
   mapSpawnPoint: {fileID: 42407122}
 --- !u!4 &918417915
@@ -803,62 +802,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &918417916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918417913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 2
-  m_MaxPlayerCount: 2
-  m_AllowJoining: 1
-  m_JoinBehavior: 0
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 918417914}
-        m_TargetAssemblyTypeName: ControllerListener, Assembly-CSharp
-        m_MethodName: OnPlayerJoin
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Join
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 82baf81a-37a6-4825-beb9-0fe7b7af21e2
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 7823575494001143626, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1001 &936580767
 PrefabInstance:
   m_ObjectHideFlags: 0

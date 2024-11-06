@@ -331,9 +331,81 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1583520621189726305}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bd3d211c-4444-401f-ac96-1d9f80b128a1
+    m_ActionName: 'Player2/Move[/DualShock4GamepadHID/leftStick,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1583520621189726305}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnGrab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87ce50c0-c75d-47e6-a94c-a61733a43d7d
+    m_ActionName: 'Player2/Grab[/DualShock4GamepadHID/rightShoulder,/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 173bafaa-f2e0-4a5e-abf5-25c4dcc5e23c
+    m_ActionName: 'Player2/SlowWalking[/DualShock4GamepadHID/buttonSouth,/Keyboard/ctrl]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b65de0a-c58c-4be4-83ad-840d688727af
+    m_ActionName: 'Player2/Interact[/DualShock4GamepadHID/buttonEast,/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8a6c45c-b3b9-496d-b508-a7403590bfb3
+    m_ActionName: 'Player2/Run[/DualShock4GamepadHID/buttonWest,/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5047554e-c011-429c-981a-737bc2a125d4
+    m_ActionName: 'Player2/SupressBreathing[/DualShock4GamepadHID/buttonNorth,/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e8852d43-ac13-4cd2-83d8-0cc94fdbcde3
+    m_ActionName: 'Multiplayer/Move[/DualShock4GamepadHID/leftStick]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6abe3666-51f5-4f41-bba8-4849271232ba
+    m_ActionName: 'Multiplayer/Grab[/DualShock4GamepadHID/leftShoulder]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7f544ba2-383e-4c62-ab2a-54d251fcdd1a
+    m_ActionName: 'Multiplayer/SlowWalking[/DualShock4GamepadHID/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aa9f2483-cf80-4832-8be5-2cb218e84ac2
+    m_ActionName: 'Multiplayer/Interact[/DualShock4GamepadHID/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 06fd7191-4fd0-4695-b5a6-17d621714ae9
+    m_ActionName: 'Multiplayer/Run[/DualShock4GamepadHID/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7c6b769-c633-470a-9008-adcbcae710b2
+    m_ActionName: 'Multiplayer/SupressBreathing[/DualShock4GamepadHID/buttonNorth]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse1
-  m_DefaultActionMap: Player
+  m_DefaultControlScheme: Player2
+  m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1001 &3027516127422597284
