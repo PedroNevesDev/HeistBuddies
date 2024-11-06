@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class Balance : MonoBehaviour
 {
-    [SerializeField] GameObject bodyPart;
+    [SerializeField] Rigidbody bodyPart;
     [SerializeField] float upwardForce;
-    Rigidbody bodyPartRb;
     [SerializeField]bool  balance;
 
-    void Start()
-    {
-        bodyPartRb = bodyPart.GetComponent<Rigidbody>();
-    }
     // Update is called once per frame
     void Update()
     {
@@ -30,8 +25,14 @@ public class Balance : MonoBehaviour
     }
     void ApplyUpwardForce()
     {
-        if(!bodyPartRb)
+        if(!bodyPart)
             return;
-        bodyPartRb.AddForce(upwardForce*Vector3.up*Time.fixedDeltaTime,ForceMode.Force);
+        bodyPart.AddForce(upwardForce*Vector3.up*Time.fixedDeltaTime,ForceMode.Force);
+    }
+
+    private void OnDrawGizmos() 
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(bodyPart.transform.position,bodyPart.transform.position+(Vector3.up*2));
     }
 }

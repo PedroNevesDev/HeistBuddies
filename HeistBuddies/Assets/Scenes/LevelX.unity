@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7823575494001143626, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
-  myTargetGroup: {fileID: 289038698}
+  cameraTargetGroup: {fileID: 289038698}
   mapSpawnPoint: {fileID: 42407122}
 --- !u!4 &918417915
 Transform:

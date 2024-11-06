@@ -4,22 +4,32 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb; // Rigidbody used for the player movement
-    [SerializeField]  float moveSpeed = 5f; // Movement speed
+    [Header("Movement")]
+    [SerializeField]  float moveSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 1.5f;
+    [SerializeField] private float maxSpeedMagnitude;
     [SerializeField] private bool canMove;
-    [SerializeField] Transform orientation; // Specific transform that will be used to follow the movement direction ex:mesh. Could be anything 
-    [SerializeField] Animator animator; // Animator of the animated rig. Lets you change the animation
+    [SerializeField] Rigidbody rb;
 
-    [SerializeField]BodyPartOwner[] bodyParts; // All bodyparts can be here if needed. Used to store a reference into player controller owner
-    //PlayerInputs myInputs; // SO with the player inputs
+
+    // Specific transform that will be used to follow the movement direction ex:mesh. Could be anything
+    [SerializeField] Transform orientation; 
+    
+    // Animator of the animated rig. Lets you change the animation
+    [SerializeField] Animator animator; 
+
+    // All bodyparts can be here if needed. Used to store a reference into player controller owner
+    [SerializeField,Tooltip("Assigns this character reference to every body part script added here. Makes searching for collisions easier")] BodyPartOwner[] bodyParts; 
+    
 
     
-    private Camera myCam; // Variable mean't to save up the main camera
+    private Camera myCam; 
     
 	[Header("Grab Detection Box Settings")]
     [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
     [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
     [SerializeField] private LayerMask detectionLayer;
+    
     private IGrabbable currentGrabbable;
 
     private PlayerBackpack _Backpack;
@@ -35,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        myCam = Camera.main; // Getting main camera for latter use
+        myCam = Camera.main;
         _Backpack = GetComponent<PlayerBackpack>();
         foreach(BodyPartOwner bodyPart in bodyParts)
         {
@@ -43,32 +53,61 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-                if (!canMove) return;
+        if (!canMove) return;
 
-        Move(); // Call Move method every frame
+        Move();
+        SpeedControl();
         CheckForGrabbable();
+    }
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+        if (flatVel.magnitude > maxSpeedMagnitude)
+        {
+            Vector3 limitVel = flatVel.normalized * maxSpeedMagnitude;
+            rb.linearVelocity = new Vector3(limitVel.x, rb.linearVelocity.y, limitVel.z);
+        }
     }
     private void Move()
     {
-        Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0); //Getting the main camera directions
+        //Getting the main camera directions
+
+        Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0); 
         
-        Vector3 move = (rotation*new Vector3(moveInput.x, 0, moveInput.y)).normalized; // Applying the camera directions to the the inputs to get a better feel
+        // Applying the camera directions to the the inputs to get a better feel
 
-        move = transform.TransformDirection(move); //Transform to local space
+        Vector3 move = (rotation*new Vector3(moveInput.x, 0, moveInput.y)).normalized; 
+        
+        //Transform to local space
 
-        if(move!=Vector3.zero) // Checking if there is indead movement input from the player
+        move = transform.TransformDirection(move); 
+
+        // Checking if there is indead movement input from the player
+
+        if(move!=Vector3.zero) 
         {
-            orientation.forward = Vector3.Lerp(orientation.forward ,move,15f*Time.deltaTime); // Applying rotation to the mesh so that it faces the movement direction. lerping by 15f
-            animator.SetBool("Moving",true); // Makes the character go into Walk animation
+
+            //Get Target Rotation
+            
+            Quaternion targetRotation = Quaternion.LookRotation((orientation.transform.position+move)-orientation.transform.position);
+
+            //Rotate smoothly to this target
+
+            orientation.rotation = Quaternion.Slerp(orientation.rotation, targetRotation, rotationSpeed*Time.fixedDeltaTime);
+
+            // Makes the character go into Walk animation
+
+            animator.SetBool("Moving",true); 
         }
         else
         {
             animator.SetBool("Moving",false); // Makes the character go into Idle animation
         }
 
-        rb.AddForce(move * moveSpeed * Time.deltaTime,ForceMode.VelocityChange); // Applying the move direction to the rigidbody
+        rb.AddForce(move * moveSpeed * Time.fixedDeltaTime,ForceMode.VelocityChange); // Applying the move direction to the rigidbody
     }
     private void CheckForGrabbable()
     {
