@@ -404,7 +404,7 @@ MonoBehaviour:
     m_ActionId: e7c6b769-c633-470a-9008-adcbcae710b2
     m_ActionName: 'Multiplayer/SupressBreathing[/DualShock4GamepadHID/buttonNorth]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Player2
+  m_DefaultControlScheme: Player1
   m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

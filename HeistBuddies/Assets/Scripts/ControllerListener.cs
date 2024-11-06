@@ -11,7 +11,7 @@ public class ControllerListener : MonoBehaviour
 {
     public GameObject playerPrefab;
 
-    public CinemachineTargetGroup myTargetGroup;
+    public CinemachineTargetGroup cameraTargetGroup;
 
     public Transform mapSpawnPoint;
     
@@ -20,27 +20,27 @@ public class ControllerListener : MonoBehaviour
 
     bool multiplayer = false;
     int numberOfGamepads = 0;
-    string controlScheme;
 
     void Update()
     {
-        if(!p1 || !p2)
+        if(!p1 || !p2) // If players doesnt exist spanw them
             SpawnPlayers();
 
-        if(numberOfGamepads!=Gamepad.all.Count)
+        if(numberOfGamepads!=Gamepad.all.Count) // Checking for Controllers Count
             OnDeviceChange();
     }
     void OnDeviceChange()
     {
-        numberOfGamepads=Gamepad.all.Count;
+        numberOfGamepads=Gamepad.all.Count; // Update numberOfPads so that it doesnt call OnDeviceChange multiple times
 
-        multiplayer=!(numberOfGamepads<2);
+        multiplayer=numberOfGamepads>=2; // Assigning multiplayer bool for better readability 
 
-        controlScheme = "KeyboardMouseGamepad";
 
+        //Debugging
         print("Gamepad count: " + numberOfGamepads);
         print("Multiplayer Mode: " + multiplayer);
-        if(multiplayer)
+
+        if(multiplayer) // Changing Controller Schemes depending on the boolean. true == multiplayer, false == singleplayer  
         {
             p1.SwitchCurrentControlScheme("Multiplayer", new InputDevice[] {Gamepad.all[0]});
             p2.SwitchCurrentControlScheme("Multiplayer", new InputDevice[] {Gamepad.all[1]});
@@ -55,12 +55,16 @@ public class ControllerListener : MonoBehaviour
     }
     void SpawnPlayers()
     {
-        p1 = PlayerInput.Instantiate(playerPrefab);
-        p1.transform.position = mapSpawnPoint.position + Vector3.right*1;
-        myTargetGroup.AddMember(p1.GetComponent<PlayerController>().Rb.transform,1,1);
+        p1 = PlayerInput.Instantiate(playerPrefab); // Instantiating player one
 
-        p2 = PlayerInput.Instantiate(playerPrefab);
-        p2.transform.position = mapSpawnPoint.position + Vector3.right*2;
-        myTargetGroup.AddMember(p2.GetComponent<PlayerController>().Rb.transform,1,1);
+        p1.SwitchCurrentControlScheme("Player1", new InputDevice[] { Keyboard.current, Mouse.current, Gamepad.all[0]});
+        p1.transform.position = mapSpawnPoint.position + Vector3.left*1;
+        cameraTargetGroup.AddMember(p1.GetComponent<PlayerController>().Rb.transform,1,1);
+
+        p2 = PlayerInput.Instantiate(playerPrefab); // Instantiating player two
+
+        p2.SwitchCurrentControlScheme("Player2", new InputDevice[] { Keyboard.current, Mouse.current, Gamepad.all[0]});
+        p2.transform.position = mapSpawnPoint.position + Vector3.left*2;
+        cameraTargetGroup.AddMember(p2.GetComponent<PlayerController>().Rb.transform,1,1);
     }
 }
