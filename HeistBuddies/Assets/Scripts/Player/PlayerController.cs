@@ -74,40 +74,35 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Getting the main camera directions
-
         Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0); 
         
         // Applying the camera directions to the the inputs to get a better feel
-
         Vector3 move = (rotation*new Vector3(moveInput.x, 0, moveInput.y)).normalized; 
         
         //Transform to local space
-
         move = transform.TransformDirection(move); 
 
         // Checking if there is indead movement input from the player
-
         if(move!=Vector3.zero) 
         {
 
             //Get Target Rotation
-            
             Quaternion targetRotation = Quaternion.LookRotation((orientation.transform.position+move)-orientation.transform.position);
 
             //Rotate smoothly to this target
-
             orientation.rotation = Quaternion.Slerp(orientation.rotation, targetRotation, rotationSpeed*Time.fixedDeltaTime);
 
             // Makes the character go into Walk animation
-
             animator.SetBool("Moving",true); 
         }
         else
         {
-            animator.SetBool("Moving",false); // Makes the character go into Idle animation
+            // Makes the character go into Idle animation
+            animator.SetBool("Moving",false); 
         }
-
-        rb.AddForce(move * moveSpeed * Time.fixedDeltaTime,ForceMode.VelocityChange); // Applying the move direction to the rigidbody
+        
+        // Applying the move direction to the rigidbody
+        rb.AddForce(move * moveSpeed,ForceMode.VelocityChange); 
     }
     private void CheckForGrabbable()
     {

@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31051759ec4cc8849b00d064644ef432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 60
-  rotationSpeed: 2
+  moveSpeed: 2
+  rotationSpeed: 4
   maxSpeedMagnitude: 2
   canMove: 1
   rb: {fileID: 3072980956850131568}
@@ -1910,7 +1910,7 @@ Rigidbody:
   m_GameObject: {fileID: 5946380805455670039}
   serializedVersion: 4
   m_Mass: 17
-  m_Drag: 10
+  m_Drag: 15
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
