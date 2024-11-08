@@ -518,7 +518,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 32.885246
+  field of view: 34
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -545,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 552838549}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13549681, y: 0.8640296, z: -0.3271182, w: 0.3578928}
-  m_LocalPosition: {x: -12.198631, y: 3.8709977, z: -26.577496}
+  m_LocalPosition: {x: -21.191734, y: 15.1123705, z: -17.584396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1041,12 +1041,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -1289,6 +1289,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5945059155205487298, guid: d2f211f53c78996488bdff2d0d766acd, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 8387425639325647392, guid: d2f211f53c78996488bdff2d0d766acd, type: 3}
       propertyPath: m_Name
       value: Guard
@@ -1372,9 +1376,9 @@ MonoBehaviour:
   FramingSize: 0.4
   CenterOffset: {x: 0, y: 0}
   Damping: 2
-  SizeAdjustment: 2
+  SizeAdjustment: 0
   LateralAdjustment: 0
-  FovRange: {x: 1, y: 32.885246}
+  FovRange: {x: 34, y: 66}
   DollyRange: {x: -100, y: 100}
   OrthoSizeRange: {x: 1, y: 1000}
 --- !u!114 &1565516767
