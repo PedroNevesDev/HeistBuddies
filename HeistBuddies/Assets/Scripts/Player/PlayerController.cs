@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,7 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator animator; 
 
     // All bodyparts can be here if needed. Used to store a reference into player controller owner
-    [SerializeField,Tooltip("Assigns this character reference to every body part script added here. Makes searching for collisions easier")] BodyPartOwner[] bodyParts; 
+    [SerializeField,Tooltip("Assigns this character reference to every body part script added here. Makes searching for collisions easier")] 
+    BodyPartOwner[] bodyParts; 
+
+    private List<float> playerBodyParts = new List<float>();
     
 
     
@@ -34,13 +38,16 @@ public class PlayerController : MonoBehaviour
 
     private PlayerBackpack _Backpack;
 
+
     public bool CanMove { get => canMove; set => canMove = value; }
     public Rigidbody Rb { get => rb; set => rb = value; }
     public PlayerBackpack Backpack { get => _Backpack; set => _Backpack = value; }
-
+    public BodyPartOwner[] BodyParts { get => bodyParts; set => bodyParts = value; }
 
     Vector2 moveInput = Vector2.zero;
     bool isGrabbing = false;
+
+    public Balance balance;
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.ReadValue<float>()>0;
 
@@ -48,9 +55,16 @@ public class PlayerController : MonoBehaviour
     {
         myCam = Camera.main;
         _Backpack = GetComponent<PlayerBackpack>();
-        foreach(BodyPartOwner bodyPart in bodyParts)
+        foreach(BodyPartOwner bodyPart in BodyParts)
         {
             bodyPart.MyOwner = this;
+
+            // Cache rigidbody mass
+            Rigidbody rigidbody = bodyPart.GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                playerBodyParts.Add(rigidbody.mass);
+            }
         }
     }
 
@@ -149,6 +163,43 @@ public class PlayerController : MonoBehaviour
         _Backpack.AddItemToBackPack(item);
 
         currentGrabbable.Grab();
+    }
+
+    public void ResetPlayerBodyParts()
+    {
+        for (int i = 0; i < bodyParts.Length; i++) 
+        {
+            Rigidbody rigidbody = bodyParts[i].GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                rigidbody.mass = playerBodyParts[i];
+            }
+        }
+    }
+
+    public void ChangePlayerBodyParts()
+    {
+        for (int i = 0; i < bodyParts.Length; i++)
+        {
+            Rigidbody rigidbody = bodyParts[i].GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                rigidbody.mass = 1f;
+            }
+        }
+    }
+
+    public void LaunchPlayer(float forceUp, float forceForward)
+    {
+        for (int i = 0; i < bodyParts.Length; i++)
+        {
+            Rigidbody rigidbody = bodyParts[i].GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                rigidbody.AddForce(Vector3.up * forceUp, ForceMode.Impulse);
+                rigidbody.AddForce(Vector3.forward * forceForward, ForceMode.Impulse);
+            }
+        }
     }
 
     private void OnDrawGizmos()

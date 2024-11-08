@@ -33,8 +33,7 @@ public class ChaseState : AIState
         {
             if (detectionModule.IsPlayerGrabbable)
             {
-                PlayerController player = detectionModule.DetectedPlayer.GetComponentInParent<PlayerController>();
-                player.CanMove = false;
+                brain.TransitionToState(AIStateType.Grab);
                 return;
             }
             else if (detectionModule.IsPlayerVisible)
@@ -44,6 +43,7 @@ public class ChaseState : AIState
             else
             {
                 brain.TransitionToState(AIStateType.Confusion);
+                return;
             }
         }
     }
