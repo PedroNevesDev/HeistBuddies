@@ -40,8 +40,9 @@ public class PlayerController : MonoBehaviour
 
 
     Vector2 moveInput = Vector2.zero;
+    bool isGrabbing = false;
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
-    public void OnGrab(InputAction.CallbackContext context) => Grab();
+    public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.ReadValue<float>()>0;
 
     private void Start()
     {
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         Move();
         SpeedControl();
         CheckForGrabbable();
+        Grab();
     }
     private void SpeedControl()
     {
@@ -122,6 +124,7 @@ public class PlayerController : MonoBehaviour
                     }
 
                     currentGrabbable = grabbable;
+
                     currentGrabbable.EnableUI();
                 }
                 return;
@@ -138,6 +141,8 @@ public class PlayerController : MonoBehaviour
     private void Grab()
     {
         if(currentGrabbable == null)
+            return;
+        if(isGrabbing == false)
             return;
     
         Item item = currentGrabbable as Item;

@@ -11,7 +11,6 @@ public class Van : MonoBehaviour
         if(playerBodyPart)
         {
             int newScore = playerBodyPart.MyOwner.Backpack.ClearItemsFromBackpack();
-            print(newScore);
             if(newScore>0)
             {
                 score += newScore;
