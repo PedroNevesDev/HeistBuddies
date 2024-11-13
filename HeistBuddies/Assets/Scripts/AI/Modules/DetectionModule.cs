@@ -19,18 +19,10 @@ public class DetectionModule : AIModule
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask obstacleLayer;
 
-    private AIBrain brain = null;
-
     public Transform DetectedPlayer { get => detectedPlayer; private set => detectedPlayer = value; }
     public Vector3 LastKnownPlayerPosition { get => lastKnownPlayerPosition; private set => lastKnownPlayerPosition = value; }
     public bool IsPlayerVisible { get => isPlayerVisible; private set => isPlayerVisible = value; }
     public bool IsPlayerGrabbable { get => isPlayerGrabbable; private set => isPlayerGrabbable = value; }
-
-
-    public override void Initialize(AIBrain brain)
-    {
-        this.brain = brain;
-    }
 
     private void Update()
     {

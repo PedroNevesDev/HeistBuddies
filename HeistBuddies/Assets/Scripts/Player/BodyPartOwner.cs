@@ -6,4 +6,12 @@ public class BodyPartOwner : MonoBehaviour
     PlayerController myOwner;
 
     public PlayerController MyOwner { get => myOwner; set => myOwner = value; }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (myOwner.WasGrabbed && !myOwner.WasTeleported)
+        {
+            myOwner.TeleportPlayer();
+        }
+    }
 }

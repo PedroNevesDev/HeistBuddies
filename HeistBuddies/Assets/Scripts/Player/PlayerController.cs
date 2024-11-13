@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -12,6 +13,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool canMove;
     [SerializeField] Rigidbody rb;
 
+    [Header("Player Conditions")]
+    [SerializeField] private bool wasTeleported = false;
+    [SerializeField] private bool wasGrabbed = false;
+
+    public bool WasGrabbed { get => wasGrabbed; set => wasGrabbed = value; }
+    public bool WasTeleported { get => wasTeleported; set => wasTeleported = value; }
 
     // Specific transform that will be used to follow the movement direction ex:mesh. Could be anything
     [SerializeField] Transform orientation; 
@@ -21,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     // All bodyparts can be here if needed. Used to store a reference into player controller owner
     [SerializeField,Tooltip("Assigns this character reference to every body part script added here. Makes searching for collisions easier")] 
-    BodyPartOwner[] bodyParts; 
+    BodyPartOwner[] bodyParts;
 
     private List<float> playerBodyParts = new List<float>();
     
@@ -33,15 +40,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
     [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
     [SerializeField] private LayerMask detectionLayer;
-    
-    private IGrabbable currentGrabbable;
 
-    private PlayerBackpack _Backpack;
+    private Transform teleportPoint = null;
+    private Coroutine teleportCoroutine = null;
+
+    private IGrabbable currentGrabbable = null;
+
+    private PlayerBackpack backpack = null;
 
 
     public bool CanMove { get => canMove; set => canMove = value; }
     public Rigidbody Rb { get => rb; set => rb = value; }
-    public PlayerBackpack Backpack { get => _Backpack; set => _Backpack = value; }
+    public PlayerBackpack Backpack { get => backpack; set => backpack = value; }
     public BodyPartOwner[] BodyParts { get => bodyParts; set => bodyParts = value; }
 
     Vector2 moveInput = Vector2.zero;
@@ -54,7 +64,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         myCam = Camera.main;
-        _Backpack = GetComponent<PlayerBackpack>();
+        backpack = GetComponent<PlayerBackpack>();
+
+        teleportPoint = GameObject.Find("TeleportPoint").transform;
+
         foreach(BodyPartOwner bodyPart in BodyParts)
         {
             bodyPart.MyOwner = this;
@@ -68,15 +81,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        CheckForGrabbable();
+        Grab();
+
+        if (wasTeleported)
+        {
+            StopCoroutine(teleportCoroutine);
+            wasTeleported = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!canMove) return;
 
         Move();
         SpeedControl();
-        CheckForGrabbable();
-        Grab();
     }
+
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
@@ -87,6 +111,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector3(limitVel.x, rb.linearVelocity.y, limitVel.z);
         }
     }
+
     private void Move()
     {
         //Getting the main camera directions
@@ -120,6 +145,7 @@ public class PlayerController : MonoBehaviour
         // Applying the move direction to the rigidbody
         rb.AddForce(move * moveSpeed,ForceMode.VelocityChange); 
     }
+
     private void CheckForGrabbable()
     {
         Vector3 boxCenter = rb.position + rb.transform.TransformDirection(boxOffset);
@@ -160,10 +186,12 @@ public class PlayerController : MonoBehaviour
             return;
     
         Item item = currentGrabbable as Item;
-        _Backpack.AddItemToBackPack(item);
+        backpack.AddItemToBackPack(item);
 
         currentGrabbable.Grab();
     }
+
+    #region Player BodyParts
 
     public void ResetPlayerBodyParts()
     {
@@ -189,6 +217,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Player Movement
+
     public void LaunchPlayer(float forceUp, float forceForward)
     {
         for (int i = 0; i < bodyParts.Length; i++)
@@ -201,6 +233,36 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void TeleportPlayer()
+    {
+        wasGrabbed = false;
+
+        teleportCoroutine = StartCoroutine(Teleport());
+
+        canMove = true;
+        balance.ShouldBalance = true;
+    }
+    
+    private IEnumerator Teleport()
+    {
+        wasTeleported = false;
+        transform.GetChild(0).gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
+
+        bodyParts[0].transform.position = teleportPoint.position;
+
+        yield return new WaitForSeconds(0.1f);
+
+        transform.GetChild(0).gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        wasTeleported = true;
+    }
+
+    #endregion
 
     private void OnDrawGizmos()
     {

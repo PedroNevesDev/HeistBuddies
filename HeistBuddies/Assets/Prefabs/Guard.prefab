@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 760884998967602059}
   - component: {fileID: 3637059685365946820}
   - component: {fileID: 9149789095547033491}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 2946318837766280451}
   - component: {fileID: 8654010313603198774}
   - component: {fileID: 3699887276710414661}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 4268722558040058423}
   - component: {fileID: 7000106470693044211}
   - component: {fileID: 6925635045067603783}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ConfusionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 8425140728282766369}
   - component: {fileID: 642741169101248303}
   - component: {fileID: 1068006635783986895}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 5124081115144030439}
   - component: {fileID: 1179471741741231159}
   - component: {fileID: 7603668610942771255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 120861970216699304}
   - component: {fileID: 2472351859362758050}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DetectionModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ MonoBehaviour:
     m_Bits: 8
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 128
 --- !u!1 &2807903055852626277
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 2567187934362383484}
   - component: {fileID: 4061425330411181558}
   - component: {fileID: 8372211893130214901}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AlertPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 5924597299681192146}
   - component: {fileID: 5945059155205487298}
   - component: {fileID: 4301866714083514791}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HearingModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ MonoBehaviour:
   hearingRadius: 20
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 128
 --- !u!114 &4301866714083514791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 214429503289849062}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 7372355947920649093}
   - component: {fileID: 7870006333533192844}
   - component: {fileID: 3057945058865743452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 9033673555254411320}
   - component: {fileID: 2938543149900871685}
   - component: {fileID: 8348941471483362827}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 3438937432332342789}
   - component: {fileID: 7595692592187344156}
   - component: {fileID: 6864671898898060779}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 8605443803462487870}
   - component: {fileID: 7594450020276919115}
   - component: {fileID: 8719711424355310966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GuardCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1447750621482161418}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Modules
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 6206750117571630}
   - component: {fileID: 8754696301389551789}
   - component: {fileID: 7534091931634773842}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1106,7 +1106,8 @@ GameObject:
   - component: {fileID: 8644171365038049425}
   - component: {fileID: 2574906548944148198}
   - component: {fileID: 7401508382451259951}
-  m_Layer: 0
+  - component: {fileID: 6024769028329631449}
+  m_Layer: 9
   m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1121,7 +1122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8387425639325647392}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1264,7 +1265,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   idleDurationRange: {x: 2, y: 5}
   idleChance: 0.5
 --- !u!114 &8644171365038049425
@@ -1305,3 +1305,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   investigationDuration: 10
+--- !u!114 &6024769028329631449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387425639325647392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0945483d6cac04293e8c718ee42794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impulseForceUp: 20
+  impulseForceForward: 10

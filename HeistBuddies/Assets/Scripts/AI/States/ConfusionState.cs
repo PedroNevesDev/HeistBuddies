@@ -10,35 +10,13 @@ public class ConfusionState : AIState
     private float confusionTimer = 0f;
     private Vector3 searchPosition = Vector3.zero;
 
-    private NavMeshAgent agent = null;
-    private DetectionModule detectionModule = null;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        agent = GetComponent<NavMeshAgent>();
-
-        detectionModule = brain.GetModule<DetectionModule>();
-        if (detectionModule == null)
-        {
-            Debug.LogError("DetectionModule not found!");
-        }
-    }
-
     public override void OnStateEnter()
     {
         confusionTimer = confusionDuration;
         agent.isStopped = false;
 
-        if (detectionModule != null)
-        {
-            searchPosition = detectionModule.LastKnownPlayerPosition;
-            agent.destination = searchPosition;
-        }
-        else
-        {
-            agent.isStopped = true;
-        }
+        searchPosition = detectionModule.LastKnownPlayerPosition;
+        agent.destination = searchPosition;
 
         brain.EnableConfusionPanel();
     }
@@ -47,7 +25,7 @@ public class ConfusionState : AIState
     {
         confusionTimer -= Time.deltaTime;
 
-        if (detectionModule != null && detectionModule.IsPlayerVisible)
+        if (detectionModule.IsPlayerVisible)
         {
             brain.SetTargetPlayer(detectionModule.DetectedPlayer);
             brain.TransitionToState(AIStateType.Chase);

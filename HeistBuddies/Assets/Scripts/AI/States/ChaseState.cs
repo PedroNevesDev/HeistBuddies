@@ -5,21 +5,6 @@ public class ChaseState : AIState
 {
     public override AIStateType StateType => AIStateType.Chase;
 
-    private NavMeshAgent agent = null;
-    private DetectionModule detectionModule = null;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        agent = GetComponent<NavMeshAgent>();
-
-        detectionModule = brain.GetModule<DetectionModule>();
-        if (detectionModule == null)
-        {
-            Debug.LogError("AIDetection module not found!");
-        }
-    }
-
     public override void OnStateEnter()
     {
         agent.isStopped = false;
@@ -29,22 +14,19 @@ public class ChaseState : AIState
 
     public override void OnStateUpdate()
     {
-        if (detectionModule != null)
+        if (detectionModule.IsPlayerGrabbable)
         {
-            if (detectionModule.IsPlayerGrabbable)
-            {
-                brain.TransitionToState(AIStateType.Grab);
-                return;
-            }
-            else if (detectionModule.IsPlayerVisible)
-            {
-                agent.destination = detectionModule.DetectedPlayer.position;
-            }
-            else
-            {
-                brain.TransitionToState(AIStateType.Confusion);
-                return;
-            }
+            brain.TransitionToState(AIStateType.Grab);
+            return;
+        }
+        else if (detectionModule.IsPlayerVisible)
+        {
+            agent.destination = detectionModule.DetectedPlayer.position;
+        }
+        else
+        {
+            brain.TransitionToState(AIStateType.Confusion);
+            return;
         }
     }
 

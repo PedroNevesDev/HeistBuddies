@@ -10,45 +10,16 @@ public class InvestigateState : AIState
     private float investigationTimer = 0f;
     private Vector3 investigatePosition = Vector3.zero;
 
-    private NavMeshAgent agent = null;
-    private HearingModule hearingModule = null;
-    private DetectionModule detectionModule = null;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        agent = GetComponent<NavMeshAgent>();
-
-        detectionModule = brain.GetModule<DetectionModule>();
-        if (detectionModule == null)
-        {
-            Debug.LogError("DetectionModule not found!");
-        }
-
-        hearingModule = brain.GetModule<HearingModule>();
-        if (hearingModule == null)
-        {
-            Debug.LogError("HearingModule not found!");
-        }
-    }
-    
     public override void OnStateEnter()
     {
         investigationTimer = investigationDuration;
         agent.isStopped = false;
 
-        if (hearingModule != null)
-        {
-            investigatePosition = hearingModule.SoundSourcePosition;
-            agent.destination = investigatePosition;
+        investigatePosition = hearingModule.SoundSourcePosition;
+        agent.destination = investigatePosition;
 
-            hearingModule.ResetHearing();
-            Debug.Log(gameObject.name + " is investigating sound at position: " + investigatePosition);
-        }
-        else
-        {
-            agent.isStopped = true;
-        }
+        hearingModule.ResetHearing();
+        Debug.Log(gameObject.name + " is investigating sound at position: " + investigatePosition);
 
         brain.EnableAlertPanel();
     }
@@ -57,7 +28,7 @@ public class InvestigateState : AIState
     {
         investigationTimer -= Time.deltaTime;
 
-        if (detectionModule != null && detectionModule.IsPlayerVisible)
+        if (detectionModule.IsPlayerVisible)
         {
             brain.SetTargetPlayer(detectionModule.DetectedPlayer);
             brain.TransitionToState(AIStateType.Chase);

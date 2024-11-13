@@ -16,28 +16,6 @@ public class PatrolState : AIState
     private float idleTimer = 0f;
     private float idleDuration = 0f;
 
-    private NavMeshAgent agent = null;
-    private DetectionModule detectionModule = null;
-    private HearingModule hearingModule = null;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        agent = GetComponent<NavMeshAgent>();
-
-        detectionModule = brain.GetModule<DetectionModule>();
-        if (detectionModule == null)
-        {
-            Debug.LogError("DetectionModule module not found!");
-        }
-
-        hearingModule = brain.GetModule<HearingModule>();
-        if (hearingModule == null)
-        {
-            Debug.LogError("HearingModule not found!");
-        }
-    }
-
     public override void OnStateEnter()
     {
         agent.isStopped = false;
@@ -72,7 +50,7 @@ public class PatrolState : AIState
             }
         }
 
-        if (detectionModule != null && detectionModule.IsPlayerVisible)
+        if (detectionModule.IsPlayerVisible)
         {
             brain.SetTargetPlayer(detectionModule.DetectedPlayer);
             brain.TransitionToState(AIStateType.Chase);

@@ -9,15 +9,8 @@ public class HearingModule : AIModule
     private Vector3 soundSourcePosition = Vector3.zero;
     private bool hasHeardSound = false;
 
-    private AIBrain brain = null;
-
     public Vector3 SoundSourcePosition { get => soundSourcePosition; private set => soundSourcePosition = value; }
     public bool HasHeardSound { get => hasHeardSound; private set => hasHeardSound = value; }
-
-    public override void Initialize(AIBrain brain)
-    {
-        this.brain = brain;
-    }
 
     public void OnSoundHeard(Vector3 soundPosition)
     {

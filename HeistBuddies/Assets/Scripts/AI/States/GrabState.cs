@@ -1,7 +1,5 @@
-using NUnit.Framework;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class GrabState : AIState
 {
@@ -11,36 +9,23 @@ public class GrabState : AIState
     [SerializeField] private float impulseForceUp = 500f;
     [SerializeField] private float impulseForceForward = 500f;
 
-    private NavMeshAgent agent = null;
-    private DetectionModule detectionModule = null;
-
+    private Coroutine grabCoroutine = null;
     private PlayerController player = null;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        agent = GetComponent<NavMeshAgent>();
-
-        detectionModule = brain.GetModule<DetectionModule>();
-        if (detectionModule == null)
-        {
-            Debug.LogError("AIDetection module not found!");
-        }
-    }
 
     public override void OnStateEnter()
     {
         agent.isStopped = true;
 
         player = detectionModule.DetectedPlayer.GetComponentInParent<PlayerController>();
-        player.CanMove = false;
 
-        // Turn this into a coroutine
-        player.ChangePlayerBodyParts();
-        player.balance.ShouldBalance = false;
-        player.LaunchPlayer(impulseForceUp, impulseForceForward);
-
-        brain.TransitionToState(AIStateType.Patrol);
+        if (!player.WasGrabbed)
+        {
+            grabCoroutine = StartCoroutine(GrabPlayer());   
+        }
+        else
+        {
+            brain.TransitionToState(AIStateType.Patrol);
+        }
     }
 
     public override void OnStateUpdate()
@@ -52,5 +37,27 @@ public class GrabState : AIState
     {
         player.ResetPlayerBodyParts();
         player = null;
+
+        if (grabCoroutine != null)
+        {
+            StopCoroutine(grabCoroutine);
+        }
+    }
+
+    private IEnumerator GrabPlayer()
+    {
+        player.CanMove = false;
+        player.WasGrabbed = true;
+
+        player.ChangePlayerBodyParts();
+        player.balance.ShouldBalance = false;
+
+        yield return new WaitForSeconds(0.1f);
+
+        player.LaunchPlayer(impulseForceUp, impulseForceForward);
+
+        yield return new WaitForSeconds(0.1f);
+
+        brain.TransitionToState(AIStateType.Patrol);
     }
 }

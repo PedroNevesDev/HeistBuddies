@@ -186,6 +186,8 @@ MonoBehaviour:
   maxSpeedMagnitude: 2
   canMove: 1
   rb: {fileID: 7719137223352418081}
+  wasTeleported: 0
+  wasGrabbed: 0
   orientation: {fileID: 2137057684330949899}
   animator: {fileID: 4534630571161343836}
   bodyParts:
@@ -751,9 +753,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 430108200687226393, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8727233610542163202}
-    - targetCorrespondingSourceObject: {fileID: 430108200687226393, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 689685850780850402}
     - targetCorrespondingSourceObject: {fileID: 284106650744130405, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3756257766287057799}
@@ -2129,18 +2128,6 @@ ConfigurableJoint:
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &8727233610542163202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5946380805455670039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4874ccb4c731fc74f8a2ca75d0604a34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &689685850780850402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

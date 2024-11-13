@@ -2,6 +2,11 @@ using UnityEngine;
 
 public abstract class AIModule : MonoBehaviour
 {
-    public abstract void Initialize(AIBrain brain);
+    protected AIBrain brain = null;
+
+    public void Initialize(AIBrain brain)
+    {
+        this.brain = brain;
+    }
 }
 
