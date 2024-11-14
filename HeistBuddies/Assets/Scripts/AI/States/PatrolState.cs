@@ -18,7 +18,8 @@ public class PatrolState : AIState
 
     public override void OnStateEnter()
     {
-        agent.isStopped = false;
+        brain.SetCanDetect(true);
+
         isIdling = false;
         MoveToNextPatrolPoint();
     }
@@ -50,13 +51,6 @@ public class PatrolState : AIState
             }
         }
 
-        if (detectionModule.IsPlayerVisible)
-        {
-            brain.SetTargetPlayer(detectionModule.DetectedPlayer);
-            brain.TransitionToState(AIStateType.Chase);
-            return;
-        }
-
         if (hearingModule.HasHeardSound)
         {
             brain.TransitionToState(AIStateType.Investigate);
@@ -66,7 +60,6 @@ public class PatrolState : AIState
 
     public override void OnStateExit()
     {
-        agent.isStopped = true;
         isIdling = false;
     }
 

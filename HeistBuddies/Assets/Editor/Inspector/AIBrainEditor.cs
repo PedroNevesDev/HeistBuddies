@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(AIBrain))]
+[CustomEditor(typeof(AIBrain), true)]
 public class AIBrainEditor : Editor
 {
     private AIBrain aiBrain;

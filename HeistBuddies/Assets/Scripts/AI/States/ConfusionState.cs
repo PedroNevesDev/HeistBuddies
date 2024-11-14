@@ -13,24 +13,17 @@ public class ConfusionState : AIState
     public override void OnStateEnter()
     {
         confusionTimer = confusionDuration;
-        agent.isStopped = false;
 
         searchPosition = detectionModule.LastKnownPlayerPosition;
         agent.destination = searchPosition;
 
-        brain.EnableConfusionPanel();
+        var newBrain = brain as AIBrainGuard;
+        newBrain.EnableConfusionPanel();
     }
 
     public override void OnStateUpdate()
     {
         confusionTimer -= Time.deltaTime;
-
-        if (detectionModule.IsPlayerVisible)
-        {
-            brain.SetTargetPlayer(detectionModule.DetectedPlayer);
-            brain.TransitionToState(AIStateType.Chase);
-            return;
-        }
 
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
@@ -49,6 +42,7 @@ public class ConfusionState : AIState
     {
         confusionTimer = 0f;
 
-        brain.DisableConfusionPanel();
+        var newBrain = brain as AIBrainGuard;
+        newBrain.DisableConfusionPanel();
     }
 }

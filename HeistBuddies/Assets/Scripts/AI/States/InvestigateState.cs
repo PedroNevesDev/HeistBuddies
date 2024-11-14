@@ -7,36 +7,28 @@ public class InvestigateState : AIState
 
     [Header("Investigate Settings")]
     [SerializeField] private float investigationDuration = 5f;
+    private bool isInLocation = false;
     private float investigationTimer = 0f;
     private Vector3 investigatePosition = Vector3.zero;
 
     public override void OnStateEnter()
     {
         investigationTimer = investigationDuration;
-        agent.isStopped = false;
 
-        investigatePosition = hearingModule.SoundSourcePosition;
         agent.destination = investigatePosition;
 
-        hearingModule.ResetHearing();
-        Debug.Log(gameObject.name + " is investigating sound at position: " + investigatePosition);
-
-        brain.EnableAlertPanel();
+        var newBrain = brain as AIBrainGuard;
+        newBrain.EnableAlertPanel();
     }
 
     public override void OnStateUpdate()
     {
-        investigationTimer -= Time.deltaTime;
-
-        if (detectionModule.IsPlayerVisible)
-        {
-            brain.SetTargetPlayer(detectionModule.DetectedPlayer);
-            brain.TransitionToState(AIStateType.Chase);
-            return;
-        }
+        if (isInLocation)
+            investigationTimer -= Time.deltaTime;
 
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
+            isInLocation = true;
             investigatePosition = AIHelpers.GetRandomSearchPosition(2f, transform);
             agent.destination = investigatePosition;
         }
@@ -50,8 +42,15 @@ public class InvestigateState : AIState
 
     public override void OnStateExit()
     {
-        agent.isStopped = true;
+        isInLocation = false;
+        investigationTimer = 0f;
 
-        brain.DisableAlertPanel();
+        var newBrain = brain as AIBrainGuard;
+        newBrain.DisableAlertPanel();
+    }
+
+    public void SetTargetToInvestigate(Vector3 position)
+    {
+        investigatePosition = position;
     }
 }

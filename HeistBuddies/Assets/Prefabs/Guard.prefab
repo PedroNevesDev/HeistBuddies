@@ -520,7 +520,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5924597299681192146}
   - component: {fileID: 5945059155205487298}
-  - component: {fileID: 4301866714083514791}
   m_Layer: 9
   m_Name: HearingModule
   m_TagString: Untagged
@@ -559,34 +558,6 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &4301866714083514791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3155511652248355445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58101e846f8e90418c1313f124c3324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 24198c9ca0969c14882cab5afedc566e, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5945059155205487298}
-        m_TargetAssemblyTypeName: HearingModule, Assembly-CSharp
-        m_MethodName: OnSoundHeard
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &3342523687706073713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,7 +1072,7 @@ GameObject:
   - component: {fileID: 5563849218668512172}
   - component: {fileID: 6201741014965771235}
   - component: {fileID: 3555499625845360311}
-  - component: {fileID: 4276112170456532886}
+  - component: {fileID: 7666349672253193815}
   - component: {fileID: 8607033928178358822}
   - component: {fileID: 8644171365038049425}
   - component: {fileID: 2574906548944148198}
@@ -1230,7 +1201,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4276112170456532886
+--- !u!114 &7666349672253193815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1239,7 +1210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8387425639325647392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fdae6fadc720f246b482c69e9f6a852, type: 3}
+  m_Script: {fileID: 11500000, guid: 62eec106de1776d4fa0e05b2287baeec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialStateType: 1
@@ -1317,5 +1288,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd0945483d6cac04293e8c718ee42794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impulseForceUp: 20
-  impulseForceForward: 10
+  impulseForceUp: 15
+  impulseForceForward: 5

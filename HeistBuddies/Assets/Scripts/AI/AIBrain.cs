@@ -14,22 +14,43 @@ public enum AIStateType
 public class AIBrain : MonoBehaviour
 {
     [Header("Brain Settings")]
-    [SerializeField] private AIStateType initialStateType = AIStateType.Patrol;
-    private Dictionary<AIStateType, AIState> stateDictionary = new Dictionary<AIStateType, AIState>();
-    private AIState currentState;
+    [SerializeField] protected AIStateType initialStateType = AIStateType.Patrol;
+    protected Dictionary<AIStateType, AIState> stateDictionary = new Dictionary<AIStateType, AIState>();
+    protected AIState currentState;
 
     [Header("AI Modules")]
-    [SerializeField] private List<AIModule> aiModules = new List<AIModule>();
-
-    [Header("UI Panels")]
-    [SerializeField] private GameObject alertPanel;
-    [SerializeField] private GameObject confusionPanel;
+    [SerializeField] protected List<AIModule> aiModules = new List<AIModule>();
 
     public AIStateType CurrentStateType => currentState != null ? currentState.StateType : AIStateType.None;
 
     public Transform TargetPlayer { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
+    {
+        Initialization();
+    }
+
+    protected virtual void OnEnable()
+    {
+        
+    }
+
+    protected virtual void OnDisable()
+    {
+        
+    }
+
+    protected virtual void Start()
+    {
+        TransitionToState(initialStateType);
+    }
+
+    protected virtual void Update()
+    {
+        currentState?.OnStateUpdate();
+    }
+
+    protected virtual void Initialization()
     {
         // Initialize AI States
         AIState[] stateComponents = GetComponents<AIState>();
@@ -44,18 +65,7 @@ public class AIBrain : MonoBehaviour
         foreach (AIModule module in moduleComponents)
         {
             aiModules.Add(module);
-            module.Initialize(this);
         }
-    }
-
-    private void Start()
-    {
-        TransitionToState(initialStateType);
-    }
-
-    private void Update()
-    {
-        currentState?.OnStateUpdate();
     }
 
     public void TransitionToState(AIStateType newStateType)
@@ -90,12 +100,41 @@ public class AIBrain : MonoBehaviour
 
     public void SetTargetPlayer(Transform playerTransform) => TargetPlayer = playerTransform;
 
-    public void EnableAlertPanel() => alertPanel.SetActive(true);
+    public void SetInvestigateTarget(Vector3 targetPosition)
+    {
+        if (stateDictionary.TryGetValue(AIStateType.Investigate, out AIState state))
+        {
+            InvestigateState investigateState = state as InvestigateState;
+            if (investigateState != null)
+            {
+                investigateState.SetTargetToInvestigate(targetPosition);
+            }
+            else
+            {
+                Debug.LogWarning("Investigate state is not correctly configured in the state dictionary.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Investigate state not found in state dictionary.");
+        }
+    }
 
-    public void DisableAlertPanel() => alertPanel.SetActive(false);
+    public void SetCanDetect(bool condition)
+    {
+        DetectionModule module = GetModule<DetectionModule>();
 
-    public void EnableConfusionPanel() => confusionPanel.SetActive(true);
-
-    public void DisableConfusionPanel() => confusionPanel.SetActive(false);
+        if (module != null)
+        {
+            if (condition)
+            {
+                module.CanDetect = true;
+            }
+            else
+            {
+                module.CanDetect = false;
+            }
+        }
+    }
 }
 

@@ -239,9 +239,6 @@ public class PlayerController : MonoBehaviour
         wasGrabbed = false;
 
         teleportCoroutine = StartCoroutine(Teleport());
-
-        canMove = true;
-        balance.ShouldBalance = true;
     }
     
     private IEnumerator Teleport()
@@ -259,6 +256,8 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        canMove = true;
+        balance.ShouldBalance = true;
         wasTeleported = true;
     }
 

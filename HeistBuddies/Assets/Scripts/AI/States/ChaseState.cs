@@ -7,34 +7,22 @@ public class ChaseState : AIState
 
     public override void OnStateEnter()
     {
-        agent.isStopped = false;
-
-        brain.EnableAlertPanel();
+        var newBrain = brain as AIBrainGuard;
+        newBrain.EnableAlertPanel();
     }
 
     public override void OnStateUpdate()
     {
-        if (detectionModule.IsPlayerGrabbable)
-        {
-            brain.TransitionToState(AIStateType.Grab);
-            return;
-        }
-        else if (detectionModule.IsPlayerVisible)
+        if (detectionModule.DetectedPlayer != null)
         {
             agent.destination = detectionModule.DetectedPlayer.position;
-        }
-        else
-        {
-            brain.TransitionToState(AIStateType.Confusion);
-            return;
         }
     }
 
     public override void OnStateExit()
     {
-        agent.isStopped = true;
-
-        brain.DisableAlertPanel();
+        var newBrain = brain as AIBrainGuard;
+        newBrain.DisableAlertPanel();
     }
 }
 

@@ -14,8 +14,6 @@ public class GrabState : AIState
 
     public override void OnStateEnter()
     {
-        agent.isStopped = true;
-
         player = detectionModule.DetectedPlayer.GetComponentInParent<PlayerController>();
 
         if (!player.WasGrabbed)
@@ -30,7 +28,11 @@ public class GrabState : AIState
 
     public override void OnStateUpdate()
     {
-    
+        if (player.WasTeleported)
+        {
+            brain.TransitionToState(AIStateType.Patrol);
+            return;
+        }
     }
 
     public override void OnStateExit()
@@ -55,9 +57,5 @@ public class GrabState : AIState
         yield return new WaitForSeconds(0.1f);
 
         player.LaunchPlayer(impulseForceUp, impulseForceForward);
-
-        yield return new WaitForSeconds(0.1f);
-
-        brain.TransitionToState(AIStateType.Patrol);
     }
 }

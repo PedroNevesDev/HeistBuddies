@@ -4,9 +4,9 @@ public abstract class AIModule : MonoBehaviour
 {
     protected AIBrain brain = null;
 
-    public void Initialize(AIBrain brain)
+    protected virtual void Awake()
     {
-        this.brain = brain;
+        brain = GetComponentInParent<AIBrain>();
     }
 }
 
