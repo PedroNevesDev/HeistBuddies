@@ -217,6 +217,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 667193779}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &249004142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249004143}
+  m_Layer: 0
+  m_Name: Waypoint (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &249004143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249004142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.18, y: 0, z: 14.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667193779}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &276251115
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Cube (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6812057551755705144, guid: fbd2050518d76994abc00981dee9f4be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -700,6 +735,8 @@ Transform:
   - {fileID: 173259696}
   - {fileID: 681095922}
   - {fileID: 324357726}
+  - {fileID: 249004143}
+  - {fileID: 733042213}
   m_Father: {fileID: 321165989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &681095921
@@ -728,6 +765,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.49, y: 0, z: -1.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667193779}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &733042212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733042213}
+  m_Layer: 0
+  m_Name: Waypoint (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &733042213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733042212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.93, y: 0, z: 17.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -827,6 +895,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 7823575494001143626, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
   cameraTargetGroup: {fileID: 289038698}
   mapSpawnPoint: {fileID: 42407122}
+  debugMode: 0
 --- !u!4 &918417915
 Transform:
   m_ObjectHideFlags: 0
@@ -1155,6 +1224,10 @@ PrefabInstance:
     - target: {fileID: 6812057551755705144, guid: fbd2050518d76994abc00981dee9f4be, type: 3}
       propertyPath: m_Name
       value: Item_Cube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812057551755705144, guid: fbd2050518d76994abc00981dee9f4be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1580,6 +1653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Cube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6812057551755705144, guid: fbd2050518d76994abc00981dee9f4be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1636,6 +1713,10 @@ PrefabInstance:
     - target: {fileID: 6812057551755705144, guid: fbd2050518d76994abc00981dee9f4be, type: 3}
       propertyPath: m_Name
       value: Item_Cube (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812057551755705144, guid: fbd2050518d76994abc00981dee9f4be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1816,9 +1897,21 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 324357726}
+    - target: {fileID: 3478849398283028678, guid: 66a34b4b3caa625439f168d5dea002a7, type: 3}
+      propertyPath: 'patrolPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 249004143}
+    - target: {fileID: 3478849398283028678, guid: 66a34b4b3caa625439f168d5dea002a7, type: 3}
+      propertyPath: 'patrolPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 733042213}
     - target: {fileID: 3540740696971360667, guid: 66a34b4b3caa625439f168d5dea002a7, type: 3}
       propertyPath: m_Name
       value: Dog
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540740696971360667, guid: 66a34b4b3caa625439f168d5dea002a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

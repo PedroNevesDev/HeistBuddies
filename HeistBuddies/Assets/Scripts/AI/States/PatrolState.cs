@@ -22,6 +22,8 @@ public class PatrolState : AIState
 
         isIdling = false;
         MoveToNextPatrolPoint();
+
+        agent.isStopped = false;
     }
 
     public override void OnStateUpdate()
@@ -61,6 +63,8 @@ public class PatrolState : AIState
     public override void OnStateExit()
     {
         isIdling = false;
+
+        agent.isStopped = false;
     }
 
     private void MoveToNextPatrolPoint()

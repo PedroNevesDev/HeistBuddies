@@ -52,7 +52,7 @@ public static class EventManager
     {
         if (globalEvents.ContainsKey(eventType))
         {
-            Debug.Log($"Global Event Triggered with data: {eventType}");
+            Debug.Log($"Global Event Triggered: {eventType} with data: {eventData} by {eventData.TargetBrain}");
             globalEvents[eventType]?.Invoke(eventData);
         }
         else
@@ -65,7 +65,7 @@ public static class EventManager
     {
         if (localEvents.ContainsKey(eventType))
         {
-            Debug.Log($"Local Event Triggered: {eventType} with data: {eventData}");
+            Debug.Log($"Local Event Triggered: {eventType} with data: {eventData} by {eventData.TargetBrain}");
             localEvents[eventType]?.Invoke(eventData);
         }
         else

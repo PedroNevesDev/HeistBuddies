@@ -9,6 +9,8 @@ public class ChaseState : AIState
     {
         var newBrain = brain as AIBrainGuard;
         newBrain.EnableAlertPanel();
+
+        agent.isStopped = false;
     }
 
     public override void OnStateUpdate()
@@ -23,6 +25,8 @@ public class ChaseState : AIState
     {
         var newBrain = brain as AIBrainGuard;
         newBrain.DisableAlertPanel();
+
+        agent.isStopped = false;
     }
 }
 

@@ -18,6 +18,20 @@ public class Item : MonoBehaviour, IGrabbable
         Id = Guid.NewGuid();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (itemData.isBreakable)
+        {
+            float randomValue = UnityEngine.Random.value;
+            if (randomValue <= itemData.breakChance)
+            {
+                var eventData = new PositionEventData(null, this.transform.position);
+                EventManager.InvokeGlobalEvent(GlobalEvent.SoundAlert, eventData);
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
     public void Grab()
     {
         this.gameObject.SetActive(false);

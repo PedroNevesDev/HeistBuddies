@@ -52,9 +52,9 @@ public class AIBrainGuard : AIBrain
 
     private void OnGlobalSoundAlert(EventData eventData)
     {
-        if (eventData is PlayerEventData playerData)
+        if (eventData is PositionEventData positionData)
         {
-            SetInvestigateTarget(playerData.Position);
+            SetInvestigateTarget(positionData.Position);
         }
 
         TransitionToState(AIStateType.Investigate);
@@ -66,19 +66,19 @@ public class AIBrainGuard : AIBrain
 
     private void OnLocalPlayerFound(EventData eventData)
     {
-        if (eventData is PlayerEventData playerData && playerData.TargetBrain == this)
+        if (eventData.TargetBrain == this)
             TransitionToState(AIStateType.Chase);
     }
 
     private void OnLocalPlayerLost(EventData eventData)
     {
-        if (eventData is PlayerEventData playerData && playerData.TargetBrain == this)
+        if (eventData.TargetBrain == this)
             TransitionToState(AIStateType.Confusion);
     }
 
     private void OnLocalPlayerGrabbed(EventData eventData)
     {
-        if (eventData is PlayerEventData playerData && playerData.TargetBrain == this)
+        if (eventData.TargetBrain == this)
         {
             SetCanDetect(false);
             TransitionToState(AIStateType.Grab);

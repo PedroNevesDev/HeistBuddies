@@ -19,6 +19,8 @@ public class InvestigateState : AIState
 
         var newBrain = brain as AIBrainGuard;
         newBrain.EnableAlertPanel();
+
+        agent.isStopped = false;
     }
 
     public override void OnStateUpdate()
@@ -47,6 +49,8 @@ public class InvestigateState : AIState
 
         var newBrain = brain as AIBrainGuard;
         newBrain.DisableAlertPanel();
+
+        agent.isStopped = false;
     }
 
     public void SetTargetToInvestigate(Vector3 position)

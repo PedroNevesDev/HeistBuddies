@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class HearingModule : AIModule
 {
+    [Header("General Settings")]
+    [SerializeField] private DetectionType detectionType;
+
     [Header("Hearing Settings")]
     [SerializeField] private float hearingRadius = 20f;
     [SerializeField] private LayerMask obstacleLayer;
@@ -32,12 +35,6 @@ public class HearingModule : AIModule
                 Debug.Log($"{gameObject.name} sound blocked by obstacle.");
             }
         }
-    }
-
-    public void ResetHearing()
-    {
-        hasHeardSound = false;
-        soundSourcePosition = Vector3.zero;
     }
 
     private void OnDrawGizmos()

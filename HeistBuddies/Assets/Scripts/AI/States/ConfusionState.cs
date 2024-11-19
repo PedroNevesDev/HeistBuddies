@@ -19,6 +19,8 @@ public class ConfusionState : AIState
 
         var newBrain = brain as AIBrainGuard;
         newBrain.EnableConfusionPanel();
+
+        agent.isStopped = false;
     }
 
     public override void OnStateUpdate()
@@ -44,5 +46,7 @@ public class ConfusionState : AIState
 
         var newBrain = brain as AIBrainGuard;
         newBrain.DisableConfusionPanel();
+
+        agent.isStopped = false;
     }
 }

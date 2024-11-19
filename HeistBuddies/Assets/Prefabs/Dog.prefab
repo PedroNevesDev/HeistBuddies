@@ -543,7 +543,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3540740696971360667}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.93, y: 0.74, z: 11.65}
   m_LocalScale: {x: 1, y: 0.632, z: 1}
   m_ConstrainProportionsScale: 0
@@ -680,6 +680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   idleDurationRange: {x: 2, y: 5}
   idleChance: 0.5
@@ -1151,6 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173698653c72965469bf30ade91492b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionType: 1
   hearingRadius: 20
   obstacleLayer:
     serializedVersion: 2

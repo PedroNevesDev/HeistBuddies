@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cube
   Points: 10
+  isBreakable: 1
+  breakChance: 1
