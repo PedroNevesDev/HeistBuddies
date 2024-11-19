@@ -48,11 +48,11 @@ public class GrabState : AIState
 
     private IEnumerator GrabPlayer()
     {
-        player.CanMove = false;
+        player.PlayerModules.MovementModule.enabled = false;
         player.WasGrabbed = true;
 
         player.ChangePlayerBodyParts();
-        player.balance.ShouldBalance = false;
+        player.Balance.ShouldBalance = false;
 
         yield return new WaitForSeconds(0.1f);
 

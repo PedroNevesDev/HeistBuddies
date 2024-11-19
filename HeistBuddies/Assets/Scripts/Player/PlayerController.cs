@@ -1,30 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField]  float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 1.5f;
-    [SerializeField] private float maxSpeedMagnitude;
-    [SerializeField] private bool canMove;
+    #region Variables
+
+    [SerializeField,Tooltip("All the player modules can be found here. Each one works individually in order to decrease dependencies and increase abstraction.")] 
+    Modules playerModules;
     [SerializeField] Rigidbody rb;
 
     [Header("Player Conditions")]
     [SerializeField] private bool wasTeleported = false;
     [SerializeField] private bool wasGrabbed = false;
-
-    public bool WasGrabbed { get => wasGrabbed; set => wasGrabbed = value; }
-    public bool WasTeleported { get => wasTeleported; set => wasTeleported = value; }
-
-    // Specific transform that will be used to follow the movement direction ex:mesh. Could be anything
-    [SerializeField] Transform orientation; 
-    
-    // Animator of the animated rig. Lets you change the animation
-    [SerializeField] Animator animator; 
+    [SerializeField] Balance balance;
 
     // All bodyparts can be here if needed. Used to store a reference into player controller owner
     [SerializeField,Tooltip("Assigns this character reference to every body part script added here. Makes searching for collisions easier")] 
@@ -32,39 +21,26 @@ public class PlayerController : MonoBehaviour
 
     private List<float> playerBodyParts = new List<float>();
     
-
-    
-    private Camera myCam; 
-    
-	[Header("Grab Detection Box Settings")]
-    [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
-    [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
-    [SerializeField] private LayerMask detectionLayer;
-
     private Transform teleportPoint = null;
     private Coroutine teleportCoroutine = null;
 
-    private IGrabbable currentGrabbable = null;
+    #endregion
+    
+    #region Getters/Setters
+    public bool WasGrabbed { get => wasGrabbed; set => wasGrabbed = value; }
+    public bool WasTeleported { get => wasTeleported; set => wasTeleported = value; }
 
-    private PlayerBackpack backpack = null;
-
-
-    public bool CanMove { get => canMove; set => canMove = value; }
     public Rigidbody Rb { get => rb; set => rb = value; }
-    public PlayerBackpack Backpack { get => backpack; set => backpack = value; }
     public BodyPartOwner[] BodyParts { get => bodyParts; set => bodyParts = value; }
-
-    Vector2 moveInput = Vector2.zero;
-    bool isGrabbing = false;
-
-    public Balance balance;
-    public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
-    public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.ReadValue<float>()>0;
-
-    private void Start()
+    public Modules PlayerModules { get => playerModules; set => playerModules = value; }
+    public Balance Balance { get => balance; set => balance = value; }
+    
+    #endregion
+    
+    #region MonoBehaviour
+    private void Awake()
     {
-        myCam = Camera.main;
-        backpack = GetComponent<PlayerBackpack>();
+        playerModules.FindModules(this);
 
         teleportPoint = GameObject.Find("TeleportPoint").transform;
 
@@ -83,113 +59,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CheckForGrabbable();
-        Grab();
-
         if (wasTeleported)
         {
             StopCoroutine(teleportCoroutine);
             wasTeleported = false;
         }
     }
-
-    private void FixedUpdate()
-    {
-        if (!canMove) return;
-
-        Move();
-        SpeedControl();
-    }
-
-    private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-
-        if (flatVel.magnitude > maxSpeedMagnitude)
-        {
-            Vector3 limitVel = flatVel.normalized * maxSpeedMagnitude;
-            rb.linearVelocity = new Vector3(limitVel.x, rb.linearVelocity.y, limitVel.z);
-        }
-    }
-
-    private void Move()
-    {
-        //Getting the main camera directions
-        Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0); 
-        
-        // Applying the camera directions to the the inputs to get a better feel
-        Vector3 move = (rotation*new Vector3(moveInput.x, 0, moveInput.y)).normalized; 
-        
-        //Transform to local space
-        move = transform.TransformDirection(move); 
-
-        // Checking if there is indead movement input from the player
-        if(move!=Vector3.zero) 
-        {
-
-            //Get Target Rotation
-            Quaternion targetRotation = Quaternion.LookRotation((orientation.transform.position+move)-orientation.transform.position);
-
-            //Rotate smoothly to this target
-            orientation.rotation = Quaternion.Slerp(orientation.rotation, targetRotation, rotationSpeed*Time.fixedDeltaTime);
-
-            // Makes the character go into Walk animation
-            animator.SetBool("Moving",true); 
-        }
-        else
-        {
-            // Makes the character go into Idle animation
-            animator.SetBool("Moving",false); 
-        }
-        
-        // Applying the move direction to the rigidbody
-        rb.AddForce(move * moveSpeed,ForceMode.VelocityChange); 
-    }
-
-    private void CheckForGrabbable()
-    {
-        Vector3 boxCenter = rb.position + rb.transform.TransformDirection(boxOffset);
-        Collider[] hits = Physics.OverlapBox(boxCenter, boxSize / 2, rb.transform.rotation, detectionLayer);
-
-        if (hits.Length > 0)
-        {
-            IGrabbable grabbable = hits[0].GetComponent<IGrabbable>();
-            if (grabbable != null)
-            {
-                if (currentGrabbable != grabbable)
-                {
-                    if (currentGrabbable != null)
-                    {
-                        currentGrabbable.DisableUI();
-                    }
-
-                    currentGrabbable = grabbable;
-
-                    currentGrabbable.EnableUI();
-                }
-                return;
-            }
-        }
-
-        if (currentGrabbable != null)
-        {
-            currentGrabbable.DisableUI();
-            currentGrabbable = null;
-        }
-    }
-
-    private void Grab()
-    {
-        if(currentGrabbable == null)
-            return;
-        if(isGrabbing == false)
-            return;
-    
-        Item item = currentGrabbable as Item;
-        backpack.AddItemToBackPack(item);
-
-        currentGrabbable.Grab();
-    }
+    #endregion
 
     #region Player BodyParts
 
@@ -256,18 +132,34 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        canMove = true;
+        if(playerModules.MovementModule!=null)
+        {
+            playerModules.MovementModule.enabled = true;
+        }
         balance.ShouldBalance = true;
         wasTeleported = true;
     }
 
     #endregion
-
-    private void OnDrawGizmos()
+    
+    #region Structs (Modules)
+    [System.Serializable]
+    public struct Modules
     {
-        Gizmos.color = Color.green;
-        Vector3 boxCenter = rb.transform.position + rb.transform.TransformDirection(boxOffset);
-        Gizmos.matrix = Matrix4x4.TRS(boxCenter, rb.transform.rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+        [SerializeField] PlayerMovementModule movementModule;
+        [SerializeField] PlayerGrabbingModule grabbingModule;
+        [SerializeField] PlayerBackpackModule backpackModule;
+
+        public PlayerMovementModule MovementModule { get => movementModule; set => movementModule = value; }
+        public PlayerGrabbingModule GrabbingModule { get => grabbingModule; set => grabbingModule = value; }
+        public PlayerBackpackModule BackpackModule { get => backpackModule; set => backpackModule = value; }
+
+        public void FindModules(PlayerController pc)
+        {
+            movementModule = pc.GetComponent<PlayerMovementModule>();
+            grabbingModule = pc.GetComponent<PlayerGrabbingModule>();
+            backpackModule = pc.GetComponent<PlayerBackpackModule>();
+        }
     }
+    #endregion
 }

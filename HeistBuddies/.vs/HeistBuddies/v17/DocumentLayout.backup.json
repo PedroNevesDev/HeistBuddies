@@ -7,11 +7,27 @@
       "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\states\\grabstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\ai\\states\\chasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\player\\balance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\balance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\assets\\scripts\\ai\\states\\chasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\states\\chasestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\ai\\aibrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\ai\\states\\patrolstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\states\\patrolstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\ai\\states\\investigatestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\states\\investigatestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\assets\\scripts\\ai\\aibrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ai\\aibrain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,11 +38,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Balance.cs",
+              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\Balance.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\Balance.cs",
+              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\Balance.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\Balance.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T21:54:41.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAswC8AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T20:55:42.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "AIBrain.cs",
               "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\AIBrain.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\AIBrain.cs",
@@ -39,26 +81,52 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InvestigateState.cs",
+              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\InvestigateState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\States\\InvestigateState.cs",
+              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\InvestigateState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AI\\States\\InvestigateState.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T20:50:25.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PatrolState.cs",
+              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\PatrolState.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\States\\PatrolState.cs",
+              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\PatrolState.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AI\\States\\PatrolState.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-08T20:49:06.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "GrabState.cs",
               "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\GrabState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\States\\GrabState.cs",
               "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\GrabState.cs",
               "RelativeToolTip": "Assets\\Scripts\\AI\\States\\GrabState.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwCUAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-08T20:43:40.781Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ChaseState.cs",
               "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\ChaseState.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AI\\States\\ChaseState.cs",
               "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\AI\\States\\ChaseState.cs",
               "RelativeToolTip": "Assets\\Scripts\\AI\\States\\ChaseState.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-08T20:41:30.389Z",
               "EditorCaption": ""

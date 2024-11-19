@@ -10,14 +10,18 @@ public class Van : MonoBehaviour
         BodyPartOwner playerBodyPart = other.GetComponent<BodyPartOwner>();
         if(playerBodyPart)
         {
-            int newScore = playerBodyPart.MyOwner.Backpack.ClearItemsFromBackpack();
-            if(newScore>0)
+            PlayerBackpackModule backpackModule = playerBodyPart.MyOwner.PlayerModules.BackpackModule;
+            if(backpackModule!=null)
             {
-                score += newScore;
-                scoreText.text = score.ToString();
-                StartCoroutine(TextPreFadeDelay());
-            }
+                int totalItemScore = backpackModule.ClearItemsFromBackpack();
 
+                if(totalItemScore>0)
+                {
+                    score += totalItemScore;
+                    scoreText.text = score.ToString();
+                    StartCoroutine(TextPreFadeDelay());
+                }
+            }
         }
     }
 
