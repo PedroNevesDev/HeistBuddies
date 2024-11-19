@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mono.Cecil.Cil;
 using Unity.Burst.Intrinsics;
 using Unity.Cinemachine;
@@ -15,6 +16,7 @@ public class ControllerListener : MonoBehaviour
 
     public Transform mapSpawnPoint;
     
+    public bool debugMode;
     PlayerInput p1;
     PlayerInput p2;
 
@@ -60,6 +62,7 @@ public class ControllerListener : MonoBehaviour
     // Just a quick and easy way to get access to the default singleplayer devices without repiting the code
     InputDevice[] GetConnectedDevices(int playerInputIndex)
     {
+        List<InputDevice> devices = new List<InputDevice>();
         // Update numberOfPads so that it doesnt call OnDeviceChange multiple times
         numberOfGamepads=Gamepad.all.Count; 
         // Assigning multiplayer bool for better readability 
@@ -67,24 +70,23 @@ public class ControllerListener : MonoBehaviour
 
         if(multiplayer) //Checks multiplayer has been triggered (condition : having more than one gamepad connected)
         {
-            return new InputDevice[] {Gamepad.all[playerInputIndex]};
+            devices.Add(Gamepad.all[playerInputIndex]);
         }
-        else if(numberOfGamepads==1) //Checks if it should add the gamepad
+        else 
         {
-            return new InputDevice[] { Keyboard.current, Gamepad.all[0]};                
+            if(Keyboard.current!=null) devices.Add(Keyboard.current);
+            if(numberOfGamepads==1) devices.Add(Gamepad.all[0]);            
         }
-        else if(Keyboard.current!=null) //Checks if there is a keyboard connected
-        {
-            return new InputDevice[] { Keyboard.current};
-        }
+        
         Debugging();
-        return null;
+        return devices.ToArray();
     }
 
 
 
     void Debugging()
     {
+        if(!debugMode) return;
         print("Gamepad count: " + numberOfGamepads);
         print("Multiplayer Mode: " + multiplayer);
     }

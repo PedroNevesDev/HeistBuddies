@@ -9,11 +9,14 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
     [SerializeField] private LayerMask detectionLayer;
 
+    [SerializeField] Rigidbody[] armsRigidbodies;
     private IGrabbable currentGrabbable = null;
     bool isGrabbing = false;
     private PlayerBackpackModule backpack = null;
 
     [SerializeField] Rigidbody rbBoxOrigin;
+
+    [SerializeField] Transform pointTarget;
     
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.ReadValue<float>()>0;
 
@@ -27,6 +30,15 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         CheckForGrabbable();
         Grab();
+        PointHands();
+    }
+    void PointHands()
+    {
+        if(isGrabbing == false) return;
+        foreach(Rigidbody arm in armsRigidbodies)
+        {
+
+        }
     }
     public void CheckForGrabbable()
     {

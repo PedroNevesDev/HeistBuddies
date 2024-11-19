@@ -59,6 +59,37 @@ MonoBehaviour:
     animatedCounterpart: {fileID: 7210097032200774915}
   - joint: {fileID: 5867739334387758263}
     animatedCounterpart: {fileID: 8821533014135116387}
+--- !u!1 &6504446050578854515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5936218167974124250}
+  m_Layer: 3
+  m_Name: ArmTargetPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5936218167974124250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6504446050578854515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2137057684330949899}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6531792795510212672
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,9 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31051759ec4cc8849b00d064644ef432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerModules:
+    movementModule: {fileID: 0}
+    grabbingModule: {fileID: 0}
+    backpackModule: {fileID: 0}
   rb: {fileID: 7719137223352418081}
   wasTeleported: 0
   wasGrabbed: 0
+  balance: {fileID: 5810256199914316612}
   bodyParts:
   - {fileID: 8727233610542163202}
   - {fileID: 7299348367403102038}
@@ -200,10 +236,6 @@ MonoBehaviour:
   - {fileID: 4006233030543305420}
   - {fileID: 4116565020132592757}
   - {fileID: 3988050154209268817}
-  movementModule: {fileID: 0}
-  grabbingModule: {fileID: 0}
-  backpackModule: {fileID: 0}
-  balance: {fileID: 5810256199914316612}
 --- !u!114 &8808667950619304722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +271,11 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 64
+  armsRigidbodies:
+  - {fileID: 2558300208864185093}
+  - {fileID: 4378824694231647429}
   rbBoxOrigin: {fileID: 7719137223352418081}
+  pointTarget: {fileID: 5936218167974124250}
 --- !u!114 &4666042578104732768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,6 +827,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -1063094714816996356, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 8751460837227959158}
+    - targetCorrespondingSourceObject: {fileID: 5392390209365313541, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5936218167974124250}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
@@ -881,7 +920,7 @@ PrefabInstance:
       addedObject: {fileID: 1860344589604163797}
     - targetCorrespondingSourceObject: {fileID: 8356538690890272372, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 530497699465854384}
+      addedObject: {fileID: 4961955811735660091}
     - targetCorrespondingSourceObject: {fileID: 8356538690890272372, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7719137223352418081}
@@ -1143,8 +1182,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8356538690890272372, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
   m_PrefabInstance: {fileID: 6304411620346111246}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &530497699465854384
-BoxCollider:
+--- !u!135 &4961955811735660091
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1160,10 +1199,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0034, y: 0.0025, z: 0.003}
-  m_Center: {x: 1.1641532e-10, y: 0.0009, z: 0.000038488448}
+  m_Radius: 0.0019
+  m_Center: {x: 0, y: 0.0012, z: 0}
 --- !u!54 &7719137223352418081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1813,14 +1852,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 500
-    positionDamper: 5
+    positionSpring: 90
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 500
-    positionDamper: 5
+    positionSpring: 90
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -2323,14 +2362,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 500
-    positionDamper: 5
+    positionSpring: 90
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 500
-    positionDamper: 5
+    positionSpring: 90
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -3421,11 +3460,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -24.972443
+    limit: -1.7161283
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 25.791847
+    limit: 24.497955
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
