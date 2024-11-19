@@ -10,9 +10,13 @@ public enum GlobalEvent
 
 public enum LocalEvent
 {
+    // Player
     PlayerFound,
     PlayerLost,
     PlayerGrabbed,
+
+    //Dog
+    BoneFound,
 }
 
 public static class EventManager

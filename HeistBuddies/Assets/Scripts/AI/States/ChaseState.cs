@@ -8,7 +8,10 @@ public class ChaseState : AIState
     public override void OnStateEnter()
     {
         var newBrain = brain as AIBrainGuard;
-        newBrain.EnableAlertPanel();
+        if (newBrain is AIBrainGuard)
+        {
+            newBrain.EnableAlertPanel();
+        }
 
         agent.isStopped = false;
     }
@@ -24,7 +27,10 @@ public class ChaseState : AIState
     public override void OnStateExit()
     {
         var newBrain = brain as AIBrainGuard;
-        newBrain.DisableAlertPanel();
+        if (newBrain is AIBrainGuard)
+        {
+            newBrain.DisableAlertPanel();
+        }
 
         agent.isStopped = false;
     }

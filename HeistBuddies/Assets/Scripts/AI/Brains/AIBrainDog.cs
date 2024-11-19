@@ -8,6 +8,7 @@ public class AIBrainDog : AIBrain
 
         //LOCAL EVENTS
         EventManager.SubscribeToLocalEvent(LocalEvent.PlayerFound, OnLocalPlayerFound);
+        EventManager.SubscribeToLocalEvent(LocalEvent.PlayerLost, OnLocalPlayerLost);
     }
 
     protected override void OnDisable()
@@ -16,14 +17,22 @@ public class AIBrainDog : AIBrain
 
         //LOCAL EVENTS
         EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerFound, OnLocalPlayerFound);
+        EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerLost, OnLocalPlayerLost);
     }
 
     #region Local Events Callbacks
 
     private void OnLocalPlayerFound(EventData eventData)
     {
-        if (eventData is PlayerEventData playerData && playerData.TargetBrain == this)
-            EventManager.InvokeGlobalEvent(GlobalEvent.DogAlert, eventData);
+        if (eventData.TargetBrain == this)
+            TransitionToState(AIStateType.Chase);
+            //EventManager.InvokeGlobalEvent(GlobalEvent.DogAlert, eventData);
+    }
+
+    private void OnLocalPlayerLost(EventData eventData)
+    {
+        if (eventData.TargetBrain == this)
+            TransitionToState(AIStateType.Patrol);
     }
 
     #endregion

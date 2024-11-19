@@ -81,12 +81,9 @@ public class DetectionModule : AIModule
 
         if (playerController != null && !playerController.WasGrabbed)
         {
-            if (detectionType == DetectionType.Guard)
+            if (wasPlayerVisible && !isPlayerVisible)
             {
-                if (wasPlayerVisible && !isPlayerVisible)
-                {
-                    OnPlayerLost();
-                }
+                OnPlayerLost();
             }
         }
 
@@ -153,6 +150,11 @@ public class DetectionModule : AIModule
         EventManager.InvokeLocalEvent(LocalEvent.PlayerLost, eventData);
 
         playerController = null;
+    }
+
+    private void OnBoneReceived()
+    {
+
     }
 
     private void UpdateFlagsForNextFrame()
