@@ -2,7 +2,14 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class Item : MonoBehaviour, IGrabbable
+public enum ItemState
+{
+    Idle,
+    Grabbed,
+    Throwing
+}
+
+public class Item : MonoBehaviour, IGrabbable, IThrowable
 {
     [Header("Item Data")]
     [SerializeField] private ItemData itemData;
@@ -10,31 +17,60 @@ public class Item : MonoBehaviour, IGrabbable
     [Header("Item UI")]
     [SerializeField] private TextMeshProUGUI itemText;
 
+    [Header("Item Conditions")]
+    [SerializeField] private bool isBreakable;
+    [SerializeField] private bool isThrowable;
+    [SerializeField] private bool isStorable;
+
+    [Header("Item State")]
+    [SerializeField] private ItemState state = ItemState.Idle;
+
+    private Rigidbody rb;
+
     public Guid Id { get; private set; }
     public ItemData Data { get => itemData; private set => itemData = value; }
+    public ItemState State { get => state; set => state = value; }
 
     private void Awake()
     {
         Id = Guid.NewGuid();
+
+        rb = GetComponent<Rigidbody>();
+
+        if (itemData == null)
+        {
+            Debug.Log("No ItemData assigned!");
+            return;
+        }
+
+        isBreakable = itemData.isBreakable;
+        isThrowable = itemData.isThrowable;
+        isStorable = itemData.isStorable;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (itemData.isBreakable)
         {
-            float randomValue = UnityEngine.Random.value;
-            if (randomValue <= itemData.breakChance)
-            {
-                var eventData = new PositionEventData(null, this.transform.position);
-                EventManager.InvokeGlobalEvent(GlobalEvent.SoundAlert, eventData);
-                Destroy(this.gameObject);
-            }
+            
         }
     }
 
-    public void Grab()
+    #region IGrabbable
+
+    public void Grab(Transform target)
     {
-        this.gameObject.SetActive(false);
+        state = ItemState.Grabbed;
+
+        rb.isKinematic = true;
+
+        this.transform.SetParent(target);
+        this.transform.position = target.position;
+    }
+
+    public void Release()
+    {
+        state = ItemState.Idle;
     }
 
     public void EnableUI()
@@ -47,4 +83,18 @@ public class Item : MonoBehaviour, IGrabbable
         itemText.text = "";
     }
 
+    #endregion
+
+    #region IThrowable
+
+    public void Throw(float forceUp, float forceForward)
+    {
+        state = ItemState.Throwing;
+        rb.isKinematic = false;
+
+        rb.AddForce(Vector3.up * forceUp, ForceMode.Impulse);
+        rb.AddForce(Vector3.forward * forceForward, ForceMode.Impulse);
+    }
+
+    #endregion
 }

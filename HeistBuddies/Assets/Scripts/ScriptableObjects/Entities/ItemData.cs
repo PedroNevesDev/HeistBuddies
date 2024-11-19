@@ -8,7 +8,8 @@ public class ItemData : ScriptableObject
     public string Name;
     public int Points;
 
-    [Header("Breaking Settings")]
+    [Header("Item Conditions")]
     public bool isBreakable = false;
-    [Range(0, 1)] public float breakChance;
+    public bool isThrowable = false;
+    public bool isStorable = false;
 }

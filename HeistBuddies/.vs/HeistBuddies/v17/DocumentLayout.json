@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\player\\playermodules\\playergrabbingmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playermodules\\playergrabbingmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\player\\playermodules\\playerbackpackmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playermodules\\playerbackpackmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\entities\\items\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\entities\\items\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|c:\\users\\aluno\\documents\\github\\heistbuddies\\heistbuddies\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89A2CCFC-AB8A-234D-2757-4717F8BB4859}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PlayerBackpackModule.cs",
-              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerModules\\PlayerBackpackModule.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerModules\\PlayerBackpackModule.cs",
-              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerModules\\PlayerBackpackModule.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerModules\\PlayerBackpackModule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T19:06:01.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerGrabbingModule.cs",
-              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerModules\\PlayerGrabbingModule.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerModules\\PlayerGrabbingModule.cs",
-              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerModules\\PlayerGrabbingModule.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerModules\\PlayerGrabbingModule.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T19:05:57.276Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Entities\\Items\\Item.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Entities\\Items\\Item.cs",
               "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Entities\\Items\\Item.cs",
               "RelativeToolTip": "Assets\\Scripts\\Entities\\Items\\Item.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T19:02:43.353Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\aluno\\Documents\\GitHub\\HeistBuddies\\HeistBuddies\\Assets\\Scripts\\Player\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-19T12:25:20.964Z",
+              "WhenOpened": "2024-11-19T19:49:34.667Z",
               "EditorCaption": ""
             }
           ]

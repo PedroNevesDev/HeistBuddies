@@ -1,6 +1,9 @@
+using UnityEngine;
+
 public interface IGrabbable
 {
-    void Grab();
+    void Grab(Transform target);
+    void Release();
     void EnableUI();
     void DisableUI();
 }

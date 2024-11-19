@@ -10,15 +10,22 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] private LayerMask detectionLayer;
 
     [SerializeField] Rigidbody[] armsRigidbodies;
-    private IGrabbable currentGrabbable = null;
+    [SerializeField] private Item currentGrabbable = null;
     bool isGrabbing = false;
+    bool isThrowing = false;
     private PlayerBackpackModule backpack = null;
 
     [SerializeField] Rigidbody rbBoxOrigin;
 
     [SerializeField] Transform pointTarget;
+
+    [SerializeField] private float throwForce;
+
+    [Range(0,1)] private float currentPower = 0;
     
-    public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.ReadValue<float>()>0;
+    public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
+
+    public void OnThrow(InputAction.CallbackContext context) => isThrowing = context.performed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,9 +37,11 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         CheckForGrabbable();
         Grab();
+        Throw();
         PointHands();
     }
-    void PointHands()
+
+    private void PointHands()
     {
         if(isGrabbing == false) return;
         foreach(Rigidbody arm in armsRigidbodies)
@@ -40,6 +49,7 @@ public class PlayerGrabbingModule : MonoBehaviour
 
         }
     }
+
     public void CheckForGrabbable()
     {
         Vector3 boxCenter = rbBoxOrigin.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
@@ -47,7 +57,7 @@ public class PlayerGrabbingModule : MonoBehaviour
 
         if (hits.Length > 0)
         {
-            IGrabbable grabbable = hits[0].GetComponent<IGrabbable>();
+            Item grabbable = hits[0].GetComponent<Item>();
             if (grabbable != null)
             {
                 if (currentGrabbable != grabbable)
@@ -71,18 +81,32 @@ public class PlayerGrabbingModule : MonoBehaviour
             currentGrabbable = null;
         }
     }
+
     public void Grab()
     {
-        if(currentGrabbable == null)
-            return;
-        if(isGrabbing == false)
-            return;
-    
-        Item item = currentGrabbable as Item;
-        backpack.AddItemToBackPack(item);
+        if (currentGrabbable == null) return;
+        if (isGrabbing == false)  return;
+        
+        //Item item = currentGrabbable as Item;
+        //backpack.AddItemToBackPack(item);
 
-        currentGrabbable.Grab();
+        currentGrabbable.Grab(pointTarget);
     }
+
+    public void Throw()
+    {
+        if (currentGrabbable == null) return;
+        if (isThrowing == false) return;
+
+        //Item item = currentGrabbable as Item;
+        //backpack.AddItemToBackPack(item);
+
+        if (currentGrabbable.State == ItemState.Grabbed && isThrowing)
+        {
+            currentGrabbable.Throw(100f, 100f);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

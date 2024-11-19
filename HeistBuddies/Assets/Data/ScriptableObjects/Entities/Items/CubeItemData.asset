@@ -15,4 +15,4 @@ MonoBehaviour:
   Name: Cube
   Points: 10
   isBreakable: 1
-  breakChance: 1
+  isThrowable: 1

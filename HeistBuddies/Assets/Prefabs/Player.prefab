@@ -59,6 +59,37 @@ MonoBehaviour:
     animatedCounterpart: {fileID: 7210097032200774915}
   - joint: {fileID: 5867739334387758263}
     animatedCounterpart: {fileID: 8821533014135116387}
+--- !u!1 &4892715885511467438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6291135511640663191}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6291135511640663191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892715885511467438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0058521773, y: 0.017086208, z: 0.0025677711, w: 0.9998336}
+  m_LocalPosition: {x: 0.0003, y: 0.00205, z: 0.00898}
+  m_LocalScale: {x: 0.01, y: 0.009999998, z: 0.009999998}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4325847804096019636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6504446050578854515
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,8 +305,10 @@ MonoBehaviour:
   armsRigidbodies:
   - {fileID: 2558300208864185093}
   - {fileID: 4378824694231647429}
+  currentGrabbable: {fileID: 0}
   rbBoxOrigin: {fileID: 7719137223352418081}
-  pointTarget: {fileID: 5936218167974124250}
+  pointTarget: {fileID: 6291135511640663191}
+  throwForce: 0
 --- !u!114 &4666042578104732768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,25 +485,9 @@ MonoBehaviour:
     m_ActionName: 'Player2/SupressBreathing[/DualShock4GamepadHID/buttonNorth,/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8808667950619304722}
-        m_TargetAssemblyTypeName: PlayerMovementModule, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e8852d43-ac13-4cd2-83d8-0cc94fdbcde3
-    m_ActionName: 'Multiplayer/Move[/DualShock4GamepadHID/leftStick]'
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8974963639332065678}
         m_TargetAssemblyTypeName: PlayerGrabbingModule, Assembly-CSharp
-        m_MethodName: OnGrab
+        m_MethodName: OnThrow
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -480,24 +497,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 6abe3666-51f5-4f41-bba8-4849271232ba
-    m_ActionName: 'Multiplayer/Grab[/DualShock4GamepadHID/leftShoulder]'
+    m_ActionId: faa95e23-f1f2-4a55-b5f7-25ac2b3053a8
+    m_ActionName: 'Player1/Throw[/Keyboard/f]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 7f544ba2-383e-4c62-ab2a-54d251fcdd1a
-    m_ActionName: 'Multiplayer/SlowWalking[/DualShock4GamepadHID/buttonSouth]'
+    m_ActionId: 07a5dd0d-000f-4cc2-bd8b-cbcb58b3af4e
+    m_ActionName: 'Player2/Throw[/Keyboard/rightCtrl]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: aa9f2483-cf80-4832-8be5-2cb218e84ac2
-    m_ActionName: 'Multiplayer/Interact[/DualShock4GamepadHID/buttonEast]'
+    m_ActionId: e5fa0a65-9fb3-47a6-8e64-7df10b461084
+    m_ActionName: 'Multiplayer/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 06fd7191-4fd0-4695-b5a6-17d621714ae9
-    m_ActionName: 'Multiplayer/Run[/DualShock4GamepadHID/buttonWest]'
+    m_ActionId: 5bbcdd6b-8f9a-472e-86b3-1c90a03281c9
+    m_ActionName: 'Multiplayer/Grab[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e7c6b769-c633-470a-9008-adcbcae710b2
-    m_ActionName: 'Multiplayer/SupressBreathing[/DualShock4GamepadHID/buttonNorth]'
+    m_ActionId: 2c4adbb1-3be4-40a5-ac2e-6a595663f04b
+    m_ActionName: 'Multiplayer/SlowWalking[/Keyboard/ctrl]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 35fa50c2-9f85-4c87-b57c-d62f60fc0329
+    m_ActionName: 'Multiplayer/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0bc8c4dd-bfa2-46c5-b1ee-fb64c0a569cf
+    m_ActionName: 'Multiplayer/Run[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 27702f8b-67e2-4895-bb80-9d457eb2e55f
+    m_ActionName: 'Multiplayer/SupressBreathing[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cea20828-6493-4cd3-8dfb-e4954ba6059b
+    m_ActionName: 'Multiplayer/Throw[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Player1
   m_DefaultActionMap: Player2
@@ -830,6 +863,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5392390209365313541, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5936218167974124250}
+    - targetCorrespondingSourceObject: {fileID: -1480070881545233990, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6291135511640663191}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
       insertIndex: -1
@@ -1722,6 +1758,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4874ccb4c731fc74f8a2ca75d0604a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &4325847804096019636 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1480070881545233990, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
+  m_PrefabInstance: {fileID: 6304411620346111246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4338031106849873684 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7732131601650465306, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
