@@ -71,6 +71,7 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
     public void Release()
     {
         state = ItemState.Idle;
+        transform.SetParent(null);
     }
 
     public void EnableUI()
@@ -83,18 +84,19 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
         itemText.text = "";
     }
 
+    public void Throw(Vector3 direction)
+    {
+        state = ItemState.Throwing;
+        rb.isKinematic = false;
+        Release();
+        rb.AddForce(direction, ForceMode.Impulse);
+    }
+
     #endregion
 
     #region IThrowable
 
-    public void Throw(float forceUp, float forceForward)
-    {
-        state = ItemState.Throwing;
-        rb.isKinematic = false;
 
-        rb.AddForce(Vector3.up * forceUp, ForceMode.Impulse);
-        rb.AddForce(Vector3.forward * forceForward, ForceMode.Impulse);
-    }
 
     #endregion
 }

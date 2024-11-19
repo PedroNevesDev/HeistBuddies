@@ -308,7 +308,9 @@ MonoBehaviour:
   currentGrabbable: {fileID: 0}
   rbBoxOrigin: {fileID: 7719137223352418081}
   pointTarget: {fileID: 6291135511640663191}
-  throwForce: 0
+  throwForce: 10
+  maxHoldingDuration: 1
+  throwingDebugSlider: 0
 --- !u!114 &4666042578104732768
 MonoBehaviour:
   m_ObjectHideFlags: 0

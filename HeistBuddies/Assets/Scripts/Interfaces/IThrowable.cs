@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface IThrowable
 {
-    void Throw(float forceUp, float forceForward);
+    public void Throw(Vector3 direction);
 }

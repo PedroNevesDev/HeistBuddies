@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,6 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] Rigidbody[] armsRigidbodies;
     [SerializeField] private Item currentGrabbable = null;
     bool isGrabbing = false;
-    bool isThrowing = false;
     private PlayerBackpackModule backpack = null;
 
     [SerializeField] Rigidbody rbBoxOrigin;
@@ -21,11 +21,11 @@ public class PlayerGrabbingModule : MonoBehaviour
 
     [SerializeField] private float throwForce;
 
-    [Range(0,1)] private float currentPower = 0;
+    [SerializeField] private float maxHoldingDuration = 1;
+    [SerializeField, Range(0,1)] private float throwingDebugSlider = 0;
+    InputAction.CallbackContext throwingCtx;
     
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
-
-    public void OnThrow(InputAction.CallbackContext context) => isThrowing = context.performed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,7 +37,6 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         CheckForGrabbable();
         Grab();
-        Throw();
         PointHands();
     }
 
@@ -93,20 +92,27 @@ public class PlayerGrabbingModule : MonoBehaviour
         currentGrabbable.Grab(pointTarget);
     }
 
-    public void Throw()
+    public void OnThrow(InputAction.CallbackContext ctx) 
     {
         if (currentGrabbable == null) return;
-        if (isThrowing == false) return;
+        float currentDuration = (float)Math.Clamp(ctx.duration,0,maxHoldingDuration);
+        throwingDebugSlider = currentDuration/maxHoldingDuration;
+        if (ctx.canceled)
+        {
+            Vector3 dir = rbBoxOrigin.transform.position * currentDuration * throwForce;
+            currentGrabbable.Throw(dir);
+        }
 
         //Item item = currentGrabbable as Item;
         //backpack.AddItemToBackPack(item);
 
-        if (currentGrabbable.State == ItemState.Grabbed && isThrowing)
-        {
-            currentGrabbable.Throw(100f, 100f);
-        }
     }
 
+    public void Store()
+    {
+        //Item item = currentGrabbable as Item;
+        //backpack.AddItemToBackPack(item);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
