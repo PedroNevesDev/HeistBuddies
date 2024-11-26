@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System.Threading;
 
 [RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController))]
 public class PlayerGrabbingModule : MonoBehaviour
@@ -30,6 +33,11 @@ public class PlayerGrabbingModule : MonoBehaviour
     
     [SerializeField] Image fillThrowUi;
     [SerializeField] GameObject throwCanvas;
+    [SerializeField] AnimationCurve exponentialCurve;
+
+    [SerializeField] VerticalLayoutGroup verticalLayoutGroup;
+    [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
+    [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
     public void OnThrow(InputAction.CallbackContext ctx) => throwingCtx = ctx;
     
@@ -42,12 +50,54 @@ public class PlayerGrabbingModule : MonoBehaviour
 
     private void Update()
     {
+        if(currentGrabbable!=null&&currentGrabbable.State==ItemState.Grabbed&&isGrabbing)
+            Store();
         CheckForGrabbable();
         Grab();
         PointHands();
         CheckThrowingState();
+        UpdateObjectInputText();
     }
 
+    void UpdateObjectInputText()
+    {
+        if(currentGrabbable==null)
+        {
+            verticalLayoutGroup.gameObject.SetActive(false);
+            return;
+        }
+        for(int i = grabbableTexts.Count-1;i>=0;i-- )
+        {
+            Destroy(grabbableTexts[i].gameObject);
+            grabbableTexts.RemoveAt(i);
+        }
+        verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.lossyScale.y,0);
+        switch(currentGrabbable.State)
+        {
+            case ItemState.Idle:
+            verticalLayoutGroup.gameObject.SetActive(true);
+            grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
+            grabbableTexts[grabbableTexts.Count-1].text = "Grab";
+            break;
+            case ItemState.Grabbed:
+            verticalLayoutGroup.gameObject.SetActive(true);
+            if(currentGrabbable.Data.isThrowable)
+            {
+                grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
+                grabbableTexts[grabbableTexts.Count-1].text = "Throw";
+            }
+            if(currentGrabbable.Data.isStorable)
+            {
+                grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
+                grabbableTexts[grabbableTexts.Count-1].text = "Store";
+            }
+
+            break;
+            case ItemState.Throwing:
+            verticalLayoutGroup.gameObject.SetActive(false);
+            break;
+        }
+    }
     private void PointHands()
     {
         if(isGrabbing == false) return;
@@ -58,46 +108,39 @@ public class PlayerGrabbingModule : MonoBehaviour
     }
     public void CheckThrowingState()
     {
-        if (currentGrabbable == null) return;
+        if (currentGrabbable == null||currentGrabbable.State==ItemState.Idle) return;
         if (throwingCtx.performed)
         {
+            currentGrabbable.State = ItemState.Throwing;
             throwCanvas.SetActive(true);
-            print(throwingCtx);
             currentHoldingDuration += Time.deltaTime;
             currentHoldingDuration = Math.Clamp(currentHoldingDuration,0,maxHoldingDuration);
         }
         if (!throwingCtx.performed&&currentHoldingDuration!=0)
         {
 
-            Vector3 dir = orientation.forward * currentHoldingDuration * throwForce+ orientation.up/3 * currentHoldingDuration * throwForce;
+            Vector3 dir = orientation.forward * currentHoldingDuration * throwForce+ orientation.up/2 * currentHoldingDuration * throwForce;
             currentGrabbable.Throw(dir);
-            currentHoldingDuration =0;
+            currentGrabbable.State = ItemState.Idle;
+            currentHoldingDuration = 0;
             throwCanvas.SetActive(false);
-            print("Throw");
         }
-        fillThrowUi.fillAmount = currentHoldingDuration/maxHoldingDuration;
+        fillThrowUi.fillAmount = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
     }
 
     public void CheckForGrabbable()
     {
         Vector3 boxCenter = rbBoxOrigin.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
-        Collider[] hits = Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, detectionLayer);
+        List<Collider> hits = new List<Collider>(Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, detectionLayer));
 
-        if (hits.Length > 0)
+        if (hits.Count > 0)
         {
             Item grabbable = hits[0].GetComponent<Item>();
             if (grabbable != null)
             {
                 if (currentGrabbable != grabbable)
                 {
-                    if (currentGrabbable != null)
-                    {
-                        currentGrabbable.DisableUI();
-                    }
-
                     currentGrabbable = grabbable;
-
-                    currentGrabbable.EnableUI();
                 }
                 return;
             }
@@ -105,7 +148,6 @@ public class PlayerGrabbingModule : MonoBehaviour
 
         if (currentGrabbable != null)
         {
-            currentGrabbable.DisableUI();
             currentGrabbable = null;
         }
     }
@@ -114,17 +156,17 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         if (currentGrabbable == null) return;
         if (isGrabbing == false)  return;
-        
-        //Item item = currentGrabbable as Item;
-        //backpack.AddItemToBackPack(item);
 
         currentGrabbable.Grab(pointTarget);
+        isGrabbing = false;
     }
 
     public void Store()
     {
-        //Item item = currentGrabbable as Item;
-        //backpack.AddItemToBackPack(item);
+        if(!currentGrabbable.Data.isStorable)return;
+        
+        Item item = currentGrabbable as Item;
+        backpack.AddItemToBackPack(item);
     }
     private void OnDrawGizmos()
     {
