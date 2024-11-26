@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController))]
@@ -22,10 +23,16 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] private float throwForce;
 
     [SerializeField] private float maxHoldingDuration = 1;
-    [SerializeField, Range(0,1)] private float throwingDebugSlider = 0;
+
+    float currentHoldingDuration;
+    [SerializeField] Transform orientation;
     InputAction.CallbackContext throwingCtx;
     
+    [SerializeField] Image fillThrowUi;
+    [SerializeField] GameObject throwCanvas;
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
+    public void OnThrow(InputAction.CallbackContext ctx) => throwingCtx = ctx;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +45,7 @@ public class PlayerGrabbingModule : MonoBehaviour
         CheckForGrabbable();
         Grab();
         PointHands();
+        CheckThrowingState();
     }
 
     private void PointHands()
@@ -47,6 +55,27 @@ public class PlayerGrabbingModule : MonoBehaviour
         {
 
         }
+    }
+    public void CheckThrowingState()
+    {
+        if (currentGrabbable == null) return;
+        if (throwingCtx.performed)
+        {
+            throwCanvas.SetActive(true);
+            print(throwingCtx);
+            currentHoldingDuration += Time.deltaTime;
+            currentHoldingDuration = Math.Clamp(currentHoldingDuration,0,maxHoldingDuration);
+        }
+        if (!throwingCtx.performed&&currentHoldingDuration!=0)
+        {
+
+            Vector3 dir = orientation.forward * currentHoldingDuration * throwForce+ orientation.up/3 * currentHoldingDuration * throwForce;
+            currentGrabbable.Throw(dir);
+            currentHoldingDuration =0;
+            throwCanvas.SetActive(false);
+            print("Throw");
+        }
+        fillThrowUi.fillAmount = currentHoldingDuration/maxHoldingDuration;
     }
 
     public void CheckForGrabbable()
@@ -90,22 +119,6 @@ public class PlayerGrabbingModule : MonoBehaviour
         //backpack.AddItemToBackPack(item);
 
         currentGrabbable.Grab(pointTarget);
-    }
-
-    public void OnThrow(InputAction.CallbackContext ctx) 
-    {
-        if (currentGrabbable == null) return;
-        float currentDuration = (float)Math.Clamp(ctx.duration,0,maxHoldingDuration);
-        throwingDebugSlider = currentDuration/maxHoldingDuration;
-        if (ctx.canceled)
-        {
-            Vector3 dir = rbBoxOrigin.transform.position * currentDuration * throwForce;
-            currentGrabbable.Throw(dir);
-        }
-
-        //Item item = currentGrabbable as Item;
-        //backpack.AddItemToBackPack(item);
-
     }
 
     public void Store()
