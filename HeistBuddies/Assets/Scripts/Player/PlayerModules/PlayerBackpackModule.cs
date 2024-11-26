@@ -16,6 +16,7 @@ public class PlayerBackpackModule : MonoBehaviour
         {
             items.Add(item);
             Debug.Log($"{item.Data.Name} with the ID {item.Id} was added to the backpack");
+            item.gameObject.SetActive(false);
         }
     }
 

@@ -13,15 +13,25 @@ public class Van : MonoBehaviour
             PlayerBackpackModule backpackModule = playerBodyPart.MyOwner.PlayerModules.BackpackModule;
             if(backpackModule!=null)
             {
-                int totalItemScore = backpackModule.ClearItemsFromBackpack();
-
-                if(totalItemScore>0)
-                {
-                    score += totalItemScore;
-                    scoreText.text = score.ToString();
-                    StartCoroutine(TextPreFadeDelay());
-                }
+                AddScore(backpackModule.ClearItemsFromBackpack());
             }
+        }
+        Item item = other.GetComponent<Item>();
+        if(item&&item.Data.isCollectable)
+        {
+            AddScore(item.Data.Points);
+            Destroy(item.gameObject);
+        }
+    }
+
+    void AddScore(int total)
+    {
+
+        if(total>0)
+        {
+            score += total;
+            scoreText.text = score.ToString();
+            StartCoroutine(TextPreFadeDelay());
         }
     }
 

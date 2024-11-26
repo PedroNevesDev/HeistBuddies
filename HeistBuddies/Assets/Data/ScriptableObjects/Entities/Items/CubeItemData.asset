@@ -15,4 +15,7 @@ MonoBehaviour:
   Name: Cube
   Points: 10
   isBreakable: 1
+  breakingSpeed: 3
   isThrowable: 1
+  isStorable: 1
+  isCollectable: 1

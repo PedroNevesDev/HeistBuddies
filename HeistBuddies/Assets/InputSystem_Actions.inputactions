@@ -248,6 +248,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e4561422-6e2e-4542-b47c-2844c5da5cdd",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouseGamepad;Player1",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2a1cf12c-c6c3-4c71-b03b-eca7a7f3a388",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -510,7 +521,18 @@
                     "path": "<Keyboard>/rightCtrl",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Player2",
+                    "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe0d3c5c-2d81-4624-a515-5670bfbd8f4e",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouseGamepad;Player2",
                     "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false

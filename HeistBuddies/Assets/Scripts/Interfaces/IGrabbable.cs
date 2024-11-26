@@ -4,6 +4,4 @@ public interface IGrabbable
 {
     void Grab(Transform target);
     void Release();
-    void EnableUI();
-    void DisableUI();
 }

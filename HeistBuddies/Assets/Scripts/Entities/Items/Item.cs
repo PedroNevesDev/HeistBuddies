@@ -52,7 +52,12 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
     {
         if (itemData.isBreakable)
         {
-            
+            float colisionSpeed = rb.angularVelocity.magnitude;
+            if(colisionSpeed>= itemData.breakingSpeed)
+            {
+                print(this.name + " broke at " + colisionSpeed + "km/h");
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -74,19 +79,9 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
         transform.SetParent(null);
     }
 
-    public void EnableUI()
-    {
-        itemText.text = "GRAB";
-    }
-
-    public void DisableUI()
-    {
-        itemText.text = "";
-    }
 
     public void Throw(Vector3 direction)
     {
-        state = ItemState.Throwing;
         rb.isKinematic = false;
         Release();
         rb.AddForce(direction, ForceMode.Impulse);
