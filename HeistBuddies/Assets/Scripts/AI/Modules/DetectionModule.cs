@@ -5,6 +5,11 @@ public class DetectionModule : AIModule
     [Header("General Settings")]
     [SerializeField] private DetectionType detectionType;
 
+    [Header("Scriptable Events")]
+    [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
+    [SerializeField] private PlayerLostEvent PlayerLostEvent;
+    [SerializeField] private PlayerGrabbedEvent PlayerGrabbedEvent;
+
     [Header("Player Detection Settings")]
     [SerializeField] private float fieldOfView = 110f;
     [SerializeField] private float detectionRadius = 15f;
@@ -120,8 +125,8 @@ public class DetectionModule : AIModule
 
         if (!wasPlayerGrabbable)
         {
-            var eventData = new PlayerEventData(brain, player.Rb.position);
-            EventManager.InvokeLocalEvent(LocalEvent.PlayerGrabbed, eventData);
+            var eventData = new PositionEventData(brain, player.Rb.position);
+            PlayerGrabbedEvent.Invoke(eventData);
         }
     }
 
@@ -139,15 +144,15 @@ public class DetectionModule : AIModule
 
         if (!wasPlayerVisible)
         {
-            var eventData = new PlayerEventData(brain, player.Rb.position);
-            EventManager.InvokeLocalEvent(LocalEvent.PlayerFound, eventData);
+            var eventData = new PositionEventData(brain, player.Rb.position);
+            PlayerFoundEvent.Invoke(eventData);
         }
     }
 
     private void OnPlayerLost()
     {
-        var eventData = new PlayerEventData(brain, Vector3.zero);
-        EventManager.InvokeLocalEvent(LocalEvent.PlayerLost, eventData);
+        var eventData = new PositionEventData(brain, Vector3.zero);
+        PlayerLostEvent.Invoke(eventData);
 
         playerController = null;
     }
