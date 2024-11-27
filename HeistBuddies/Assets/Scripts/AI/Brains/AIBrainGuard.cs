@@ -14,11 +14,8 @@ public class AIBrainGuard : AIBrain
 
     protected override void OnEnable()
     {
-        //GLOBAL EVENTS
         DogAlertEvent.Subscribe(OnDogAlert);
-        //EventManager.SubscribeToGlobalEvent(GlobalEvent.SoundAlert, OnGlobalSoundAlert);
 
-        //LOCAL EVENTS
         PlayerFoundEvent.Subscribe(OnPlayerFound);
         PlayerLostEvent.Subscribe(OnPlayerLost);
         PlayerGrabbedEvent.Subscribe(OnPlayerGrabbed);
@@ -26,11 +23,8 @@ public class AIBrainGuard : AIBrain
 
     protected override void OnDisable()
     {
-        //GLOBAL EVENTS
         DogAlertEvent.Unsubscribe(OnDogAlert);
-        //EventManager.UnsubscribeFromGlobalEvent(GlobalEvent.SoundAlert, OnGlobalSoundAlert);
 
-        //LOCAL EVENTS
         PlayerFoundEvent.Unsubscribe(OnPlayerFound);
         PlayerLostEvent.Unsubscribe(OnPlayerLost);
         PlayerGrabbedEvent.Unsubscribe(OnPlayerGrabbed);
@@ -44,7 +38,7 @@ public class AIBrainGuard : AIBrain
 
     public void DisableConfusionPanel() => confusionPanel.SetActive(false);
 
-    #region Global Events Callbacks
+    #region Events Callbacks
 
     private void OnDogAlert(EventData eventData)
     {
@@ -65,10 +59,6 @@ public class AIBrainGuard : AIBrain
 
         TransitionToState(AIStateType.Investigate);
     }
-
-    #endregion
-
-    #region Local Events Callbacks
 
     private void OnPlayerFound(EventData eventData)
     {

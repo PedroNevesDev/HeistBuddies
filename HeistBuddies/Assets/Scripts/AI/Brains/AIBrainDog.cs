@@ -4,34 +4,47 @@ public class AIBrainDog : AIBrain
 {
     [Header("Scriptable Events")]
     [SerializeField] private DogAlertEvent DogAlertEvent;
+    [SerializeField] private DogBoneReceivedEvent DogBoneReceivedEvent;
     [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
     [SerializeField] private PlayerLostEvent PlayerLostEvent;
 
+    private bool isBoneReceived = false;
+
     protected override void OnEnable()
     {
-        //GLOBAL EVENTS
+        DogBoneReceivedEvent.Subscribe(OnBoneReceived);
 
-        //LOCAL EVENTS
         PlayerFoundEvent.Subscribe(OnPlayerFound);
         PlayerLostEvent.Subscribe(OnPlayerLost);
     }
 
     protected override void OnDisable()
     {
-        //GLOBAL EVENTS
+        DogBoneReceivedEvent.Unsubscribe(OnBoneReceived);
 
-        //LOCAL EVENTS
         PlayerFoundEvent.Unsubscribe(OnPlayerFound);
         PlayerLostEvent.Unsubscribe(OnPlayerLost);
     }
 
-    #region Local Events Callbacks
+    #region Events Callbacks
+
+    private void OnBoneReceived(EventData eventData)
+    {
+        if (eventData is PositionEventData positionData)
+        {
+            isBoneReceived = true;
+            SetSinglePatrolPosition(positionData.TransformPosition);
+        }
+    }
 
     private void OnPlayerFound(EventData eventData)
     {
         if (eventData.TargetBrain == this)
-            //TransitionToState(AIStateType.Chase);
-            DogAlertEvent.Invoke(eventData);
+        {
+            if (isBoneReceived) return;
+            TransitionToState(AIStateType.Chase);
+            //DogAlertEvent.Invoke(eventData);
+        }
     }
 
     private void OnPlayerLost(EventData eventData)

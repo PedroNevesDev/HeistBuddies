@@ -90,4 +90,10 @@ public class PatrolState : AIState
         idleDuration = Random.Range(idleDurationRange.x, idleDurationRange.y);
         agent.isStopped = true;
     }
+
+    public void SetSinglePatrolPosition(Transform patrolPoint)
+    {
+        patrolPoints = null;
+        patrolPoints[0] = patrolPoint;
+    }
 }

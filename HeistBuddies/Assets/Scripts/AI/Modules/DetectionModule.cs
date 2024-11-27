@@ -6,6 +6,7 @@ public class DetectionModule : AIModule
     [SerializeField] private DetectionType detectionType;
 
     [Header("Scriptable Events")]
+    [SerializeField] private DogBoneReceivedEvent DogBoneReceivedEvent;
     [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
     [SerializeField] private PlayerLostEvent PlayerLostEvent;
     [SerializeField] private PlayerGrabbedEvent PlayerGrabbedEvent;
@@ -18,6 +19,7 @@ public class DetectionModule : AIModule
     [Header("Layers")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private LayerMask itemLayer;
 
     [Header("Detection Timing")]
     [SerializeField] private float detectionCooldown = 0.1f;
@@ -54,7 +56,17 @@ public class DetectionModule : AIModule
     {
         ResetDetectionState();
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, Mathf.Max(detectionRadius, grabbingRadius), playerLayer);
+        LayerMask detectionLayers;
+        if (detectionType == DetectionType.Dog)
+        {
+            detectionLayers = playerLayer | itemLayer;
+        }
+        else
+        {
+            detectionLayers = playerLayer;
+        }
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, Mathf.Max(detectionRadius, grabbingRadius), detectionLayers);
 
         foreach (Collider hit in hits)
         {
@@ -76,7 +88,12 @@ public class DetectionModule : AIModule
             }
             else if (detectionType == DetectionType.Dog)
             {
-                if (TryDetectPlayer(hit, out PlayerController detectedPlayerController, out _))
+                if (TryDetectBone(hit, out Item detectedItem))
+                {
+                    OnBoneDetected(detectedItem);
+                    break; // Exit after handling the first detected bone
+                }
+                else if (TryDetectPlayer(hit, out PlayerController detectedPlayerController, out _))
                 {
                     OnPlayerVisible(detectedPlayerController);
                     break; // Exit after the first detection for Dog
@@ -118,6 +135,25 @@ public class DetectionModule : AIModule
         return isDetected;
     }
 
+    private bool TryDetectBone(Collider hit, out Item item)
+    {
+        item = null;
+        if (hit == null) return false;
+
+        if (((1 << hit.gameObject.layer) & itemLayer.value) == 0)
+            return false;
+
+        item = hit.GetComponent<Item>();
+        if (item != null && item.Data.name == "Bone")
+        {
+            if (AIHelpers.CheckLineOfSight(item.transform.position, transform, obstacleLayer))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void OnPlayerGrabbable(PlayerController player)
     {
         isPlayerGrabbable = true;
@@ -125,7 +161,7 @@ public class DetectionModule : AIModule
 
         if (!wasPlayerGrabbable)
         {
-            var eventData = new PositionEventData(brain, player.Rb.position);
+            var eventData = new PositionEventData(brain, player.Rb.position, player.Rb.transform);
             PlayerGrabbedEvent.Invoke(eventData);
         }
     }
@@ -144,22 +180,23 @@ public class DetectionModule : AIModule
 
         if (!wasPlayerVisible)
         {
-            var eventData = new PositionEventData(brain, player.Rb.position);
+            var eventData = new PositionEventData(brain, player.Rb.position, player.Rb.transform);
             PlayerFoundEvent.Invoke(eventData);
         }
     }
 
     private void OnPlayerLost()
     {
-        var eventData = new PositionEventData(brain, Vector3.zero);
+        var eventData = new PositionEventData(brain, Vector3.zero, null);
         PlayerLostEvent.Invoke(eventData);
 
         playerController = null;
     }
 
-    private void OnBoneReceived()
+    private void OnBoneDetected(Item item)
     {
-
+        var eventData = new PositionEventData(brain, item.gameObject.transform.position, item.gameObject.transform);
+        DogBoneReceivedEvent.Invoke(eventData);
     }
 
     private void UpdateFlagsForNextFrame()

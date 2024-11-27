@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public enum AIStateType
 {
@@ -108,6 +109,26 @@ public class AIBrain : MonoBehaviour
             if (investigateState != null)
             {
                 investigateState.SetTargetToInvestigate(targetPosition);
+            }
+            else
+            {
+                Debug.LogWarning("Investigate state is not correctly configured in the state dictionary.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Investigate state not found in state dictionary.");
+        }
+    }
+
+    public void SetSinglePatrolPosition(Transform patrolPosition)
+    {
+        if (stateDictionary.TryGetValue(AIStateType.Patrol, out AIState state))
+        {
+            PatrolState patrolState = state as PatrolState;
+            if (patrolState != null)
+            {
+                patrolState.SetSinglePatrolPosition(patrolPosition);
             }
             else
             {

@@ -424,15 +424,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d77c477ba28bf7469e55a12749057ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionType: 0
+  DogBoneReceivedEvent: {fileID: 0}
+  PlayerFoundEvent: {fileID: 11400000, guid: a4ee5285761a6754bb0b666fb8f8da1c, type: 2}
+  PlayerLostEvent: {fileID: 11400000, guid: fdc3885dc954c1c468ae3c8b29993142, type: 2}
+  PlayerGrabbedEvent: {fileID: 11400000, guid: 1c3801220ad0a40488731412794b25a0, type: 2}
   fieldOfView: 110
   detectionRadius: 5
   grabbingRadius: 1.2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 512
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionCooldown: 0.1
 --- !u!1 &2807903055852626277
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173698653c72965469bf30ade91492b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionType: 0
   hearingRadius: 20
   obstacleLayer:
     serializedVersion: 2
@@ -1219,6 +1229,10 @@ MonoBehaviour:
   - {fileID: 5945059155205487298}
   alertPanel: {fileID: 2807903055852626277}
   confusionPanel: {fileID: 1199823769695745333}
+  DogAlertEvent: {fileID: 11400000, guid: 6676529ddc403294784dd5be49667e45, type: 2}
+  PlayerFoundEvent: {fileID: 11400000, guid: a4ee5285761a6754bb0b666fb8f8da1c, type: 2}
+  PlayerLostEvent: {fileID: 11400000, guid: fdc3885dc954c1c468ae3c8b29993142, type: 2}
+  PlayerGrabbedEvent: {fileID: 11400000, guid: 1c3801220ad0a40488731412794b25a0, type: 2}
 --- !u!114 &8607033928178358822
 MonoBehaviour:
   m_ObjectHideFlags: 0
