@@ -43,3 +43,14 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.vsidx
+HeistBuddies/Logs/AssetImportWorker0-prev.log
+HeistBuddies/Logs/AssetImportWorker0.log
+HeistBuddies/Logs/AssetImportWorker1-prev.log
+HeistBuddies/Logs/AssetImportWorker1.log
+HeistBuddies/Logs/AssetImportWorker2-prev.log
+HeistBuddies/Logs/AssetImportWorker3-prev.log
+HeistBuddies/Logs/shadercompiler-AssetImportWorker0-0.log
+HeistBuddies/Logs/shadercompiler-AssetImportWorker1-0.log
+HeistBuddies/Logs/shadercompiler-UnityShaderCompiler.exe-0.log
+HeistBuddies/UserSettings/Layouts/CurrentMaximizeLayout.dwlt
+HeistBuddies/UserSettings/Layouts/default-6000.dwlt

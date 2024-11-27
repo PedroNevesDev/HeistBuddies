@@ -30,10 +30,15 @@ public class AIBrainDog : AIBrain
 
     private void OnBoneReceived(EventData eventData)
     {
-        if (eventData is PositionEventData positionData)
+        Debug.Log("Bone Detected Event Received");
+        if (eventData.TargetBrain == this)
         {
-            isBoneReceived = true;
-            SetSinglePatrolPosition(positionData.TransformPosition);
+            if (eventData is PositionEventData positionData)
+            {
+                isBoneReceived = true;
+                SetSinglePatrolPosition(positionData.TransformPosition);
+                Debug.Log("Patrol Position set");
+            }
         }
     }
 
