@@ -6,28 +6,34 @@ public class AIBrainGuard : AIBrain
     [SerializeField] private GameObject alertPanel;
     [SerializeField] private GameObject confusionPanel;
 
+    [Header("Scriptable Events")]
+    [SerializeField] private DogAlertEvent DogAlertEvent;
+    [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
+    [SerializeField] private PlayerLostEvent PlayerLostEvent;
+    [SerializeField] private PlayerGrabbedEvent PlayerGrabbedEvent;
+
     protected override void OnEnable()
     {
         //GLOBAL EVENTS
-        EventManager.SubscribeToGlobalEvent(GlobalEvent.DogAlert, OnGlobalDogAlert);
-        EventManager.SubscribeToGlobalEvent(GlobalEvent.SoundAlert, OnGlobalSoundAlert);
+        DogAlertEvent.Subscribe(OnDogAlert);
+        //EventManager.SubscribeToGlobalEvent(GlobalEvent.SoundAlert, OnGlobalSoundAlert);
 
         //LOCAL EVENTS
-        EventManager.SubscribeToLocalEvent(LocalEvent.PlayerFound, OnLocalPlayerFound);
-        EventManager.SubscribeToLocalEvent(LocalEvent.PlayerLost, OnLocalPlayerLost);
-        EventManager.SubscribeToLocalEvent(LocalEvent.PlayerGrabbed, OnLocalPlayerGrabbed);
+        PlayerFoundEvent.Subscribe(OnPlayerFound);
+        PlayerLostEvent.Subscribe(OnPlayerLost);
+        PlayerGrabbedEvent.Subscribe(OnPlayerGrabbed);
     }
 
     protected override void OnDisable()
     {
         //GLOBAL EVENTS
-        EventManager.UnsubscribeFromGlobalEvent(GlobalEvent.DogAlert, OnGlobalDogAlert);
-        EventManager.UnsubscribeFromGlobalEvent(GlobalEvent.SoundAlert, OnGlobalSoundAlert);
+        DogAlertEvent.Unsubscribe(OnDogAlert);
+        //EventManager.UnsubscribeFromGlobalEvent(GlobalEvent.SoundAlert, OnGlobalSoundAlert);
 
         //LOCAL EVENTS
-        EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerFound, OnLocalPlayerFound);
-        EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerLost, OnLocalPlayerLost);
-        EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerGrabbed, OnLocalPlayerGrabbed);
+        PlayerFoundEvent.Unsubscribe(OnPlayerFound);
+        PlayerLostEvent.Unsubscribe(OnPlayerLost);
+        PlayerGrabbedEvent.Unsubscribe(OnPlayerGrabbed);
     }
 
     public void EnableAlertPanel() => alertPanel.SetActive(true);
@@ -40,11 +46,11 @@ public class AIBrainGuard : AIBrain
 
     #region Global Events Callbacks
 
-    private void OnGlobalDogAlert(EventData eventData)
+    private void OnDogAlert(EventData eventData)
     {
-        if (eventData is PlayerEventData playerData)
+        if (eventData is PositionEventData positionData)
         {
-            SetInvestigateTarget(playerData.Position);
+            SetInvestigateTarget(positionData.Position);
         }
 
         TransitionToState(AIStateType.Investigate);
@@ -64,19 +70,19 @@ public class AIBrainGuard : AIBrain
 
     #region Local Events Callbacks
 
-    private void OnLocalPlayerFound(EventData eventData)
+    private void OnPlayerFound(EventData eventData)
     {
         if (eventData.TargetBrain == this)
             TransitionToState(AIStateType.Chase);
     }
 
-    private void OnLocalPlayerLost(EventData eventData)
+    private void OnPlayerLost(EventData eventData)
     {
         if (eventData.TargetBrain == this)
             TransitionToState(AIStateType.Confusion);
     }
 
-    private void OnLocalPlayerGrabbed(EventData eventData)
+    private void OnPlayerGrabbed(EventData eventData)
     {
         if (eventData.TargetBrain == this)
         {

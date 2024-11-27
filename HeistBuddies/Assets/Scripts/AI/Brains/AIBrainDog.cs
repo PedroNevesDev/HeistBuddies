@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class AIBrainDog : AIBrain
 {
+    [Header("Scriptable Events")]
+    [SerializeField] private DogAlertEvent DogAlertEvent;
+    [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
+    [SerializeField] private PlayerLostEvent PlayerLostEvent;
+
     protected override void OnEnable()
     {
         //GLOBAL EVENTS
 
         //LOCAL EVENTS
-        EventManager.SubscribeToLocalEvent(LocalEvent.PlayerFound, OnLocalPlayerFound);
-        EventManager.SubscribeToLocalEvent(LocalEvent.PlayerLost, OnLocalPlayerLost);
+        PlayerFoundEvent.Subscribe(OnPlayerFound);
+        PlayerLostEvent.Subscribe(OnPlayerLost);
     }
 
     protected override void OnDisable()
@@ -16,20 +21,20 @@ public class AIBrainDog : AIBrain
         //GLOBAL EVENTS
 
         //LOCAL EVENTS
-        EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerFound, OnLocalPlayerFound);
-        EventManager.UnsubscribeFromLocalEvent(LocalEvent.PlayerLost, OnLocalPlayerLost);
+        PlayerFoundEvent.Unsubscribe(OnPlayerFound);
+        PlayerLostEvent.Unsubscribe(OnPlayerLost);
     }
 
     #region Local Events Callbacks
 
-    private void OnLocalPlayerFound(EventData eventData)
+    private void OnPlayerFound(EventData eventData)
     {
         if (eventData.TargetBrain == this)
-            TransitionToState(AIStateType.Chase);
-            //EventManager.InvokeGlobalEvent(GlobalEvent.DogAlert, eventData);
+            //TransitionToState(AIStateType.Chase);
+            DogAlertEvent.Invoke(eventData);
     }
 
-    private void OnLocalPlayerLost(EventData eventData)
+    private void OnPlayerLost(EventData eventData)
     {
         if (eventData.TargetBrain == this)
             TransitionToState(AIStateType.Patrol);
