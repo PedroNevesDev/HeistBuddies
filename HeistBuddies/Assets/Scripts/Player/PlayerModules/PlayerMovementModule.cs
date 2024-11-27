@@ -18,6 +18,8 @@ public class PlayerMovementModule : MonoBehaviour
 
     Vector2 moveInput = Vector2.zero;
 
+    public Vector2 MoveInput { get => moveInput; set => moveInput = value; }
+
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
 
     private void FixedUpdate()

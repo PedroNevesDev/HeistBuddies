@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class FollowTransform : MonoBehaviour
 {
-    [SerializeField] Transform followTarget;
-    [SerializeField] Vector3 offset;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] Transform followTargetPosition;
+    [SerializeField] Transform followTargetRotation;
+    [SerializeField] Vector3 positionOffset;
+
+    Quaternion startRotation;
+
     void Start()
     {
-        
+        startRotation = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = followTarget.position+offset;
+        if(followTargetPosition) transform.position = followTargetPosition.position+positionOffset;
+        if(followTargetRotation) transform.eulerAngles = new Vector3(transform.eulerAngles.x, followTargetRotation.eulerAngles.y, transform.eulerAngles.z);;
     }
 }

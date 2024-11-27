@@ -71,25 +71,22 @@ public class PlayerGrabbingModule : MonoBehaviour
             Destroy(grabbableTexts[i].gameObject);
             grabbableTexts.RemoveAt(i);
         }
-        verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.lossyScale.y,0);
+        verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.localScale.y,0);
         switch(currentGrabbable.State)
         {
             case ItemState.Idle:
             verticalLayoutGroup.gameObject.SetActive(true);
-            grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
-            grabbableTexts[grabbableTexts.Count-1].text = "Grab";
+                AddText("Grab");
             break;
             case ItemState.Grabbed:
             verticalLayoutGroup.gameObject.SetActive(true);
             if(currentGrabbable.Data.isThrowable)
             {
-                grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
-                grabbableTexts[grabbableTexts.Count-1].text = "Throw";
+                AddText("Throw");
             }
             if(currentGrabbable.Data.isStorable)
             {
-                grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
-                grabbableTexts[grabbableTexts.Count-1].text = "Store";
+                AddText("Store");
             }
 
             break;
@@ -97,6 +94,11 @@ public class PlayerGrabbingModule : MonoBehaviour
             verticalLayoutGroup.gameObject.SetActive(false);
             break;
         }
+    }
+    void AddText(string text)
+    {
+        grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
+        grabbableTexts[grabbableTexts.Count-1].text = text;
     }
     private void PointHands()
     {
@@ -119,7 +121,8 @@ public class PlayerGrabbingModule : MonoBehaviour
         if (!throwingCtx.performed&&currentHoldingDuration!=0)
         {
 
-            Vector3 dir = orientation.forward * currentHoldingDuration * throwForce+ orientation.up/2 * currentHoldingDuration * throwForce;
+            float force = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
+            Vector3 dir = orientation.forward * force * throwForce+ orientation.up/2 * force * throwForce;
             currentGrabbable.Throw(dir);
             currentGrabbable.State = ItemState.Idle;
             currentHoldingDuration = 0;
