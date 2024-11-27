@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,7 +7,7 @@ public class PatrolState : AIState
     public override AIStateType StateType => AIStateType.Patrol;
 
     [Header("State Settings")]
-    [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] private List<Transform> patrolPoints = new List<Transform>();
     private int currentPatrolIndex = 0;
 
     [Header("Idle Settings")]
@@ -69,13 +70,13 @@ public class PatrolState : AIState
 
     private void MoveToNextPatrolPoint()
     {
-        if (patrolPoints.Length == 0) return;
+        if (patrolPoints.Count == 0) return;
 
-        int nextPatrolIndex = Random.Range(0, patrolPoints.Length);
+        int nextPatrolIndex = Random.Range(0, patrolPoints.Count);
 
-        while (nextPatrolIndex == currentPatrolIndex && patrolPoints.Length > 1)
+        while (nextPatrolIndex == currentPatrolIndex && patrolPoints.Count > 1)
         {
-            nextPatrolIndex = Random.Range(0, patrolPoints.Length);
+            nextPatrolIndex = Random.Range(0, patrolPoints.Count);
         }
 
         currentPatrolIndex = nextPatrolIndex;
@@ -93,7 +94,9 @@ public class PatrolState : AIState
 
     public void SetSinglePatrolPosition(Transform patrolPoint)
     {
-        patrolPoints = null;
-        patrolPoints[0] = patrolPoint;
+        patrolPoints.Clear();
+        patrolPoints.Add(patrolPoint);
+
+        MoveToNextPatrolPoint();
     }
 }

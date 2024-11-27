@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DetectionModule : AIModule
@@ -88,12 +90,13 @@ public class DetectionModule : AIModule
             }
             else if (detectionType == DetectionType.Dog)
             {
-                if (TryDetectBone(hit, out Item detectedItem))
+                if (TryDetectBone(hit, out GameObject detectedItem))
                 {
                     OnBoneDetected(detectedItem);
                     break; // Exit after handling the first detected bone
                 }
-                else if (TryDetectPlayer(hit, out PlayerController detectedPlayerController, out _))
+                
+                if (TryDetectPlayer(hit, out PlayerController detectedPlayerController, out _))
                 {
                     OnPlayerVisible(detectedPlayerController);
                     break; // Exit after the first detection for Dog
@@ -135,21 +138,14 @@ public class DetectionModule : AIModule
         return isDetected;
     }
 
-    private bool TryDetectBone(Collider hit, out Item item)
+    private bool TryDetectBone(Collider hit, out GameObject item)
     {
-        item = null;
-        if (hit == null) return false;
+        item = hit.gameObject;
+        var actualItem = item.GetComponent<Item>();
 
-        if (((1 << hit.gameObject.layer) & itemLayer.value) == 0)
-            return false;
-
-        item = hit.GetComponent<Item>();
-        if (item != null && item.Data.name == "Bone")
+        if (item != null && actualItem != null && actualItem.Data != null && actualItem.Data.name == "Bone")
         {
-            if (AIHelpers.CheckLineOfSight(item.transform.position, transform, obstacleLayer))
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -193,9 +189,9 @@ public class DetectionModule : AIModule
         playerController = null;
     }
 
-    private void OnBoneDetected(Item item)
+    private void OnBoneDetected(GameObject item)
     {
-        var eventData = new PositionEventData(brain, item.gameObject.transform.position, item.gameObject.transform);
+        var eventData = new PositionEventData(brain, item.transform.position, item.transform);
         DogBoneReceivedEvent.Invoke(eventData);
     }
 
