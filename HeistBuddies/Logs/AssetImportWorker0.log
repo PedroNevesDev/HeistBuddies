@@ -224,3 +224,131 @@ Received Import Request.
 Start importing Assets/Models/Kitchen Assets 2/KitchenSink.fbx using Guid(f564b76b08030d342b9f440d56116f4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '108b63fae7dcdcf358059e7e8513109d') in 0.0370728 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
 
+========================================================================
+Received Import Request.
+  Time since last request: 818.102719 seconds.
+  path: Assets/Models/Kitchen Assets 2/KitchenCounter.fbx
+  artifactKey: Guid(0a133b9cc2c248646a4805dafbf4b13a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/KitchenCounter.fbx using Guid(0a133b9cc2c248646a4805dafbf4b13a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '72470c6f71e98cc41922aa15b1f2435b') in 0.0493673 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 577.588979 seconds.
+  path: Assets/Models/Kitchen Assets
+  artifactKey: Guid(c6cf41512d98cab48ada29293246223f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets using Guid(c6cf41512d98cab48ada29293246223f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '795ca32ef81ba720ea1fc8129f313535') in 0.0006624 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.371689 seconds.
+  path: Assets/Models/Kitchen Assets 2
+  artifactKey: Guid(ebde2f4d829331a4e9478f2e63cb7b2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2 using Guid(ebde2f4d829331a4e9478f2e63cb7b2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ebdd4923017f5dce5e83c33a2ba36188') in 0.0004245 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.725361 seconds.
+  path: Assets/Models/Kitchen Assets 2/Microwave.fbx
+  artifactKey: Guid(c9b1ed3cdd076db458d06ec268c2f39a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/Microwave.fbx using Guid(c9b1ed3cdd076db458d06ec268c2f39a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e23c4be5d2fa89ea0b1577bbc0f62dc1') in 0.0309393 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 80.356369 seconds.
+  path: Assets/Models/Kitchen Assets 2/Fridge.fbx
+  artifactKey: Guid(58557dbe2bcddff49bbc8e84906f46cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/Fridge.fbx using Guid(58557dbe2bcddff49bbc8e84906f46cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0e6ead0d4df25884f3cf1a22dad331d4') in 0.0276057 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 72.980180 seconds.
+  path: Assets/Models/Kitchen Assets 2/DogBowl.fbx
+  artifactKey: Guid(7ab3e4f19fbaf1e4aa356c8265fab5fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/DogBowl.fbx using Guid(7ab3e4f19fbaf1e4aa356c8265fab5fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ad4351216538c473153ee31ec33a83c9') in 0.0169663 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.308905 seconds.
+  path: Assets/Models/Kitchen Assets 2/CoffeeMachine.fbx
+  artifactKey: Guid(9087f5e8ad76571418c2e896e969381e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/CoffeeMachine.fbx using Guid(9087f5e8ad76571418c2e896e969381e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cd163f2bb78ce65b053ad5d3e1f85bf7') in 0.0329331 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 39.488876 seconds.
+  path: Assets/Models/Kitchen Assets 2/Mug.fbx
+  artifactKey: Guid(92e978b07f9e0514fbc5c3012ca9aadb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/Mug.fbx using Guid(92e978b07f9e0514fbc5c3012ca9aadb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '91b92cf8dd25155d116a705d06c90ba2') in 0.0207561 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.352245 seconds.
+  path: Assets/Models/Kitchen Assets 2/PaperRoll.fbx
+  artifactKey: Guid(ea9e96ab3dd49f34d8554ac3a2737d2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/PaperRoll.fbx using Guid(ea9e96ab3dd49f34d8554ac3a2737d2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '79a0fdc89228ffd37c44de47c172a8f5') in 0.0240668 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.281131 seconds.
+  path: Assets/Models/Kitchen Assets 2/Clock.fbx
+  artifactKey: Guid(977c107e2c3e7514f8221c81fcee8e8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/Clock.fbx using Guid(977c107e2c3e7514f8221c81fcee8e8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f65573f699491475c5a69e0a9a39b25b') in 0.0739247 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 21
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.828672 seconds.
+  path: Assets/Models/Kitchen Assets 2/blender.fbx
+  artifactKey: Guid(4f14594a2e6e9c3448051d0f140b171e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets 2/blender.fbx using Guid(4f14594a2e6e9c3448051d0f140b171e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5590601db7e51682ac218a8ebd9ec951') in 0.0323963 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 342.583306 seconds.
+  path: Assets/Models/Kitchen Assets/diningtable.fbx
+  artifactKey: Guid(8edf9c4270ed054448a6b6531bee5586) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets/diningtable.fbx using Guid(8edf9c4270ed054448a6b6531bee5586) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ee0f3c83eeb761603282cf462186b21d') in 0.037519 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.609632 seconds.
+  path: Assets/Models/Kitchen Assets/dinnerplate.fbx
+  artifactKey: Guid(36e4f217f3187e744804afbaccef5f59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Kitchen Assets/dinnerplate.fbx using Guid(36e4f217f3187e744804afbaccef5f59) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f63b75a4c72b09cb40946ada44e0faad') in 0.0330746 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 7
+
+========================================================================
+Received Import Request.
+  Time since last request: 226.635301 seconds.
+  path: Assets/Models/Bedroom Assets/BedTable.fbx
+  artifactKey: Guid(7dc9760b6c0b28d4f8b74a54d3145ac7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Bedroom Assets/BedTable.fbx using Guid(7dc9760b6c0b28d4f8b74a54d3145ac7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '010380fc28fde45921272b8ed67b2efd') in 0.0179069 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.827297 seconds.
+  path: Assets/Models/Bedroom Assets/Desk.fbx
+  artifactKey: Guid(dfbda5735daa1ee4b80f204ddbb1f99c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Bedroom Assets/Desk.fbx using Guid(dfbda5735daa1ee4b80f204ddbb1f99c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a23e6480d31bae4bd153eb7c7436e519') in 0.0173355 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.750825 seconds.
+  path: Assets/Models/Bedroom Assets/Bed.fbx
+  artifactKey: Guid(365c042715e6270419f7c69f97f2b2d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Bedroom Assets/Bed.fbx using Guid(365c042715e6270419f7c69f97f2b2d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5a56905fe1ac56963f99e34348d9b573') in 0.0412528 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 26
+
