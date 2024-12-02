@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "NewItemData", menuName = "Item/Item Data")]
 public class ItemData : ScriptableObject
@@ -14,4 +15,7 @@ public class ItemData : ScriptableObject
     public bool isThrowable = false;
     public bool isStorable = false;
     public bool isCollectable = false;
+
+    [Header("Item Logo")]
+    public Sprite Image;
 }

@@ -9,9 +9,18 @@ public class UIManager : MonoBehaviour
     [Header("Timer Text")]
     [SerializeField] private TextMeshProUGUI timerText;
 
+    [Header("Item List")]
+    [SerializeField] private GameObject ItemHolder;
+    [SerializeField] private GameObject ItemListPrefab;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        UpdateItemList();
     }
 
     public void UpdateTimer(float currentTime)
@@ -21,5 +30,21 @@ public class UIManager : MonoBehaviour
 
         string formattedTime = string.Format("{0:00}:{1:00}", hours, minutes);
         timerText.text = formattedTime;
+    }
+
+    public void UpdateItemList()
+    {
+        foreach (Transform child in ItemHolder.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        var items = GameManager.Instance.GetItems();
+        foreach (var itemData in items)
+        {
+            GameObject newItem = Instantiate(ItemListPrefab, ItemHolder.transform);
+            var itemUI = newItem.GetComponent<ItemToPickupUI>();
+            itemUI.Populate(itemData.Image, itemData.Name, itemData.Points);
+        }
     }
 }
