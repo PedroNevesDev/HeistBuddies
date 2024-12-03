@@ -667,7 +667,6 @@ GameObject:
   - component: {fileID: 1215531689290831082}
   - component: {fileID: 3234135924360320612}
   - component: {fileID: 9215913622368635314}
-  - component: {fileID: 4245812364479667925}
   m_Layer: 9
   m_Name: ArrowCanvas
   m_TagString: Untagged
@@ -756,18 +755,6 @@ MonoBehaviour:
   followTargetPosition: {fileID: 2137057684330949899}
   followTargetRotation: {fileID: 0}
   positionOffset: {x: 0, y: 0.1, z: 0}
---- !u!114 &4245812364479667925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7108383728069967639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1531bc31270804ebb61bff29e8a01f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7314703247072656536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,45 +1167,33 @@ MonoBehaviour:
     m_ActionId: 07a5dd0d-000f-4cc2-bd8b-cbcb58b3af4e
     m_ActionName: 'Player2/Throw[/Keyboard/rightCtrl]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e5fa0a65-9fb3-47a6-8e64-7df10b461084
-    m_ActionName: 'Multiplayer/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+      m_Calls: []
+    m_ActionId: a7cffc25-c0a4-4eb6-9d1e-fd0c7970c176
+    m_ActionName: 'Player1/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 5bbcdd6b-8f9a-472e-86b3-1c90a03281c9
-    m_ActionName: 'Multiplayer/Grab[/Keyboard/e]'
+    m_ActionId: 7de0cba7-b43d-4fb0-9c9d-747dc49869d5
+    m_ActionName: 'Player2/Jump[/Keyboard/rightAlt]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 35fa50c2-9f85-4c87-b57c-d62f60fc0329
-    m_ActionName: 'Multiplayer/Interact[/Keyboard/e]'
+    m_ActionId: 1819c7ae-56a6-43a9-9eba-1d3f1a8e266f
+    m_ActionName: Multiplayer/Move
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cea20828-6493-4cd3-8dfb-e4954ba6059b
-    m_ActionName: 'Multiplayer/Throw[/Keyboard/f]'
+      m_Calls: []
+    m_ActionId: 2cdf4fa7-64fd-4064-a027-73ce281f7b5f
+    m_ActionName: Multiplayer/Grab/Store
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 962a88e6-af15-4db7-9f0d-7b8b7d6f1c96
+    m_ActionName: Multiplayer/Interact
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6284c98-87c3-4945-892f-92adb4801737
+    m_ActionName: Multiplayer/Jump
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a3fe6b4f-3760-4637-aeef-5a965e8f9559
+    m_ActionName: Multiplayer/Throw
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Player1
   m_DefaultActionMap: Player2
