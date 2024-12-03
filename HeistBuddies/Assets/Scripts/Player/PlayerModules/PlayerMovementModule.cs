@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController)),RequireComponent(typeof(GroundDetection))]
 public class PlayerMovementModule : MonoBehaviour
 {
     [Header("Movement")]
@@ -22,6 +22,11 @@ public class PlayerMovementModule : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
 
+    GroundDetection myGroundDetection;
+    void Start()
+    {
+        myGroundDetection = GetComponent<GroundDetection>();
+    }
     private void FixedUpdate()
     {
         Move();

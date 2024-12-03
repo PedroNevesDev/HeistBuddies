@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: {fileID: 7719137223352418081}
-  upwardForce: 30000
+  upwardForce: 45000
   balance: 1
 --- !u!1 &7108383728069967639
 GameObject:
@@ -673,7 +673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452171359871567378
 RectTransform:
   m_ObjectHideFlags: 0
@@ -843,6 +843,8 @@ GameObject:
   - component: {fileID: 8808667950619304722}
   - component: {fileID: 8974963639332065678}
   - component: {fileID: 4666042578104732768}
+  - component: {fileID: 3549202150260482220}
+  - component: {fileID: 1025647574928979143}
   - component: {fileID: 2965796179517941442}
   m_Layer: 9
   m_Name: Player
@@ -997,6 +999,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+--- !u!114 &3549202150260482220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823575494001143626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175ba0f19e8c70e46952c3cef2cde209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7719137223352418081}
+  jumpForce: 500
+  balanceForDeactivation: {fileID: 5810256199914316612}
+--- !u!114 &1025647574928979143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823575494001143626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5444110442a0947ae8b1255dd3f04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  raycastDistance: 0.5
+  origin: {fileID: 4325847804096019636}
+  balance: {fileID: 5810256199914316612}
 --- !u!114 &2965796179517941442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,19 +1202,67 @@ MonoBehaviour:
     m_ActionId: 07a5dd0d-000f-4cc2-bd8b-cbcb58b3af4e
     m_ActionName: 'Player2/Throw[/Keyboard/rightCtrl]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3549202150260482220}
+        m_TargetAssemblyTypeName: PlayerJumpModule, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a7cffc25-c0a4-4eb6-9d1e-fd0c7970c176
     m_ActionName: 'Player1/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3549202150260482220}
+        m_TargetAssemblyTypeName: PlayerJumpModule, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7de0cba7-b43d-4fb0-9c9d-747dc49869d5
     m_ActionName: 'Player2/Jump[/Keyboard/rightAlt]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8808667950619304722}
+        m_TargetAssemblyTypeName: PlayerMovementModule, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1819c7ae-56a6-43a9-9eba-1d3f1a8e266f
     m_ActionName: Multiplayer/Move
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8974963639332065678}
+        m_TargetAssemblyTypeName: PlayerGrabbingModule, Assembly-CSharp
+        m_MethodName: OnGrab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2cdf4fa7-64fd-4064-a027-73ce281f7b5f
     m_ActionName: Multiplayer/Grab/Store
   - m_PersistentCalls:
@@ -1187,11 +1270,35 @@ MonoBehaviour:
     m_ActionId: 962a88e6-af15-4db7-9f0d-7b8b7d6f1c96
     m_ActionName: Multiplayer/Interact
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3549202150260482220}
+        m_TargetAssemblyTypeName: PlayerJumpModule, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b6284c98-87c3-4945-892f-92adb4801737
     m_ActionName: Multiplayer/Jump
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8974963639332065678}
+        m_TargetAssemblyTypeName: PlayerGrabbingModule, Assembly-CSharp
+        m_MethodName: OnThrow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a3fe6b4f-3760-4637-aeef-5a965e8f9559
     m_ActionName: Multiplayer/Throw
   m_NeverAutoSwitchControlSchemes: 0

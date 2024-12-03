@@ -39,7 +39,7 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
     [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
-    public void OnThrow(InputAction.CallbackContext ctx) => throwingCtx = ctx;
+    public void OnThrow(InputAction.CallbackContext context) => throwingCtx = context;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

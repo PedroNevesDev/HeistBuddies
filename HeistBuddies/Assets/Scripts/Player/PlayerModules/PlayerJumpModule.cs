@@ -1,21 +1,28 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerController)),RequireComponent(typeof(GroundDetection))]
 public class PlayerJumpModule : MonoBehaviour
 {
+    [SerializeField] Rigidbody rb;
     [SerializeField] float jumpForce;
 
-    PlayerController playerController;
+    [SerializeField] Balance balanceForDeactivation;
+    GroundDetection myGroundDetection;
+    bool isJumping = false;
+    public void OnJump(InputAction.CallbackContext context) => Jump();
 
     void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        myGroundDetection = GetComponent<GroundDetection>();
     }
     void Jump()
     {
-        if(!playerController) return;
-
-        playerController.Rb.AddForce(jumpForce*Vector3.up,ForceMode.Impulse);
+        if(!rb||!myGroundDetection.CheckForGround()) return;
+        print("Jumped");
+        balanceForDeactivation.gameObject.SetActive(false);
+        rb.AddForce(jumpForce*Vector3.up,ForceMode.Impulse);
     }
 }
