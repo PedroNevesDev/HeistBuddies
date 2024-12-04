@@ -193,6 +193,8 @@ public class DetectionModule : AIModule
     {
         var eventData = new PositionEventData(brain, item.transform.position, item.transform);
         DogBoneReceivedEvent.Invoke(eventData);
+
+        canDetect = false;
     }
 
     private void UpdateFlagsForNextFrame()

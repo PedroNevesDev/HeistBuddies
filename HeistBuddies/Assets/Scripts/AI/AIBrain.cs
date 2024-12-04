@@ -9,7 +9,8 @@ public enum AIStateType
     Chase,
     Confusion,
     Investigate,
-    Grab
+    Grab,
+    Alert
 }
 
 public class AIBrain : MonoBehaviour

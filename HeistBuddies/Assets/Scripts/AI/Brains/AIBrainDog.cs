@@ -3,12 +3,13 @@ using UnityEngine;
 public class AIBrainDog : AIBrain
 {
     [Header("Scriptable Events")]
-    [SerializeField] private DogAlertEvent DogAlertEvent;
     [SerializeField] private DogBoneReceivedEvent DogBoneReceivedEvent;
     [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
     [SerializeField] private PlayerLostEvent PlayerLostEvent;
 
     private bool isBoneReceived = false;
+
+    public bool IsBoneReceived { get => isBoneReceived; set => isBoneReceived = value; }
 
     protected override void OnEnable()
     {
@@ -47,7 +48,7 @@ public class AIBrainDog : AIBrain
         if (eventData.TargetBrain == this)
         {
             if (isBoneReceived) return;
-            TransitionToState(AIStateType.Chase);
+            TransitionToState(AIStateType.Alert);
             //DogAlertEvent.Invoke(eventData);
         }
     }
