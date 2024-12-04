@@ -5,6 +5,11 @@ public class Van : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
     float score;
+    UIManager uiManager;
+    void Start()
+    {
+        uiManager = UIManager.Instance;
+    }
     void OnTriggerEnter(Collider other) 
     {
         BodyPartOwner playerBodyPart = other.GetComponent<BodyPartOwner>();
@@ -19,6 +24,10 @@ public class Van : MonoBehaviour
         Item item = other.GetComponent<Item>();
         if(item&&item.Data.isCollectable)
         {
+            
+            uiManager.uiItemDictionary.TryGetValue(item.Data,out ItemToPickupUI itemUI);
+            itemUI.CheckRightMark();
+
             AddScore(item.Data.Points);
             Destroy(item.gameObject);
         }

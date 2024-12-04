@@ -23,6 +23,12 @@ public class PlayerBackpackModule : MonoBehaviour
     public int ClearItemsFromBackpack()
     {
         int totalPoints = items.Sum(item => item.Data.Points);
+        UIManager uIManager = UIManager.Instance;
+        foreach(Item i in items)
+        {
+            uIManager.uiItemDictionary.TryGetValue(i.Data,out ItemToPickupUI itemUI);
+            itemUI.CheckRightMark();
+        }
 
         items.Clear();
 

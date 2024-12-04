@@ -4,14 +4,25 @@ using UnityEngine.UI;
 
 public class ItemToPickupUI : MonoBehaviour
 {
-    public Image Icon;
+    public Image rightCheckMark;
+    public Image wrongCheckMark;
     public TextMeshProUGUI Name;
-    public TextMeshProUGUI Points;
 
-    public void Populate(Sprite icon, string name, int points)
+    public void Populate( string name, int points)
     {
-        Icon.sprite = icon;
-        Name.text = name;
-        Points.text = $"+ {points}";
+
+        Name.text = name + " +"+points;
     }
+
+    public void CheckWrongMark()
+    {
+        UIManager.Instance.ShowList();
+        wrongCheckMark.gameObject.SetActive(true);
+    }
+    public void CheckRightMark()
+    {
+        UIManager.Instance.ShowList();
+        rightCheckMark.gameObject.SetActive(true);
+    }
+
 }

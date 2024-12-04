@@ -14,13 +14,7 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
     [Header("Item Data")]
     [SerializeField] private ItemData itemData;
 
-    [Header("Item UI")]
-    [SerializeField] private TextMeshProUGUI itemText;
 
-    [Header("Item Conditions")]
-    [SerializeField] private bool isBreakable;
-    [SerializeField] private bool isThrowable;
-    [SerializeField] private bool isStorable;
 
     [Header("Item State")]
     [SerializeField] private ItemState state = ItemState.Idle;
@@ -42,10 +36,6 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
             Debug.Log("No ItemData assigned!");
             return;
         }
-
-        isBreakable = itemData.isBreakable;
-        isThrowable = itemData.isThrowable;
-        isStorable = itemData.isStorable;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,6 +45,9 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
             float colisionSpeed = rb.angularVelocity.magnitude;
             if(colisionSpeed>= itemData.breakingSpeed)
             {
+                UIManager uiManager = UIManager.Instance;
+                uiManager.uiItemDictionary.TryGetValue(itemData,out ItemToPickupUI itemUI);
+                itemUI.CheckWrongMark();
                 print(this.name + " broke at " + colisionSpeed + "km/h");
                 Destroy(gameObject);
             }

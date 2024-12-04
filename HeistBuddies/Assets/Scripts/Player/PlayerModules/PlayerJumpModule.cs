@@ -21,7 +21,6 @@ public class PlayerJumpModule : MonoBehaviour
     void Jump()
     {
         if(!rb||!myGroundDetection.CheckForGround()) return;
-        print("Jumped");
         balanceForDeactivation.gameObject.SetActive(false);
         rb.AddForce(jumpForce*Vector3.up,ForceMode.Impulse);
     }
