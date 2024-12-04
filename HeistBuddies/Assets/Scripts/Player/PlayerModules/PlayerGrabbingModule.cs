@@ -38,6 +38,7 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] VerticalLayoutGroup verticalLayoutGroup;
     [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
     [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
+    bool shouldDecrease = false;
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
     public void OnThrow(InputAction.CallbackContext context) => throwingCtx = context;
     
@@ -166,7 +167,19 @@ public class PlayerGrabbingModule : MonoBehaviour
         {
             currentGrabbable.State = ItemState.Throwing;
             throwCanvas.SetActive(true);
-            currentHoldingDuration += Time.deltaTime;
+            if(shouldDecrease)
+            {
+                currentHoldingDuration -= Time.deltaTime;
+                if(currentHoldingDuration<=0)
+                    DeactivateThrowUI();
+            }
+            else
+            {
+                currentHoldingDuration += Time.deltaTime;
+                if(currentHoldingDuration>=maxHoldingDuration)
+                    shouldDecrease = true;
+            }
+
             currentHoldingDuration = Math.Clamp(currentHoldingDuration,0,maxHoldingDuration);
         }
         if (!throwingCtx.performed&&currentHoldingDuration!=0)
@@ -176,10 +189,16 @@ public class PlayerGrabbingModule : MonoBehaviour
             Vector3 dir = orientation.forward * force * throwForce+ orientation.up/2 * force * throwForce;
             currentGrabbable.Throw(dir);
             currentGrabbable.State = ItemState.Idle;
-            currentHoldingDuration = 0;
-            throwCanvas.SetActive(false);
+            DeactivateThrowUI();
         }
         fillThrowUi.fillAmount = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
+    }
+    void DeactivateThrowUI()
+    {
+        shouldDecrease = false;
+        fillThrowUi.fillAmount = 0;
+        currentHoldingDuration = 0;
+        throwCanvas.SetActive(false);
     }
 
     public void CheckForGrabbable()
