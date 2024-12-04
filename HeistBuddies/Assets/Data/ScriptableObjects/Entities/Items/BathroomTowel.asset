@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: BathroomTowel
   Points: 50
   isBreakable: 1
-  breakingSpeed: 3
+  breakingSpeed: 6
   isThrowable: 1
   isStorable: 1
   isCollectable: 1

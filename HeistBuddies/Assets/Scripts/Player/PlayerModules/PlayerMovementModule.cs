@@ -53,8 +53,14 @@ public class PlayerMovementModule : MonoBehaviour
             //Rotate smoothly to this target
             orientation.rotation = Quaternion.Slerp(orientation.rotation, targetRotation, rotationSpeed*Time.fixedDeltaTime);
 
-            // Makes the character go into Walk animation
-            animator.SetBool("Moving",true); 
+            if(myGroundDetection.CheckForGround())
+            {
+                animator.SetBool("Moving",true);
+            }
+            else
+            {
+                animator.SetBool("Moving",false);
+            }
         }
         else
         {

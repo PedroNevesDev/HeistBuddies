@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cup
   Points: 25
-  isBreakable: 0
-  breakingSpeed: 3
+  isBreakable: 1
+  breakingSpeed: 6
   isThrowable: 1
-  isStorable: 0
+  isStorable: 1
   isCollectable: 1
   Image: {fileID: 21300000, guid: 52aa9d200a0da3547827e00d7bad201b, type: 3}

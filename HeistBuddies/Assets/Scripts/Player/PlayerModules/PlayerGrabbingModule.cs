@@ -52,9 +52,9 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         if(currentGrabbable!=null&&currentGrabbable.State==ItemState.Grabbed&&isGrabbing)
             Store();
+        PointArms();
         CheckForGrabbable();
         Grab();
-        PointHands();
         CheckThrowingState();
         UpdateObjectInputText();
     }
@@ -99,15 +99,66 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
         grabbableTexts[grabbableTexts.Count-1].text = text;
-    }
-    private void PointHands()
-    {
-        if(isGrabbing == false) return;
-        foreach(Rigidbody arm in armsRigidbodies)
-        {
+    }    
+    public Transform target; // The target to aim at
+    public ConfigurableJoint rightArmJoint; // The joint controlling the arm
+    public ConfigurableJoint leftArmJoint; // The joint controlling the arm
 
-        }
+    public float positionSpring = 100f; // Spring strength for rotation
+    public float positionDamper = 10f; // Damping for smooth rotation
+
+    JointDrive jd1;
+    JointDrive jd2;
+    void Awake()
+    {
+        // Set up joint drive for smooth motion
+        jd1 = new JointDrive
+        {
+            positionSpring = positionSpring,
+            positionDamper = positionDamper,
+            maximumForce = Mathf.Infinity
+        };
+        jd2 = new JointDrive
+        {
+            positionSpring = 0,
+            positionDamper = 0,
+            maximumForce = Mathf.Infinity
+        };
+
+
     }
+
+
+    void PointArms()
+    {
+        if (!target)return;
+        print(isGrabbing);
+        if(isGrabbing==true||(currentGrabbable&&currentGrabbable.State==ItemState.Grabbed)) 
+        {
+            leftArmJoint.slerpDrive = jd1;
+            rightArmJoint.slerpDrive = jd1;
+        }
+        else
+        {
+            leftArmJoint.slerpDrive = jd2;
+            rightArmJoint.slerpDrive = jd2;
+            return;            
+        }
+
+
+        // Calculate direction to target
+        Vector3 rightDirectionToTarget = target.localPosition - rightArmJoint.transform.localPosition;
+        Vector3 leftDirectionToTarget = target.localPosition - leftArmJoint.transform.localPosition;
+
+        // Create a rotation to face the target
+        Quaternion rightTargetRotation = Quaternion.LookRotation(rightDirectionToTarget);
+        Quaternion leftTargetRotation = Quaternion.LookRotation(leftDirectionToTarget);
+
+        // Adjust for joint's local space
+        rightArmJoint.targetRotation = Quaternion.Inverse(rightArmJoint.transform.localRotation) * rightTargetRotation;
+        leftArmJoint.targetRotation = Quaternion.Inverse(leftArmJoint.transform.localRotation) * leftTargetRotation;
+    }
+    
     public void CheckThrowingState()
     {
         if (currentGrabbable == null||currentGrabbable.State==ItemState.Idle) return;
