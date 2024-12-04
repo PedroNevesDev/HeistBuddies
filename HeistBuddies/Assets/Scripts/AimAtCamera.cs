@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class AimAtCamera : MonoBehaviour
 {
-    Camera cam;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        cam = Camera.main;
+void LateUpdate()
+{
+    // Get the main camera
+    Camera mainCamera = Camera.main;
 
-    }
+    // Calculate direction to camera
+    Vector3 directionToCamera = (mainCamera.transform.position - transform.position).normalized;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.LookAt(-cam.transform.position);
-    }
+    // Flip the direction if needed (use -directionToCamera for reverse facing)
+    directionToCamera.y = 0; // Optional: Keep the UI upright
+
+    // Apply rotation
+    transform.rotation = Quaternion.LookRotation(-directionToCamera);
+}
 }

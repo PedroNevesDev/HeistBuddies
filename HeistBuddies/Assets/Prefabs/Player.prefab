@@ -30,9 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2077112769532991582}
-  - {fileID: 8174329853719590516}
   - {fileID: 9205389142192161585}
   - {fileID: 452171359871567378}
+  - {fileID: 8174329853719590516}
   m_Father: {fileID: 4882627866721590575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1911848391782790954
@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 6991231311980595171}
   - component: {fileID: 3770805303611680665}
   - component: {fileID: 2421290587204432698}
-  - component: {fileID: 7888430752047169225}
+  - component: {fileID: 6722943782820720232}
   m_Layer: 9
   m_Name: InputCanvas
   m_TagString: Untagged
@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7888430752047169225
+--- !u!114 &6722943782820720232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
