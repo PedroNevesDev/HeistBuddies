@@ -3757,6 +3757,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 6809512254781457443, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6833610119329069085, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3809,10 +3813,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6809512254781457443, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 846611500814342888, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2101870614}
     - targetCorrespondingSourceObject: {fileID: 647912134104450694, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1800543303}
@@ -4060,7 +4068,7 @@ MonoBehaviour:
   ItemListPrefab: {fileID: 4932069167589965992, guid: 3342e3eafcbd6b944b72b29fd1c5f08b, type: 3}
   itemListForFade: {fileID: 971794334}
   itemListFadeInSpeed: 2
-  itemListFadeOutSpeed: 3
+  itemListFadeOutSpeed: 5
   timeUntilFadeOut: 3
 --- !u!114 &1364872256
 MonoBehaviour:
@@ -6632,6 +6640,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1531bc31270804ebb61bff29e8a01f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2101870609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 846611500814342888, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
+  m_PrefabInstance: {fileID: 1263826613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2101870614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101870609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 95.50921, y: 0.099301815, z: 78.81065}
+  m_Center: {x: -3.805725, y: 0.04660944, z: -5.61479}
 --- !u!1001 &4016509876319008736
 PrefabInstance:
   m_ObjectHideFlags: 0
