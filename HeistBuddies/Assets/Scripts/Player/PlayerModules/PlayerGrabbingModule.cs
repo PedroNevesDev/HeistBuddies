@@ -133,7 +133,6 @@ public class PlayerGrabbingModule : MonoBehaviour
     void PointArms()
     {
         if (!target)return;
-        print(isGrabbing);
         if(isGrabbing==true||(currentGrabbable&&currentGrabbable.State==ItemState.Grabbed)) 
         {
             leftArmJoint.slerpDrive = jd1;
