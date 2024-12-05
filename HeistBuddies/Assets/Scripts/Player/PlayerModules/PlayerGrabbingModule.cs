@@ -150,6 +150,7 @@ public class PlayerGrabbingModule : MonoBehaviour
         // Calculate direction to target
         Vector3 rightDirectionToTarget = target.localPosition - rightArmJoint.transform.localPosition;
         Vector3 leftDirectionToTarget = target.localPosition - leftArmJoint.transform.localPosition;
+        
 
         // Create a rotation to face the target
         Quaternion rightTargetRotation = Quaternion.LookRotation(rightDirectionToTarget);
