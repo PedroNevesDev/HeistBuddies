@@ -6,7 +6,7 @@ public enum DoorState
     Opened
 }
 
-public class Door : MonoBehaviour, IInteractable
+public class Door : MonoBehaviour
 {
     [Header("Door State")]
     [SerializeField] private DoorState doorState;
@@ -44,12 +44,35 @@ public class Door : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(Vector3 playerPosition)
     {
         if (doorState == DoorState.Closed) 
-        { 
-            doorState = DoorState.Opened;
-            joint.limits = jointLimits;
+        {
+            OpenDoor(playerPosition);
         }
+    }
+
+    private void OpenDoor(Vector3 playerPosition)
+    {
+        Vector3 doorToPlayer = playerPosition - transform.position;
+        doorToPlayer.y = 0;
+
+        float direction = Vector3.Dot(transform.right, doorToPlayer.normalized);
+
+        if (direction > 0)
+        {
+            // Player is on the right, open door to the left
+            jointLimits.min = -90;
+            jointLimits.max = 0;
+        }
+        else
+        {
+            // Player is on the left, open door to the right
+            jointLimits.min = 0;
+            jointLimits.max = 90;
+        }
+
+        joint.limits = jointLimits;
+        doorState = DoorState.Opened;
     }
 }
