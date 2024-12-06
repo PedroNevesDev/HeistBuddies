@@ -6,6 +6,8 @@ public class GroundDetection : MonoBehaviour
     [SerializeField] float raycastDistance;
     [SerializeField] Transform origin;
     [SerializeField] Balance balance;
+
+    [SerializeField] LayerMask ignoreMask;
     // Update is called once per frame
     void Update()
     {
@@ -15,7 +17,7 @@ public class GroundDetection : MonoBehaviour
 
     public bool CheckForGround()
     {
-        return Physics.Raycast(origin.position,Vector3.down,raycastDistance,groundMask);
+        return Physics.Raycast(origin.position,Vector3.down,raycastDistance,~ignoreMask);
     }
 
     void OnDrawGizmos()

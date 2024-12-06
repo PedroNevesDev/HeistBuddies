@@ -1037,6 +1037,9 @@ MonoBehaviour:
   raycastDistance: 0.5
   origin: {fileID: 4325847804096019636}
   balance: {fileID: 5810256199914316612}
+  ignoreMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &2965796179517941442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2458,8 +2461,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1024
-  fadeInSpeed: 3
-  fadeOutSpeed: 3
+  min: 0.15
+  max: 1
 --- !u!4 &2757016654112095986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1063094714816996356, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
@@ -4360,8 +4363,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
-  fadeInSpeed: 3
-  fadeOutSpeed: 1
+  min: 0.35
+  max: 1
 --- !u!114 &3988050154209268817
 MonoBehaviour:
   m_ObjectHideFlags: 0
