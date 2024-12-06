@@ -170,7 +170,11 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 1
+<<<<<<< Updated upstream
   controlID: 2815
+=======
+  controlID: 150
+>>>>>>> Stashed changes
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -197,7 +201,11 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 2816
+=======
+  controlID: 151
+>>>>>>> Stashed changes
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -247,12 +255,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1298
     y: 0
+<<<<<<< Updated upstream
     width: 712
     height: 1293
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
   controlID: 109
+=======
+    width: 481
+    height: 981
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 59
+>>>>>>> Stashed changes
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -273,12 +290,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< Updated upstream
     width: 712
     height: 766
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
   controlID: 59
+=======
+    width: 481
+    height: 845
+  m_MinSize: {x: 200, y: 50}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 60
+>>>>>>> Stashed changes
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -297,8 +323,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< Updated upstream
     width: 266
     height: 766
+=======
+    width: 235
+    height: 845
+>>>>>>> Stashed changes
   m_MinSize: {x: 202, y: 226}
   m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 21}
@@ -321,10 +352,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< Updated upstream
     x: 266
     y: 0
     width: 446
     height: 766
+=======
+    x: 235
+    y: 0
+    width: 246
+    height: 845
+>>>>>>> Stashed changes
   m_MinSize: {x: 232, y: 276}
   m_MaxSize: {x: 10002, y: 10026}
   m_ActualView: {fileID: 22}
@@ -348,9 +386,15 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< Updated upstream
     y: 766
     width: 712
     height: 527
+=======
+    y: 845
+    width: 481
+    height: 136
+>>>>>>> Stashed changes
   m_MinSize: {x: 52, y: 76}
   m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 23}
@@ -373,10 +417,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< Updated upstream
     x: 2010
     y: 0
     width: 550
     height: 1293
+=======
+    x: 1526
+    y: 0
+    width: 394
+    height: 981
+>>>>>>> Stashed changes
   m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 24}
@@ -1557,9 +1608,15 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: -15.412177, y: 8.9099655, z: -2.1431582}
     speed: 2
     m_Value: {x: -15.412177, y: 8.9099655, z: -2.1431582}
+=======
+    m_Target: {x: 0.32175338, y: 0.70617586, z: 0.0062200725}
+    speed: 2
+    m_Value: {x: 0.32175338, y: 0.70617586, z: 0.0062200725}
+>>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1605,6 +1662,7 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< Updated upstream
     m_Target: {x: 0.15069793, y: 0.7397759, z: -0.17664878, w: 0.631696}
     speed: 2
     m_Value: {x: 0.15068114, y: 0.73969346, z: -0.1766291, w: 0.6316256}
@@ -1612,6 +1670,15 @@ MonoBehaviour:
     m_Target: 2.7844727
     speed: 2
     m_Value: 2.7844727
+=======
+    m_Target: {x: -0.081326194, y: 0.77514184, z: -0.101978056, w: -0.6181574}
+    speed: 2
+    m_Value: {x: -0.08225432, y: 0.77499694, z: -0.10314183, w: -0.6180419}
+  m_Size:
+    m_Target: 0.73785365
+    speed: 2
+    m_Value: 0.7378537
+>>>>>>> Stashed changes
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1776,8 +1843,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1298
     y: 79
+<<<<<<< Updated upstream
     width: 264
     height: 740
+=======
+    width: 233
+    height: 819
+>>>>>>> Stashed changes
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1791,10 +1863,17 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
+<<<<<<< Updated upstream
       scrollPos: {x: 0, y: 69}
       m_SelectedIDs: e0b20000
       m_LastClickedID: 45792
       m_ExpandedIDs: 7cf7ffff2afaffff2cfaffff46faffff7cad00008cad0000a0ad0000
+=======
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: c6faffffdefaffffe0faffff
+>>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1811,7 +1890,11 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
+<<<<<<< Updated upstream
         m_ClientGUIView: {fileID: 9}
+=======
+        m_ClientGUIView: {fileID: 10}
+>>>>>>> Stashed changes
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1840,10 +1923,17 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
+<<<<<<< Updated upstream
     x: 1564
     y: 79
     width: 444
     height: 740
+=======
+    x: 1280
+    y: 79
+    width: 244
+    height: 819
+>>>>>>> Stashed changes
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1883,23 +1973,29 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< Updated upstream
     m_SelectedIDs: e8c60000
     m_LastClickedID: 50920
     m_ExpandedIDs: 0000000008c600000ac600000cc600000ec6000010c6000012c6000014c6000016c6000000ca9a3b
+=======
+    m_SelectedIDs: 86af0000
+    m_LastClickedID: 44934
+    m_ExpandedIDs: 00000000e6ac0000e8ac0000eaac0000ecac0000eeac000084af000000ca9a3b
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Meshes
+      m_OriginalName: Meshes
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 44938
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 13}
@@ -1914,7 +2010,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< Updated upstream
     m_ExpandedIDs: 0000000008c600000ac600000cc600000ec6000010c6000012c6000014c6000016c60000
+=======
+    m_ExpandedIDs: 00000000e6ac0000e8ac0000eaac0000ecac0000eeac0000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1971,8 +2071,13 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
+<<<<<<< Updated upstream
   m_DirectoriesAreaWidth: 134
 --- !u!114 &23
+=======
+  m_DirectoriesAreaWidth: 97
+--- !u!114 &20
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1993,10 +2098,17 @@ MonoBehaviour:
     m_TextWithWhitespace: "Console\u200B"
   m_Pos:
     serializedVersion: 2
+<<<<<<< Updated upstream
     x: 1298
     y: 845
     width: 710
     height: 501
+=======
+    x: 1045
+    y: 924
+    width: 479
+    height: 110
+>>>>>>> Stashed changes
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -2029,10 +2141,17 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
+<<<<<<< Updated upstream
     x: 2010
     y: 79
     width: 549
     height: 1267
+=======
+    x: 1526
+    y: 79
+    width: 393
+    height: 955
+>>>>>>> Stashed changes
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -2047,7 +2166,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: -222
+    m_CachedPref: -341
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
