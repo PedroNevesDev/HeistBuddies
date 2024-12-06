@@ -1,72 +1,76 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
 public class SyncingSeeThrough : MonoBehaviour
 {
-    static string pos = "_CutoutPosition";
-    static string size = "_CutoutSize";
-    static string direction = "_CutoutDirection";
-
     private Camera cam;
     public LayerMask mask;
-    public float maxSize = 1f;
-    public float fadeInSpeed = 1f; // Adjust this for speed
+    public float fadeSpeed = 1f; 
 
-    private MaterialPropertyBlock propBlock;
-    private Renderer wallRenderer;
-    private float currentSize = 0f; // Start with size 0
-    public int playerID = 1; // 1 for first player, 2 for second player
+    List<RaycastHit> wallsToFadeIn = new List<RaycastHit>();
+    List<RaycastHit> oldWalls = new List<RaycastHit>();
+    List<RaycastHit> wallsToFadeOut = new List<RaycastHit>();
 
-    private Vector3 worldPos;
     private Vector3 dir;
-
-    void Awake()
-    {
-        if (FindObjectsByType<SyncingSeeThrough>(FindObjectsSortMode.None).Length == 2)
-        {
-            playerID = 2;
-        }
-    }
 
     void Start()
     {
         cam = Camera.main;
-        propBlock = new MaterialPropertyBlock();
     }
 
     void Update()
     {
         dir = cam.transform.position - transform.position;
-        var ray = new Ray(transform.position, dir.normalized);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Vector3.Distance(cam.transform.position,transform.position), mask))
-        {
-            worldPos = hit.point; // Use the hit point as the cutout position
-            currentSize = Mathf.Lerp(currentSize, maxSize, fadeInSpeed * Time.deltaTime); // Fade in
-            wallRenderer = hit.collider.GetComponent<MeshRenderer>();
-        }
-        else
-        {
-            // Fade out, ensuring we can access wallRenderer
-            if (wallRenderer != null)
-            {
-                currentSize = Mathf.Lerp(currentSize, 0, fadeInSpeed * Time.deltaTime);
-            }
-        }
+        ProcessNewHits();
+        ProcessOldHits();
     }
 
-    void FixedUpdate()
+    void ProcessNewHits()
     {
-        if (wallRenderer != null)
+        // Raycast to get all the walls within range that are now visible
+        RaycastHit[] newHits = Physics.RaycastAll(transform.position, dir.normalized, 40, mask);
+
+        // Add any new hits that weren't previously in oldWalls to wallsToFadeIn
+        foreach (RaycastHit hit in newHits)
         {
-            wallRenderer.GetPropertyBlock(propBlock);
+            AlterHitMaterialOpacity(hit, 0.35f); // Fade in detected walls immediately
+        }
 
-            // Set the cutout size
-            propBlock.SetFloat(Shader.PropertyToID(size + playerID), currentSize);
-            propBlock.SetVector(Shader.PropertyToID(pos + playerID), new Vector4(worldPos.x, worldPos.y, worldPos.z, 1));
-            propBlock.SetVector(Shader.PropertyToID(direction + playerID), new Vector4(dir.x, dir.y, dir.z, 1));
+        foreach (RaycastHit wall in oldWalls)
+        {
+            if (!newHits.Contains(wall)&&!wallsToFadeIn.Contains(wall))  // If the wall is no longer hit
+            {
+                wallsToFadeIn.Add(wall);  // Move it to the fade-out list
+            }
+        }
+        oldWalls.Clear();
+    }
 
-            wallRenderer.SetPropertyBlock(propBlock);
+    void ProcessOldHits()
+    {
+        // Fade in walls that are still being hit but were not marked to fade yet
+        foreach (RaycastHit wall in wallsToFadeIn)
+        {
+            AlterHitMaterialOpacity(wall, 1f); // Fade in
+        }
+
+        oldWalls.AddRange(wallsToFadeOut); // Update oldWalls list with walls that are fading out
+    }
+
+    void AlterHitMaterialOpacity(RaycastHit hit, float targetOpacity)
+    {
+        MeshRenderer mr = hit.collider.GetComponent<MeshRenderer>();
+        if (mr != null)
+        {
+            Material mat = mr.material;
+            // Smoothly transition opacity toward targetOpacity
+            float currentOpacity = mat.GetFloat("_Opacity");
+            float newOpacity = Mathf.Lerp(currentOpacity, targetOpacity, fadeSpeed * Time.deltaTime);
+            mat.SetFloat("_Opacity", newOpacity);
+            mr.material = mat;
         }
     }
 }

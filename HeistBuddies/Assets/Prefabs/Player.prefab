@@ -2458,9 +2458,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1024
-  maxSize: 1
-  fadeInSpeed: 1
-  playerID: 1
+  fadeInSpeed: 3
+  fadeOutSpeed: 3
 --- !u!4 &2757016654112095986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1063094714816996356, guid: 77c91b022ec6c2448a4575ce0057b40d, type: 3}
@@ -4361,9 +4360,8 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 128
-  maxSize: 2
   fadeInSpeed: 3
-  playerID: 1
+  fadeOutSpeed: 1
 --- !u!114 &3988050154209268817
 MonoBehaviour:
   m_ObjectHideFlags: 0
