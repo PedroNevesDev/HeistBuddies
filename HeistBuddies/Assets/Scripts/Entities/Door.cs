@@ -6,7 +6,7 @@ public enum DoorState
     Opened
 }
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IInteractable
 {
     [Header("Door State")]
     [SerializeField] private DoorState doorState;
@@ -17,6 +17,15 @@ public class Door : MonoBehaviour
     private HingeJoint joint;
     private JointLimits jointLimits;
 
+    [Header("Door Interact")]
+    [SerializeField] int howManyAttempsUntilUnlocked;
+    [SerializeField] LockPicking lockPicking;
+    public bool ShouldBeInteractedWith{ get =>doorState == DoorState.Closed;}
+    public bool IsBeingInteractedWith{ get =>lockPicking.gameObject.activeSelf;}
+
+    int currentAttemps;
+
+    Vector3 currentPlayerPosition;
     private void Start()
     {
         joint = GetComponentInChildren<HingeJoint>();
@@ -24,12 +33,6 @@ public class Door : MonoBehaviour
 
         Initialize();
     }
-
-    private void Update()
-    {
-
-    }
-
     private void Initialize()
     {
         if (useState)
@@ -44,17 +47,35 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void Interact(Vector3 playerPosition)
+    public void Interact(PlayerController playerController)
     {
         if (doorState == DoorState.Closed) 
         {
-            OpenDoor(playerPosition);
+            if(lockPicking.gameObject.activeSelf== true)
+            {
+                currentPlayerPosition = playerController.transform.position;
+                lockPicking.OnSuccess += OpenDoor;
+                lockPicking.gameObject.SetActive(true);
+            }
+            else
+            {
+                lockPicking.CheckForOverlap();
+            }
         }
     }
 
-    private void OpenDoor(Vector3 playerPosition)
+    
+
+    public void StopInteraction()
     {
-        Vector3 doorToPlayer = playerPosition - transform.position;
+        lockPicking.OnSuccess -= OpenDoor;
+        lockPicking.gameObject.SetActive(false);
+
+    }
+
+    public void OpenDoor()
+    {
+        Vector3 doorToPlayer = currentPlayerPosition - transform.position;
         doorToPlayer.y = 0;
 
         float direction = Vector3.Dot(transform.right, doorToPlayer.normalized);
@@ -74,5 +95,7 @@ public class Door : MonoBehaviour
 
         joint.limits = jointLimits;
         doorState = DoorState.Opened;
+        currentPlayerPosition = Vector3.zero;
     }
+
 }

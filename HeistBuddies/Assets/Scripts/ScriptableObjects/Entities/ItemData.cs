@@ -12,6 +12,7 @@ public class ItemData : ScriptableObject
     [Header("Item Conditions")]
     public bool isBreakable = false;
     public float breakingSpeed = 1;
+    public AudioSource breakingSound;
     public bool isThrowable = false;
     public bool isStorable = false;
     public bool isCollectable = false;

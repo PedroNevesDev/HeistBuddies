@@ -2,5 +2,9 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    void Interact();
+    public bool IsBeingInteractedWith{ get;}
+    public bool ShouldBeInteractedWith{ get;}
+    public void Interact(PlayerController playerController);
+
+    public void StopInteraction();
 }

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using System.Threading;
 
 [RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController))]
 public class PlayerGrabbingModule : MonoBehaviour

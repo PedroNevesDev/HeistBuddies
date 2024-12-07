@@ -8,9 +8,6 @@ using UnityEngine.InputSystem.Haptics;
 public class TransparentWallBehaviour : MonoBehaviour
 {
     MeshRenderer meshRenderer;
-    float timerUntilDesapear;
-    bool hide = false;
-
     float fadeSpeed = 5;
 
     float min = 0.15f;
@@ -34,7 +31,7 @@ public class TransparentWallBehaviour : MonoBehaviour
     void LateUpdate()
     {
         float opacity = meshRenderer.material.GetFloat("_Opacity");
-        pretendedOpacity = listOfDetectorsBehindWalls.Count==0?1f:0.15f;
+        pretendedOpacity = listOfDetectorsBehindWalls.Count==0?max:min;
         if(opacity==pretendedOpacity)return;
         meshRenderer.material.SetFloat("_Opacity",Mathf.Lerp(opacity,pretendedOpacity, fadeSpeed*Time.deltaTime));
     }
