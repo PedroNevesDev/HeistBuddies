@@ -909,7 +909,6 @@ GameObject:
   - component: {fileID: 3549202150260482220}
   - component: {fileID: 1025647574928979143}
   - component: {fileID: 2965796179517941442}
-  - component: {fileID: 5994875913499881467}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -955,7 +954,6 @@ MonoBehaviour:
   wasGrabbed: 0
   balance: {fileID: 5810256199914316612}
   bodyParts:
-  - {fileID: 5994875913499881467}
   - {fileID: 3533729729565307143}
   - {fileID: 3284401909450547996}
   - {fileID: 8908249299652776432}
@@ -1382,18 +1380,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5994875913499881467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7823575494001143626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4874ccb4c731fc74f8a2ca75d0604a34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8474104103222143540
 GameObject:
   m_ObjectHideFlags: 0
@@ -7120,7 +7106,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!153 &3335278055561213569
 ConfigurableJoint:
   m_ObjectHideFlags: 0

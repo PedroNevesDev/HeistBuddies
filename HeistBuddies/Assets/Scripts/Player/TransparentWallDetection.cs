@@ -36,7 +36,7 @@ public class TransparentWallDetection : MonoBehaviour
         {
             if (!oldColliders.Contains(newCollider))
             {
-                newCollider.GetComponent<TransparentWallBehaviour>()?.ToggleHide(true, min, max);
+                newCollider.GetComponent<TransparentWallBehaviour>()?.ListOfDetectorsBehindWalls.Add(this);
             }
         }
 
@@ -45,7 +45,7 @@ public class TransparentWallDetection : MonoBehaviour
         {
             if (!newColliders.Contains(oldCollider))
             {
-                oldCollider.GetComponent<TransparentWallBehaviour>()?.ToggleHide(false, min, max);
+                oldCollider.GetComponent<TransparentWallBehaviour>()?.ListOfDetectorsBehindWalls.Remove(this);
             }
         }
 
