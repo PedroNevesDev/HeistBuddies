@@ -908,6 +908,7 @@ GameObject:
   - component: {fileID: 4666042578104732768}
   - component: {fileID: 3549202150260482220}
   - component: {fileID: 1025647574928979143}
+  - component: {fileID: 1519832221729379525}
   - component: {fileID: 2965796179517941442}
   m_Layer: 9
   m_Name: Player
@@ -1000,16 +1001,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c64a2dfdce5f34e997d67b64b47f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 1, y: 1.15, z: 1}
-  boxOffset: {x: 0, y: -0.06, z: 0.72}
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 64
   armsRigidbodies:
   - {fileID: 2558300208864185093}
   - {fileID: 4378824694231647429}
-  currentGrabbable: {fileID: 0}
-  rbBoxOrigin: {fileID: 4501275906084773058}
   pointTarget: {fileID: 5440180829542987536}
   throwForce: 10
   maxHoldingDuration: 1
@@ -1106,6 +1100,31 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1519832221729379525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823575494001143626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067585244c2121548b22f7daaa9ec4c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxSize: {x: 1, y: 1.15, z: 1}
+  boxOffset: {x: 0, y: -0.06, z: 0.72}
+  grababbleDetectionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  interactableDetectionLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  currentGrabbable: {fileID: 0}
+  rbBoxOrigin: {fileID: 4501275906084773058}
+  verticalLayoutGroup: {fileID: 3599485272759833794}
+  grabableObjTextPrefab: {fileID: 2765865393249042053, guid: d6b7aaa1c94c8a44a84079e33ee93935, type: 3}
+  uiImputTexts: []
 --- !u!114 &2965796179517941442
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,18 +8,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController))]
 public class PlayerGrabbingModule : MonoBehaviour
 {
-    [Header("Grab Detection Box Settings")]
-    [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
-    [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
-    [SerializeField] private LayerMask detectionLayer;
-
     [SerializeField] Rigidbody[] armsRigidbodies;
-    [SerializeField] private Item currentGrabbable = null;
     bool isGrabbing = false;
     private PlayerBackpackModule backpack = null;
-
-    [SerializeField] Rigidbody rbBoxOrigin;
-
     [SerializeField] Transform pointTarget;
 
     [SerializeField] private float throwForce;
@@ -38,68 +29,11 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
     [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
     bool shouldDecrease = false;
-    public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
-    public void OnThrow(InputAction.CallbackContext context) => throwingCtx = context;
+
+    EnvironmentDetectionModule environmentDetectionModule;
+
+    [Header("Arm Settings")]
     
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        backpack = GetComponent<PlayerBackpackModule>();
-    }
-
-    private void Update()
-    {
-        if(currentGrabbable!=null&&currentGrabbable.State==ItemState.Grabbed&&isGrabbing)
-            Store();
-        PointArms();
-        CheckForGrabbable();
-        Grab();
-        CheckThrowingState();
-        UpdateObjectInputText();
-    }
-
-    void UpdateObjectInputText()
-    {
-        if(currentGrabbable==null)
-        {
-            verticalLayoutGroup.gameObject.SetActive(false);
-            return;
-        }
-        for(int i = grabbableTexts.Count-1;i>=0;i-- )
-        {
-            Destroy(grabbableTexts[i].gameObject);
-            grabbableTexts.RemoveAt(i);
-        }
-        verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.localScale.y,0);
-        switch(currentGrabbable.State)
-        {
-            case ItemState.Idle:
-            verticalLayoutGroup.gameObject.SetActive(true);
-                AddText("Grab");
-            break;
-            case ItemState.Grabbed:
-            verticalLayoutGroup.gameObject.SetActive(true);
-            if(currentGrabbable.Data.isThrowable)
-            {
-                AddText("Throw");
-            }
-            if(currentGrabbable.Data.isStorable)
-            {
-                AddText("Store");
-            }
-
-            break;
-            case ItemState.Throwing:
-            verticalLayoutGroup.gameObject.SetActive(false);
-            break;
-        }
-    }
-    void AddText(string text)
-    {
-        grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
-        grabbableTexts[grabbableTexts.Count-1].text = text;
-    }    
     public Transform target; // The target to aim at
     public ConfigurableJoint rightArmJoint; // The joint controlling the arm
     public ConfigurableJoint leftArmJoint; // The joint controlling the arm
@@ -109,6 +43,32 @@ public class PlayerGrabbingModule : MonoBehaviour
 
     JointDrive jd1;
     JointDrive jd2;
+    public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
+    public void OnThrow(InputAction.CallbackContext context) => throwingCtx = context;
+    
+    public Item GetGrabbable()=>environmentDetectionModule.CurrentGrabbable;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        backpack = GetComponent<PlayerBackpackModule>();
+        environmentDetectionModule = GetComponent<EnvironmentDetectionModule>();
+    }
+
+    private void Update()
+    {
+        if(GetGrabbable()&&GetGrabbable().State==ItemState.Grabbed&&isGrabbing)
+            Store();
+        PointArms();
+        Grab();
+        CheckThrowingState();
+    }
+    void AddText(string text)
+    {
+        grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
+        grabbableTexts[grabbableTexts.Count-1].text = text;
+    }    
+
     void Awake()
     {
         // Set up joint drive for smooth motion
@@ -132,7 +92,7 @@ public class PlayerGrabbingModule : MonoBehaviour
     void PointArms()
     {
         if (!target)return;
-        if(isGrabbing==true||(currentGrabbable&&currentGrabbable.State==ItemState.Grabbed)) 
+        if(isGrabbing==true||(GetGrabbable()&&GetGrabbable().State==ItemState.Grabbed)) 
         {
             leftArmJoint.slerpDrive = jd1;
             rightArmJoint.slerpDrive = jd1;
@@ -161,10 +121,10 @@ public class PlayerGrabbingModule : MonoBehaviour
     
     public void CheckThrowingState()
     {
-        if (currentGrabbable == null||currentGrabbable.State==ItemState.Idle) return;
+        if (GetGrabbable() == null||GetGrabbable().State==ItemState.Idle) return;
         if (throwingCtx.performed)
         {
-            currentGrabbable.State = ItemState.Throwing;
+            GetGrabbable().State = ItemState.Throwing;
             throwCanvas.SetActive(true);
             if(shouldDecrease)
             {
@@ -186,8 +146,8 @@ public class PlayerGrabbingModule : MonoBehaviour
 
             float force = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
             Vector3 dir = orientation.forward * force * throwForce+ orientation.up/2 * force * throwForce;
-            currentGrabbable.Throw(dir);
-            currentGrabbable.State = ItemState.Idle;
+            GetGrabbable().Throw(dir);
+            GetGrabbable().State = ItemState.Idle;
             DeactivateThrowUI();
         }
         fillThrowUi.fillAmount = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
@@ -200,51 +160,21 @@ public class PlayerGrabbingModule : MonoBehaviour
         throwCanvas.SetActive(false);
     }
 
-    public void CheckForGrabbable()
-    {
-        Vector3 boxCenter = rbBoxOrigin.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
-        List<Collider> hits = new List<Collider>(Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, detectionLayer));
-
-        if (hits.Count > 0)
-        {
-            Item grabbable = hits[0].GetComponent<Item>();
-            if (grabbable != null)
-            {
-                if (currentGrabbable != grabbable)
-                {
-                    currentGrabbable = grabbable;
-                }
-                return;
-            }
-        }
-
-        if (currentGrabbable != null)
-        {
-            currentGrabbable = null;
-        }
-    }
 
     public void Grab()
     {
-        if (currentGrabbable == null) return;
+        if (GetGrabbable() == null) return;
         if (isGrabbing == false)  return;
 
-        currentGrabbable.Grab(pointTarget);
+        GetGrabbable().Grab(pointTarget);
         isGrabbing = false;
     }
 
     public void Store()
     {
-        if(!currentGrabbable.Data.isStorable)return;
+        if(!GetGrabbable().Data.isStorable)return;
         
-        Item item = currentGrabbable as Item;
+        Item item = GetGrabbable() as Item;
         backpack.AddItemToBackPack(item);
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Vector3 boxCenter = rbBoxOrigin.transform.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
-        Gizmos.matrix = Matrix4x4.TRS(boxCenter, rbBoxOrigin.transform.rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
     }
 }

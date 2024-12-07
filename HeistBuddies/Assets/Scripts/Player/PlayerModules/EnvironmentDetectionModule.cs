@@ -11,12 +11,17 @@ public class EnvironmentDetectionModule : MonoBehaviour
     [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
     [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
     [SerializeField] private LayerMask grababbleDetectionLayer;
+    [SerializeField] private LayerMask interactableDetectionLayer;
     [SerializeField] private Item currentGrabbable = null;
+    [SerializeField] private IInteractable currentInteractable = null;
     [SerializeField] Rigidbody rbBoxOrigin;
 
     [SerializeField] VerticalLayoutGroup verticalLayoutGroup;
     [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
-    [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
+    [SerializeField] List<TextMeshProUGUI> uiImputTexts = new List<TextMeshProUGUI>();
+
+    public Item CurrentGrabbable { get => currentGrabbable; set => currentGrabbable = value; }
+    public IInteractable CurrentInteractable { get => currentInteractable; set => currentInteractable = value; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,26 +30,43 @@ public class EnvironmentDetectionModule : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        CheckForGrabbable();
         UpdateObjectInputText();
     }
 
     void UpdateObjectInputText()
     {
-        if(currentGrabbable==null)
+        if(currentGrabbable!=null)
         {
-            verticalLayoutGroup.gameObject.SetActive(false);
-            return;
+            SetupTextForGrabbables();
+
         }
-        for(int i = grabbableTexts.Count-1;i>=0;i-- )
+        else if(currentInteractable!=null)
         {
-            Destroy(grabbableTexts[i].gameObject);
-            grabbableTexts.RemoveAt(i);
+
         }
-        verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.localScale.y,0);
-        switch(currentGrabbable.State)
+        else
         {
+            verticalLayoutGroup.gameObject.SetActive(false);            
+        }
+    }
+    void ResetUITexts()
+    {
+        for(int i = uiImputTexts.Count-1;i>=0;i-- )
+        {
+            Destroy(uiImputTexts[i].gameObject);
+            uiImputTexts.RemoveAt(i);
+        }
+    }
+
+    void SetupTextForGrabbables()
+    {
+            ResetUITexts();
+            verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.localScale.y,0);
+            switch(currentGrabbable.State)
+            {
             case ItemState.Idle:
             verticalLayoutGroup.gameObject.SetActive(true);
                 AddText("Grab");
@@ -64,8 +86,9 @@ public class EnvironmentDetectionModule : MonoBehaviour
             case ItemState.Throwing:
             verticalLayoutGroup.gameObject.SetActive(false);
             break;
-        }
+            }
     }
+
     public void CheckForGrabbable()
     {
         Vector3 boxCenter = rbBoxOrigin.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
@@ -90,9 +113,17 @@ public class EnvironmentDetectionModule : MonoBehaviour
         }
     }
 
-        void AddText(string text)
+    void AddText(string text)
     {
-        grabbableTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
-        grabbableTexts[grabbableTexts.Count-1].text = text;
+        uiImputTexts.Add(Instantiate(grabableObjTextPrefab,verticalLayoutGroup.transform));
+        uiImputTexts[uiImputTexts.Count-1].text = text;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Vector3 boxCenter = rbBoxOrigin.transform.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
+        Gizmos.matrix = Matrix4x4.TRS(boxCenter, rbBoxOrigin.transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
     }    
 }
