@@ -17,8 +17,9 @@ public class Balance : MonoBehaviour
         if(!bodyPart)
             return;
         if(!balance)
-            return;
-        bodyPart.AddForce(upwardForce*Vector3.up*Time.fixedDeltaTime,ForceMode.Force);
+            bodyPart.AddForce(upwardForce*2*-Vector3.up*Time.fixedDeltaTime,ForceMode.Force);
+        else
+            bodyPart.AddForce(upwardForce*Vector3.up*Time.fixedDeltaTime,ForceMode.Force);
     }
 
     private void OnDrawGizmos() 

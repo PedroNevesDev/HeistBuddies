@@ -6,10 +6,6 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-
-
-
-
 public class ControllerListener : MonoBehaviour
 {
     [SerializeField] List<Mesh> randomPlayerMeshes = new List<Mesh>();
@@ -42,7 +38,7 @@ public class ControllerListener : MonoBehaviour
     {
         // Instantiating player one
         p1 = PlayerInput.Instantiate(playerPrefab); 
-        p1.transform.position = mapSpawnPoint.position + Vector3.left*1;
+        p1.transform.position = mapSpawnPoint.position + mapSpawnPoint.right*1;
         PlayerController pc1 = p1.GetComponent<PlayerController>();
         cameraTargetGroup.AddMember(pc1.Rb.transform,1,1);
         pc1.SetMesh(GetRandomMesh());
@@ -50,7 +46,7 @@ public class ControllerListener : MonoBehaviour
 
         // Instantiating player two
         p2 = PlayerInput.Instantiate(playerPrefab); 
-        p2.transform.position = mapSpawnPoint.position + Vector3.left*2;
+        p2.transform.position = mapSpawnPoint.position + mapSpawnPoint.right*2;
         PlayerController pc2 = p2.GetComponent<PlayerController>();
         cameraTargetGroup.AddMember(pc2.Rb.transform,1,1);
         pc2.SetMesh(GetRandomMesh());

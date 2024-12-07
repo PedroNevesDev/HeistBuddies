@@ -1011,7 +1011,7 @@ MonoBehaviour:
   currentGrabbable: {fileID: 0}
   rbBoxOrigin: {fileID: 4501275906084773058}
   pointTarget: {fileID: 5440180829542987536}
-  throwForce: 7
+  throwForce: 10
   maxHoldingDuration: 1
   orientation: {fileID: 4788651375200108325}
   fillThrowUi: {fileID: 4685886553373804629}

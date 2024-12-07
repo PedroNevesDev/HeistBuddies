@@ -12,7 +12,7 @@ public class GroundDetection : MonoBehaviour
     void Update()
     {
         if(!balance)return;
-        balance.gameObject.SetActive(CheckForGround());
+        balance.ShouldBalance = CheckForGround();
     }
 
     public bool CheckForGround()

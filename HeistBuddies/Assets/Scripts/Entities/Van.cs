@@ -4,11 +4,16 @@ using System.Collections;
 public class Van : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+
+    [SerializeField] AudioClip doorSlamSoundThatDoesntSoundLikeADoorSlam;
     float score;
     UIManager uiManager;
+    AudioManager audioManager;
     void Start()
     {
         uiManager = UIManager.Instance;
+        audioManager = AudioManager.Instance;
+        audioManager.PlaySoundEffect(doorSlamSoundThatDoesntSoundLikeADoorSlam);
     }
     void OnTriggerEnter(Collider other) 
     {
@@ -41,6 +46,7 @@ public class Van : MonoBehaviour
             score += total;
             scoreText.text = score.ToString();
             StartCoroutine(TextPreFadeDelay());
+            audioManager.PlaySoundEffect(doorSlamSoundThatDoesntSoundLikeADoorSlam);
         }
     }
 
