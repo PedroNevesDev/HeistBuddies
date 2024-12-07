@@ -8403,6 +8403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6c31c1956666c4fb3d209aca31b312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomPlayerMeshes:
+  - {fileID: 3183417371380849693, guid: 57e8a5908797d684981d11c4d96396ba, type: 3}
+  - {fileID: -4807176563209452138, guid: 57dd9bb3bed3be94287b2bef5728fbad, type: 3}
   playerPrefab: {fileID: 7823575494001143626, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
   cameraTargetGroup: {fileID: 289038698}
   mapSpawnPoint: {fileID: 42407122}

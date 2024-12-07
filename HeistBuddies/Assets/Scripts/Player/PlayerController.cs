@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     private Transform teleportPoint = null;
     private Coroutine teleportCoroutine = null;
 
+    [SerializeField] SkinnedMeshRenderer skinnedMeshRenderer;
+
+    public void SetMesh(Mesh mesh)=> skinnedMeshRenderer.sharedMesh = mesh;
+
     #endregion
     
     #region Getters/Setters
