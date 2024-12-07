@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SyncingSeeThrough : MonoBehaviour
+public class TransparentWallDetection : MonoBehaviour
 {
     private Camera cam;
     public LayerMask mask;

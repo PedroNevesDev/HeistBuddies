@@ -52,7 +52,7 @@ public class ControllerListener : MonoBehaviour
         p2 = PlayerInput.Instantiate(playerPrefab); 
         p2.transform.position = mapSpawnPoint.position + Vector3.left*2;
         PlayerController pc2 = p2.GetComponent<PlayerController>();
-        cameraTargetGroup.AddMember(pc1.Rb.transform,1,1);
+        cameraTargetGroup.AddMember(pc2.Rb.transform,1,1);
         pc2.SetMesh(GetRandomMesh());
 
         SwitchControlSchemes();
