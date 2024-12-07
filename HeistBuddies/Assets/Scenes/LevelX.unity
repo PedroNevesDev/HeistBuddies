@@ -370,6 +370,7 @@ MonoBehaviour:
   - {fileID: 14116229}
   - {fileID: 1335526113}
   - {fileID: 530639676}
+  breakingSound: {fileID: 8300000, guid: 371b7186f08f043489ac496aea257830, type: 3}
 --- !u!65 &37077757
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6240,6 +6241,7 @@ MonoBehaviour:
   - {fileID: 1826985852}
   - {fileID: 2087882972}
   - {fileID: 1508916585}
+  breakingSound: {fileID: 8300000, guid: 371b7186f08f043489ac496aea257830, type: 3}
 --- !u!65 &771242833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9451,6 +9453,7 @@ MonoBehaviour:
   - {fileID: 326196868}
   - {fileID: 1452697235}
   - {fileID: 1730736244}
+  breakingSound: {fileID: 8300000, guid: 371b7186f08f043489ac496aea257830, type: 3}
 --- !u!65 &960302485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11755,6 +11758,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0cf823c4841eb4741baef24df9dfc6cc, type: 2}
+    - target: {fileID: 5562933484998201213, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6051964613842986528, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -12037,6 +12044,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3831341414391129238, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 942657519}
+    - targetCorrespondingSourceObject: {fileID: 5562933484998201213, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2105752057}
     - targetCorrespondingSourceObject: {fileID: 9123275931806420815, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1745959688}
@@ -13702,9 +13712,10 @@ MonoBehaviour:
   defaultMusic: {fileID: 8300000, guid: b7a92cff68010974e985798234a0b547, type: 3}
   pitch: 1
   defaultMusicLoop: 1
-  musicVolumeWhileEffect: 0.1
-  musicDefaultVolume: 0.3
-  effectDefaultVolume: 0.3
+  timerUntilMusicVolumeNormalize: 1.5
+  musicVolumeWhileEffect: 0.12
+  musicDefaultVolume: 0.25
+  effectDefaultVolume: 0.25
   musicVolumeSwitchSpeed: 5
 --- !u!64 &1514531732
 MeshCollider:
@@ -15023,6 +15034,7 @@ MonoBehaviour:
   - {fileID: 2016958836}
   - {fileID: 1163954105}
   - {fileID: 190525204}
+  breakingSound: {fileID: 8300000, guid: 371b7186f08f043489ac496aea257830, type: 3}
 --- !u!65 &1635484616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19472,6 +19484,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 95.50921, y: 0.099301815, z: 78.81065}
   m_Center: {x: -3.805725, y: 0.04660944, z: -5.61479}
+--- !u!1 &2105752051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5562933484998201213, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
+  m_PrefabInstance: {fileID: 1263826613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2105752057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105752051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126984c7337cae748ba306c49070fb98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: f84a2eba522277f47a33b774a6e15f1b, type: 2}
+  state: 0
 --- !u!64 &2112726536
 MeshCollider:
   m_ObjectHideFlags: 0

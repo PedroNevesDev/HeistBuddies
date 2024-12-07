@@ -7,17 +7,9 @@ public class GlassBehaviour : MonoBehaviour
     [SerializeField] float breakForce = 1;
     [SerializeField] float glassPiecesPropelForce = 1;
     [SerializeField] List<Rigidbody> glassPiecesRbs = new List<Rigidbody>();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] AudioClip breakingSound;
+
     private void OnCollisionEnter(Collision other) 
     {
         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
@@ -25,6 +17,7 @@ public class GlassBehaviour : MonoBehaviour
         {
             gameObject.SetActive(false);
             glassPiecesObj.SetActive(true);
+            AudioManager.Instance.PlaySoundEffect(breakingSound);
             foreach(Rigidbody rbs in glassPiecesRbs)
             {
                 rbs.AddForce(new Vector3(Random.Range(-1,1),Random.Range(-1,1),Random.Range(-1,1))* glassPiecesPropelForce,ForceMode.Impulse);

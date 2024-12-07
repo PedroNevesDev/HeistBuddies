@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -10,13 +11,15 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioClip defaultMusic;
     [SerializeField,Range(0,1)] float pitch = 1;
     [SerializeField] bool defaultMusicLoop = true;
+    [SerializeField] float timerUntilMusicVolumeNormalize;
 
     [Header("VolumeSettings")]
     [SerializeField,Range(0,1)] float musicVolumeWhileEffect = 0.3f;
     [SerializeField,Range(0,1)] float musicDefaultVolume = 1f;
     [SerializeField,Range(0,1)] float effectDefaultVolume = 1f;
     [SerializeField] float musicVolumeSwitchSpeed = 5;
-
+    float timer;
+    float pretendedVolume;
     List<AudioSource> soundEffect = new List<AudioSource>();
     AudioSource currentMusic;
 
@@ -34,12 +37,19 @@ public class AudioManager : Singleton<AudioManager>
     {
 
         ChangeMusic(defaultMusic);
-
+        pretendedVolume = musicDefaultVolume;
     }
 
     private void Update()
     {
-        float pretendedVolume = soundEffect.Count>0?musicVolumeWhileEffect:musicDefaultVolume;
+        if(timer>0)
+        {
+            timer-= Time.deltaTime;
+        }
+        else
+        {
+            pretendedVolume = musicDefaultVolume;
+        }
         if(currentMusic&&pretendedVolume!=currentMusic.volume)
             currentMusic.volume = Mathf.Lerp(currentMusic.volume,pretendedVolume,musicVolumeSwitchSpeed*Time.deltaTime);
     }
@@ -66,7 +76,8 @@ public class AudioManager : Singleton<AudioManager>
         newEffect.Play();
         soundEffect.Add(newEffect);
 
-
+        timer = timerUntilMusicVolumeNormalize;
+        pretendedVolume = musicVolumeWhileEffect;
     }
     
     public void ChangeMusic(AudioClip musicToPlay)
@@ -83,11 +94,5 @@ public class AudioManager : Singleton<AudioManager>
         currentMusic.Play();
     }
 
-    public void HalfChangeMusic(AudioClip musicToPlay)
-    {
-        if (!musicToPlay)
-        { return; }
-
-    }
 }
 

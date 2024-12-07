@@ -48,6 +48,7 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
                 UIManager uiManager = UIManager.Instance;
                 uiManager.uiItemDictionary.TryGetValue(itemData,out ItemToPickupUI itemUI);
                 itemUI?.CheckWrongMark();
+                AudioManager.Instance.PlaySoundEffect(itemData.breakingSound);
                 print(this.name + " broke at " + colisionSpeed + "km/h");
                 Destroy(gameObject);
             }
