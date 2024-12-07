@@ -497,6 +497,7 @@ MonoBehaviour:
   useState: 0
   howManyAttempsUntilUnlocked: 0
   lockPicking: {fileID: 0}
+  doorInteractionName: Lockpick
 --- !u!59 &45590784
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -6333,6 +6334,10 @@ PrefabInstance:
       value: DoorEntrance
       objectReference: {fileID: 0}
     - target: {fileID: 2444127853760462414, guid: 82b733cdc5ca1dc4287dd0794cd1cd65, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2444127853760462414, guid: 82b733cdc5ca1dc4287dd0794cd1cd65, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -6375,6 +6380,10 @@ PrefabInstance:
     - target: {fileID: 3572878793057715055, guid: 82b733cdc5ca1dc4287dd0794cd1cd65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596965461941729960, guid: 82b733cdc5ca1dc4287dd0794cd1cd65, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4596965461941729960, guid: 82b733cdc5ca1dc4287dd0794cd1cd65, type: 3}
       propertyPath: m_IsActive
@@ -8459,22 +8468,7 @@ MonoBehaviour:
   targetPrefab: {fileID: 4011491130470253628, guid: 9d506da203a7e714985c7adc4e8375de, type: 3}
   bar: {fileID: 149637371}
   numberOfTargets: 4
-  speed: 2
-  openDoor:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1085076222}
-        m_TargetAssemblyTypeName: Door, Assembly-CSharp
-        m_MethodName: OpenDoor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  speed: 2.5
 --- !u!114 &895776791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10411,9 +10405,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorState: 0
-  useState: 0
+  useState: 1
   howManyAttempsUntilUnlocked: 0
   lockPicking: {fileID: 895776790}
+  doorInteractionName: Lockpick
 --- !u!65 &1085076223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14762,6 +14757,7 @@ MonoBehaviour:
   useState: 0
   howManyAttempsUntilUnlocked: 0
   lockPicking: {fileID: 0}
+  doorInteractionName: Lockpick
 --- !u!59 &1634265906
 HingeJoint:
   m_ObjectHideFlags: 0

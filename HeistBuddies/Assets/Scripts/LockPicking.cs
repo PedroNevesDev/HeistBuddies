@@ -18,7 +18,6 @@ public class LockPicking : MonoBehaviour
     private HashSet<RectTransform> hitTargets; // Tracks which targets have been hit
     private Action onSuccess;
     int currentPin = 0;
-    public UnityEvent openDoor = new UnityEvent();
 
     public Action OnSuccess { get => onSuccess; set => onSuccess = value; }
 
@@ -62,14 +61,23 @@ public class LockPicking : MonoBehaviour
         float step = speed * Time.deltaTime * (isGoingRight ? 1 : -1);
         movingMarker.anchoredPosition += new Vector2(step, 0);
 
-        // Reverse direction at the edges of the bar
+        // Reverse direction and clamp at the edges of the bar
         float barWidth = bar.rect.width;
-        if (movingMarker.anchoredPosition.x > barWidth / 2 || movingMarker.anchoredPosition.x < -barWidth / 2)
+        float halfMarkerWidth = movingMarker.sizeDelta.x / 2;
+
+        if (movingMarker.anchoredPosition.x > (barWidth / 2) - halfMarkerWidth)
         {
-            isGoingRight = !isGoingRight;
+            movingMarker.anchoredPosition = new Vector2((barWidth / 2) - halfMarkerWidth, movingMarker.anchoredPosition.y);
+            isGoingRight = false; // Reverse direction
+        }
+        else if (movingMarker.anchoredPosition.x < -(barWidth / 2) + halfMarkerWidth)
+        {
+            movingMarker.anchoredPosition = new Vector2(-(barWidth / 2) + halfMarkerWidth, movingMarker.anchoredPosition.y);
+            isGoingRight = true; // Reverse direction
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        // Check for interaction
+        if (Input.GetKeyDown(KeyCode.E))
         {
             CheckForOverlap();
         }
@@ -116,9 +124,9 @@ public class LockPicking : MonoBehaviour
         // Check if all targets are hit
         if (hitTargets.Count == targets.Count)
         {
-            onSuccess?.Invoke();
-            openDoor.Invoke();
-            Debug.Log("All targets hit!");
+            onSuccess.Invoke();
+
+            Debug.Log("Door is open");
 
             gameObject.SetActive(false);
         }

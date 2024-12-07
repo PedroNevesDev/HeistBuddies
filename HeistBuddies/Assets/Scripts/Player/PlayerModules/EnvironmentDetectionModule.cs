@@ -13,7 +13,7 @@ public class EnvironmentDetectionModule : MonoBehaviour
     [SerializeField] private LayerMask grababbleDetectionLayer;
     [SerializeField] private LayerMask interactableDetectionLayer;
     [SerializeField] private Item currentGrabbable = null;
-    [SerializeField] private IInteractable currentInteractable = null;
+    private IInteractable currentInteractable = null;
     [SerializeField] Rigidbody rbBoxOrigin;
 
     [SerializeField] VerticalLayoutGroup verticalLayoutGroup;
@@ -32,7 +32,7 @@ public class EnvironmentDetectionModule : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        CheckForGrabbable();
+        CheckInFront();
         UpdateObjectInputText();
     }
 
@@ -45,7 +45,7 @@ public class EnvironmentDetectionModule : MonoBehaviour
         }
         else if(currentInteractable!=null)
         {
-
+            SetupTextForInteractables();
         }
         else
         {
@@ -63,40 +63,47 @@ public class EnvironmentDetectionModule : MonoBehaviour
 
     void SetupTextForGrabbables()
     {
-            ResetUITexts();
-            verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.localScale.y,0);
-            switch(currentGrabbable.State)
-            {
-            case ItemState.Idle:
-            verticalLayoutGroup.gameObject.SetActive(true);
-                AddText("Grab");
-            break;
-            case ItemState.Grabbed:
-            verticalLayoutGroup.gameObject.SetActive(true);
-            if(currentGrabbable.Data.isThrowable)
-            {
-                AddText("Throw");
-            }
-            if(currentGrabbable.Data.isStorable)
-            {
-                AddText("Store");
-            }
+        ResetUITexts();
+        verticalLayoutGroup.transform.position = currentGrabbable.transform.position + new Vector3(0,currentGrabbable.transform.localScale.y,0);
+        switch(currentGrabbable.State)
+        {
+        case ItemState.Idle:
+        verticalLayoutGroup.gameObject.SetActive(true);
+            AddText("Grab");
+        break;
+        case ItemState.Grabbed:
+        verticalLayoutGroup.gameObject.SetActive(true);
+        if(currentGrabbable.Data.isThrowable)
+        {
+            AddText("Throw");
+        }
+        if(currentGrabbable.Data.isStorable)
+        {
+            AddText("Store");
+        }
 
-            break;
-            case ItemState.Throwing:
-            verticalLayoutGroup.gameObject.SetActive(false);
-            break;
-            }
+        break;
+        case ItemState.Throwing:
+        verticalLayoutGroup.gameObject.SetActive(false);
+        break;
+        }
+    }
+    void SetupTextForInteractables()
+    {
+            ResetUITexts();
+            verticalLayoutGroup.transform.position = currentInteractable.GetGameObject.transform.position + new Vector3(0,currentInteractable.GetGameObject.transform.localScale.y,0);
+            verticalLayoutGroup.gameObject.SetActive(true);
+            AddText(currentInteractable.InteractionName);
     }
 
-    public void CheckForGrabbable()
+    public void CheckInFront()
     {
         Vector3 boxCenter = rbBoxOrigin.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
-        List<Collider> hits = new List<Collider>(Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, grababbleDetectionLayer));
+        List<Collider> grabbables = new List<Collider>(Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, grababbleDetectionLayer));
 
-        if (hits.Count > 0)
+        if (grabbables.Count > 0)
         {
-            Item grabbable = hits[0].GetComponent<Item>();
+            Item grabbable = grabbables[0].GetComponent<Item>();
             if (grabbable != null)
             {
                 if (currentGrabbable != grabbable)
@@ -110,6 +117,30 @@ public class EnvironmentDetectionModule : MonoBehaviour
         if (currentGrabbable != null)
         {
             currentGrabbable = null;
+        }
+        
+        List<Collider> interactables = new List<Collider>(Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, interactableDetectionLayer));
+
+        if (interactables.Count > 0)
+        {
+            IInteractable interactable = interactables[0].GetComponent<IInteractable>();
+            if (interactable != null&&interactable.ShouldBeInteractedWith&&!interactable.IsBeingInteractedWith)
+            {
+                if (currentInteractable != interactable)
+                {
+                    currentInteractable = interactable;
+                }
+                print("detected");
+                return;
+            }
+            
+        }
+
+
+
+        if (currentInteractable != null)
+        {
+            currentInteractable = null;
         }
     }
 

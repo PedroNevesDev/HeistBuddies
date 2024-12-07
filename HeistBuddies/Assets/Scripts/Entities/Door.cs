@@ -20,8 +20,11 @@ public class Door : MonoBehaviour, IInteractable
     [Header("Door Interact")]
     [SerializeField] int howManyAttempsUntilUnlocked;
     [SerializeField] LockPicking lockPicking;
+    [SerializeField] string doorInteractionName = "Lockpick";
     public bool ShouldBeInteractedWith{ get =>doorState == DoorState.Closed;}
     public bool IsBeingInteractedWith{ get =>lockPicking.gameObject.activeSelf;}
+    public string InteractionName{ get => doorInteractionName;}
+    public GameObject GetGameObject{ get=> gameObject;}
 
     int currentAttemps;
 
@@ -49,17 +52,17 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController playerController)
     {
-        if (doorState == DoorState.Closed) 
+        if (ShouldBeInteractedWith) 
         {
-            if(lockPicking.gameObject.activeSelf== true)
+            if(IsBeingInteractedWith)
+            {
+                lockPicking.CheckForOverlap();
+            }
+            else
             {
                 currentPlayerPosition = playerController.transform.position;
                 lockPicking.OnSuccess += OpenDoor;
                 lockPicking.gameObject.SetActive(true);
-            }
-            else
-            {
-                lockPicking.CheckForOverlap();
             }
         }
     }
@@ -70,7 +73,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         lockPicking.OnSuccess -= OpenDoor;
         lockPicking.gameObject.SetActive(false);
-
+        print("triggered");
     }
 
     public void OpenDoor()

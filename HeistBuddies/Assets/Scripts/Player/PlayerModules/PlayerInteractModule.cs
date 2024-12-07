@@ -4,9 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractModule : MonoBehaviour
 {
-    [Header("InteractableDetection")]
-    [SerializeField] Transform sphereOrigin;
-    [SerializeField] float sphereRadius;
+    EnvironmentDetectionModule environmentDetectionModule;
     bool onInteract;
     public void OnInteract(InputAction.CallbackContext context) => onInteract = context.performed;
 
@@ -17,18 +15,21 @@ public class PlayerInteractModule : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerController = GetComponent<PlayerController>();
+        environmentDetectionModule = GetComponent<EnvironmentDetectionModule>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Interact();
     }
 
-    void CheckForInteractable()
+    void Interact()
     {
-        if(Physics.SphereCast(sphereOrigin.position,sphereRadius, Vector3.up,out RaycastHit hit))
-        {
-        }
+        if(!onInteract)return;
+        if(environmentDetectionModule.CurrentInteractable==null)return;
+        environmentDetectionModule.CurrentInteractable.Interact(playerController);
     }
 }
