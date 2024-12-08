@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public void SetMesh(Mesh mesh)=> skinnedMeshRenderer.sharedMesh = mesh;
 
     #endregion
-    
+
     #region Getters/Setters
     public bool WasGrabbed { get => wasGrabbed; set => wasGrabbed = value; }
     public bool WasTeleported { get => wasTeleported; set => wasTeleported = value; }
