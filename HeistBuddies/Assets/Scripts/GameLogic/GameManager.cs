@@ -1,16 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance;
+    UIManager uiManager;
+
+    int currentScore = 0;
+
+    int levelTotalScore = 0;
 
     [Header("Game Items")]
     public List<ItemData> Items = new List<ItemData>();
 
-    private void Awake()
+    void Start()
     {
-        Instance = this;
+        uiManager = UIManager.Instance;
+        foreach(ItemData item in GetItems())
+        {
+            levelTotalScore +=item.Heuries;
+        }
+    }
+
+    public void AddScore(int valueToAdd)
+    {
+        currentScore+=valueToAdd;
+        uiManager.UpdateCurrency(valueToAdd);
     }
 
     public List<ItemData> GetItems()

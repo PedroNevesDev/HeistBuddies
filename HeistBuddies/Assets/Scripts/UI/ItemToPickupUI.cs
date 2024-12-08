@@ -11,7 +11,7 @@ public class ItemToPickupUI : MonoBehaviour
     public void Populate( string name, int points)
     {
 
-        Name.text = name + " +"+points;
+        Name.text = name+ " <color=yellow>+" +points+"H</color>";
     }
 
     public void CheckWrongMark()

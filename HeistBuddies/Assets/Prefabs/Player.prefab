@@ -1003,6 +1003,7 @@ MonoBehaviour:
   rb: {fileID: 4501275906084773058}
   orientation: {fileID: 4788651375200108325}
   animator: {fileID: 4534630571161343836}
+  maxOvercumberedPercentage: 70
 --- !u!114 &8974963639332065678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,9 +1141,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxSize: {x: 1, y: 1.15, z: 1}
   boxOffset: {x: 0, y: -0.06, z: 0.72}
-  grababbleDetectionLayer:
-    serializedVersion: 2
+  listOfGrabbables:
+  - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 2048
   interactableDetectionLayer:
     serializedVersion: 2
     m_Bits: 8

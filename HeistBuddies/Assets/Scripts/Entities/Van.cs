@@ -3,14 +3,14 @@ using TMPro;
 using System.Collections;
 public class Van : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-
+    GameManager gameManager;
     [SerializeField] AudioClip doorSlamSoundThatDoesntSoundLikeADoorSlam;
     float score;
     UIManager uiManager;
     AudioManager audioManager;
     void Start()
     {
+        gameManager = GameManager.Instance;
         uiManager = UIManager.Instance;
         audioManager = AudioManager.Instance;
         audioManager.PlaySoundEffect(doorSlamSoundThatDoesntSoundLikeADoorSlam);
@@ -23,7 +23,7 @@ public class Van : MonoBehaviour
             PlayerBackpackModule backpackModule = playerBodyPart.MyOwner.PlayerModules.BackpackModule;
             if(backpackModule!=null)
             {
-                AddScore(backpackModule.ClearItemsFromBackpack());
+                gameManager.AddScore(backpackModule.ClearItemsFromBackpack());
             }
         }
         Item item = other.GetComponent<Item>();
@@ -33,27 +33,8 @@ public class Van : MonoBehaviour
             uiManager.uiItemDictionary.TryGetValue(item.Data,out ItemToPickupUI itemUI);
             itemUI.CheckRightMark();
 
-            AddScore(item.Data.Points);
+            gameManager.AddScore(item.Data.Heuries);
             Destroy(item.gameObject);
         }
-    }
-
-    void AddScore(int total)
-    {
-
-        if(total>0)
-        {
-            score += total;
-            scoreText.text = score.ToString();
-            StartCoroutine(TextPreFadeDelay());
-            audioManager.PlaySoundEffect(doorSlamSoundThatDoesntSoundLikeADoorSlam);
-        }
-    }
-
-    IEnumerator TextPreFadeDelay()
-    {
-        scoreText.enabled = true;
-        yield return new WaitForSeconds(1);
-        scoreText.enabled = false;
     }
 }

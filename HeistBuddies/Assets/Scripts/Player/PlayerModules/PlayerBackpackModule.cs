@@ -22,7 +22,7 @@ public class PlayerBackpackModule : MonoBehaviour
 
     public int ClearItemsFromBackpack()
     {
-        int totalPoints = items.Sum(item => item.Data.Points);
+        int totalPoints = items.Sum(item => item.Data.Heuries);
         UIManager uIManager = UIManager.Instance;
         foreach(Item i in items)
         {

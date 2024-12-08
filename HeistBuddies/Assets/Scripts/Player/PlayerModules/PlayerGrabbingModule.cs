@@ -28,9 +28,15 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] VerticalLayoutGroup verticalLayoutGroup;
     [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
     [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
+
     bool shouldDecrease = false;
 
     EnvironmentDetectionModule environmentDetectionModule;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip storingItemsSound;
+
+    AudioManager audioManager;
 
     [Header("Arm Settings")]
     
@@ -44,9 +50,13 @@ public class PlayerGrabbingModule : MonoBehaviour
     PlayerController playerController;
 
     WeightManager weightManager;
+    
 
     JointDrive jd1;
     JointDrive jd2;
+
+
+    public string GetPlayerName()=>playerController.SkinnedMeshRenderer.sharedMesh.name;
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
     public void OnThrow(InputAction.CallbackContext context) => throwingCtx = context;
     
@@ -59,6 +69,7 @@ public class PlayerGrabbingModule : MonoBehaviour
         environmentDetectionModule = GetComponent<EnvironmentDetectionModule>();
         playerController = GetComponent<PlayerController>();
         weightManager = WeightManager.Instance;
+        audioManager = AudioManager.Instance;
     }
 
     private void Update()
@@ -155,6 +166,7 @@ public class PlayerGrabbingModule : MonoBehaviour
             GetGrabbable().Throw(dir);
             GetGrabbable().State = ItemState.Idle;
             DeactivateThrowUI();
+            weightManager.AddItemWeight(GetGrabbable(),GetPlayerName());
         }
         fillThrowUi.fillAmount = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
     }
@@ -171,7 +183,9 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         if (GetGrabbable() == null) return;
         if (isGrabbing == false)  return;
+        if (!weightManager.CheckIfItemCanBeAdded(GetGrabbable(),GetPlayerName()))return;
 
+        weightManager.AddItemWeight(GetGrabbable(),GetPlayerName());
         GetGrabbable().Grab(pointTarget);
         isGrabbing = false;
     }
@@ -180,10 +194,9 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         if(!GetGrabbable().Data.isStorable)return;
         Item item = GetGrabbable() as Item;
-        string playerName = playerController.SkinnedMeshRenderer.sharedMesh.name;
-        if(!weightManager.CheckIfItemCanBeAdded(item,playerName))return;
-
-        weightManager.AddItemWeight(item,playerName);
+        if(!weightManager.CheckIfItemCanBeAdded(item,GetPlayerName()))return;
+        audioManager.PlaySoundEffect(storingItemsSound);
+        weightManager.AddItemWeight(item,GetPlayerName());
         backpack.AddItemToBackPack(item);
     }
 }

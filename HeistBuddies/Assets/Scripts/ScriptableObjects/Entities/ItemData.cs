@@ -7,7 +7,7 @@ public class ItemData : ScriptableObject
 {
     [Header("General Settings")]
     public string Name;
-    public int Points;
+    public int Heuries;
 
     [Header("Item Conditions")]
     public bool isBreakable = false;
@@ -16,7 +16,7 @@ public class ItemData : ScriptableObject
     public bool isThrowable = false;
     public bool isStorable = false;
     public float weight;
-    public bool isCollectable = false;
+    public bool isCollectable = true;
 
     [Header("Item Logo")]
     public Sprite Image;

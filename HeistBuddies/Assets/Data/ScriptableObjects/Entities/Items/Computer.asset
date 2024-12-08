@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eade8d8da463c3a4ea24b33938d97eb9, type: 3}
-  m_Name: BathroomTowel
+  m_Name: Computer
   m_EditorClassIdentifier: 
-  Name: BathroomTowel
-  Points: 50
+  Name: Computer
+  Heures: 1200
   isBreakable: 1
-  breakingSpeed: 6
+  breakingSpeed: 9
+  breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}
   isThrowable: 1
   isStorable: 1
+  weight: 25
   isCollectable: 1
-  Image: {fileID: 21300000, guid: 900c30af0c47f9849b9a593238f20641, type: 3}
+  Image: {fileID: 0}

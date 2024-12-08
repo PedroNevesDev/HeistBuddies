@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: CubeItemData
   m_EditorClassIdentifier: 
   Name: Cube
-  Points: 10
+  Heures: 0
   isBreakable: 1
   breakingSpeed: 3
+  breakingSound: {fileID: 0}
   isThrowable: 1
   isStorable: 1
+  weight: 0
   isCollectable: 1
+  Image: {fileID: 0}
