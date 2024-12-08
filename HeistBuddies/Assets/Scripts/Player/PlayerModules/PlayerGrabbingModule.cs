@@ -41,6 +41,10 @@ public class PlayerGrabbingModule : MonoBehaviour
     public float positionSpring = 100f; // Spring strength for rotation
     public float positionDamper = 10f; // Damping for smooth rotation
 
+    PlayerController playerController;
+
+    WeightManager weightManager;
+
     JointDrive jd1;
     JointDrive jd2;
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
@@ -53,6 +57,8 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         backpack = GetComponent<PlayerBackpackModule>();
         environmentDetectionModule = GetComponent<EnvironmentDetectionModule>();
+        playerController = GetComponent<PlayerController>();
+        weightManager = WeightManager.Instance;
     }
 
     private void Update()
@@ -173,8 +179,11 @@ public class PlayerGrabbingModule : MonoBehaviour
     public void Store()
     {
         if(!GetGrabbable().Data.isStorable)return;
-        
         Item item = GetGrabbable() as Item;
+        string playerName = playerController.SkinnedMeshRenderer.sharedMesh.name;
+        if(!weightManager.CheckIfItemCanBeAdded(item,playerName))return;
+
+        weightManager.AddItemWeight(item,playerName);
         backpack.AddItemToBackPack(item);
     }
 }

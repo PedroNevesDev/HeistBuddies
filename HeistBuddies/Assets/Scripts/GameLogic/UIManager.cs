@@ -1,12 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Collections.Generic;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager Instance;
-
     [Header("Timer Text")]
     [SerializeField] private TextMeshProUGUI timerText;
 
@@ -15,18 +14,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject ItemListPrefab;
     public Dictionary<ItemData,ItemToPickupUI> uiItemDictionary = new Dictionary<ItemData, ItemToPickupUI>();
     [SerializeField] private CanvasGroup itemListForFade;
-    [SerializeField] float itemListFadeInSpeed;
-    [SerializeField] float itemListFadeOutSpeed;
+    [SerializeField] private float itemListFadeInSpeed;
+    [SerializeField] private float itemListFadeOutSpeed;
     float desiredAlpha = 0;
     float timer;
-    [SerializeField] float timeUntilFadeOut;
+    [SerializeField] private float timeUntilFadeOut;
+
+    [Header("Weight Settings")]
+
+    [SerializeField] private Image lockWeightFillImage;
+    [SerializeField] private Image pickWeightFillImage;
+    [SerializeField] private float weightUpdateSpeed;
+    [SerializeField] private Gradient weightColors;
+
+    float lockWeightTarget = 0f;
+    float pickWeightTarget = 0f;
     
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
     private void Start()
     {
         UpdateItemList();
@@ -34,6 +37,19 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
+
+        if(lockWeightFillImage.fillAmount!=lockWeightTarget)
+        {
+            lockWeightFillImage.fillAmount = Mathf.Lerp(lockWeightFillImage.fillAmount,lockWeightTarget,weightUpdateSpeed*Time.deltaTime);
+            lockWeightFillImage.color = weightColors.Evaluate(lockWeightFillImage.fillAmount);
+        }
+
+        if(pickWeightFillImage.fillAmount!=pickWeightTarget)
+        {
+            pickWeightFillImage.fillAmount = Mathf.Lerp(pickWeightFillImage.fillAmount,pickWeightTarget,weightUpdateSpeed*Time.deltaTime);
+            pickWeightFillImage.color = weightColors.Evaluate(pickWeightFillImage.fillAmount);
+        }
+
         UpdateListAlpha();
     }
     public void UpdateTimer(float currentTime)
@@ -74,5 +90,17 @@ public class UIManager : MonoBehaviour
     {
         desiredAlpha = 1;
         timer =timeUntilFadeOut;
+    }
+
+    public void UpdateWeight(float fillAmount, bool isItLock)
+    {
+        if(isItLock)
+        {
+            lockWeightTarget = fillAmount;
+        }
+        else
+        {
+            pickWeightTarget = fillAmount;
+        }
     }
 }

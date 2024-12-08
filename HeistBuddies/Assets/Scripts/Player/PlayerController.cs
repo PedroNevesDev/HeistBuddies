@@ -38,9 +38,10 @@ public class PlayerController : MonoBehaviour
     public BodyPartOwner[] BodyParts { get => bodyParts; set => bodyParts = value; }
     public Modules PlayerModules { get => playerModules; set => playerModules = value; }
     public Balance Balance { get => balance; set => balance = value; }
-    
+    public SkinnedMeshRenderer SkinnedMeshRenderer { get => skinnedMeshRenderer; set => skinnedMeshRenderer = value; }
+
     #endregion
-    
+
     #region MonoBehaviour
     private void Awake()
     {

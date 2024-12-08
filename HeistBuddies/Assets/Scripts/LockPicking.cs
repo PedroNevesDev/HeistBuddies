@@ -10,9 +10,12 @@ public class LockPicking : MonoBehaviour
     public GameObject targetPrefab;          // Prefab for the targets
     public RectTransform bar;                // The skill bar (parent RectTransform)
 
+    [Header("Lockpicking Settings")]
     public int numberOfTargets = 5;          // Number of targets to generate
     public float speed = 200f;               // Speed of the moving marker
     private bool isGoingRight = true;        // Direction of the marker's movement
+    public bool stupify = false;             // Makes lockpicking easier, making so everything doesnt reset
+    public bool useOrder = true;             // Takes in consideration pin order
 
     private List<RectTransform> targets;     // List of target RectTransforms
     private HashSet<RectTransform> hitTargets; // Tracks which targets have been hit
@@ -104,7 +107,8 @@ public class LockPicking : MonoBehaviour
         if (closestTarget != null)
         {
                 LockpickPin lockpickPin = closestTarget.GetComponent<LockpickPin>();
-                if(lockpickPin.PinOrderIndex == currentPin)
+                bool condition = useOrder?lockpickPin.PinOrderIndex == currentPin:true;
+                if(condition)
                 {
                     hitTargets.Add(closestTarget);
                     closestTarget.GetComponent<LockpickPin>().UnlockPin(true);
@@ -134,6 +138,8 @@ public class LockPicking : MonoBehaviour
 
     void ResetPins()
     {
+        if(stupify)return;
+
         foreach(RectTransform rt in hitTargets)
         {
             rt.GetComponent<LockpickPin>().UnlockPin(false);
