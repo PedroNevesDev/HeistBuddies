@@ -35,6 +35,22 @@ public class WeightManager : Singleton<WeightManager>
             uiManager.UpdateWeight(currentWeightPick/maxWeightValue,isPlayerLock);
         }
     }
+        public void RemoveItemWeight(Item item,string characterName)
+    {
+        float itemWeight = item.Data.weight;
+        bool isPlayerLock = characterName.Contains("Lock");
+
+        if(isPlayerLock)
+        {
+            currentWeightLock-=itemWeight;
+            uiManager.UpdateWeight(currentWeightLock/maxWeightValue,isPlayerLock);
+        }
+        else
+        {
+            currentWeightPick-=itemWeight;
+            uiManager.UpdateWeight(currentWeightPick/maxWeightValue,isPlayerLock);
+        }
+    }
 
     public void ClearWeight(string characterName)
     {
@@ -50,5 +66,15 @@ public class WeightManager : Singleton<WeightManager>
             currentWeightPick=0;
             uiManager.UpdateWeight(currentWeightPick/maxWeightValue,isPlayerLock);
         }
+    }
+
+    public float GetWeightPercentage(string characterName)
+    {
+        bool isPlayerLock = characterName.Contains("Lock");
+        if(isPlayerLock)
+        {
+            return currentWeightLock/maxWeightValue;
+        }
+        return currentWeightPick/maxWeightValue;
     }
 }

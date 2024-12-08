@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController))]
 public class PlayerGrabbingModule : MonoBehaviour
@@ -28,9 +29,15 @@ public class PlayerGrabbingModule : MonoBehaviour
     [SerializeField] VerticalLayoutGroup verticalLayoutGroup;
     [SerializeField] TextMeshProUGUI grabableObjTextPrefab;
     [SerializeField] List<TextMeshProUGUI> grabbableTexts = new List<TextMeshProUGUI>();
+
     bool shouldDecrease = false;
 
     EnvironmentDetectionModule environmentDetectionModule;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip storingItemsSound;
+
+    AudioManager audioManager;
 
     [Header("Arm Settings")]
     
@@ -38,15 +45,21 @@ public class PlayerGrabbingModule : MonoBehaviour
     public ConfigurableJoint rightArmJoint; // The joint controlling the arm
     public ConfigurableJoint leftArmJoint; // The joint controlling the arm
 
+    public ConfigurableJoint rightForearmJoint; // The joint controlling the arm
+    public ConfigurableJoint leftForearmJoint; // The joint controlling the arm
     public float positionSpring = 100f; // Spring strength for rotation
     public float positionDamper = 10f; // Damping for smooth rotation
 
     PlayerController playerController;
 
     WeightManager weightManager;
+    
 
     JointDrive jd1;
     JointDrive jd2;
+
+
+    public string GetPlayerName()=>playerController.SkinnedMeshRenderer.sharedMesh.name;
     public void OnGrab(InputAction.CallbackContext context) => isGrabbing = context.performed;
     public void OnThrow(InputAction.CallbackContext context) => throwingCtx = context;
     
@@ -59,6 +72,7 @@ public class PlayerGrabbingModule : MonoBehaviour
         environmentDetectionModule = GetComponent<EnvironmentDetectionModule>();
         playerController = GetComponent<PlayerController>();
         weightManager = WeightManager.Instance;
+        audioManager = AudioManager.Instance;
     }
 
     private void Update()
@@ -95,35 +109,55 @@ public class PlayerGrabbingModule : MonoBehaviour
     }
 
 
-    void PointArms()
+void PointArms()
+{
+    if (!target) return;
+
+    // Check if grabbing or holding a grabbed item
+    if (isGrabbing || (GetGrabbable() && GetGrabbable().State == ItemState.Grabbed))
     {
-        if (!target)return;
-        if(isGrabbing==true||(GetGrabbable()&&GetGrabbable().State==ItemState.Grabbed)) 
-        {
-            leftArmJoint.slerpDrive = jd1;
-            rightArmJoint.slerpDrive = jd1;
-        }
-        else
-        {
-            leftArmJoint.slerpDrive = jd2;
-            rightArmJoint.slerpDrive = jd2;
-            return;            
-        }
-
-
-        // Calculate direction to target
-        Vector3 rightDirectionToTarget = target.localPosition - rightArmJoint.transform.localPosition;
-        Vector3 leftDirectionToTarget = target.localPosition - leftArmJoint.transform.localPosition;
-        
-
-        // Create a rotation to face the target
-        Quaternion rightTargetRotation = Quaternion.LookRotation(rightDirectionToTarget);
-        Quaternion leftTargetRotation = Quaternion.LookRotation(leftDirectionToTarget);
-
-        // Adjust for joint's local space
-        rightArmJoint.targetRotation = Quaternion.Inverse(rightArmJoint.transform.localRotation) * rightTargetRotation;
-        leftArmJoint.targetRotation = Quaternion.Inverse(leftArmJoint.transform.localRotation) * leftTargetRotation;
+        leftArmJoint.slerpDrive = jd1;
+        rightArmJoint.slerpDrive = jd1;
+        leftForearmJoint.slerpDrive = jd1;
+        rightForearmJoint.slerpDrive = jd1;
+        print("Pointing");
     }
+    else
+    {
+        leftArmJoint.slerpDrive = jd2;
+        rightArmJoint.slerpDrive = jd2;
+        leftForearmJoint.slerpDrive = jd2;
+        rightForearmJoint.slerpDrive = jd2;
+        return;
+    }
+
+    // Calculate direction to target for upper arms
+    Vector3 rightDirectionToTarget = target.localPosition - rightArmJoint.transform.localPosition;
+    Vector3 leftDirectionToTarget = target.localPosition - leftArmJoint.transform.localPosition;
+
+    // Create a rotation for upper arms
+    Quaternion rightUpperArmTargetRotation = Quaternion.LookRotation(rightDirectionToTarget);
+    Quaternion leftUpperArmTargetRotation = Quaternion.LookRotation(leftDirectionToTarget);
+
+    // Adjust for upper arm joints' local space
+    rightArmJoint.targetRotation = Quaternion.Inverse(rightArmJoint.transform.localRotation) * rightUpperArmTargetRotation;
+    leftArmJoint.targetRotation = Quaternion.Inverse(leftArmJoint.transform.localRotation) * leftUpperArmTargetRotation;
+
+    // If forearms exist, calculate direction and rotation for them too
+    if (rightForearmJoint != null && leftForearmJoint != null)
+    {
+        Vector3 rightForearmDirectionToTarget = target.localPosition - rightForearmJoint.transform.localPosition;
+        Vector3 leftForearmDirectionToTarget = target.localPosition - leftForearmJoint.transform.localPosition;
+
+        Quaternion rightForearmTargetRotation = Quaternion.LookRotation(rightForearmDirectionToTarget);
+        Quaternion leftForearmTargetRotation = Quaternion.LookRotation(leftForearmDirectionToTarget);
+
+        rightForearmJoint.targetRotation = Quaternion.Inverse(rightForearmJoint.transform.localRotation) * rightForearmTargetRotation;
+        leftForearmJoint.targetRotation = Quaternion.Inverse(leftForearmJoint.transform.localRotation) * leftForearmTargetRotation;
+    }
+
+    print("Arms pointing to target");
+}
     
     public void CheckThrowingState()
     {
@@ -155,6 +189,7 @@ public class PlayerGrabbingModule : MonoBehaviour
             GetGrabbable().Throw(dir);
             GetGrabbable().State = ItemState.Idle;
             DeactivateThrowUI();
+            throwingCtx = new InputAction.CallbackContext();
         }
         fillThrowUi.fillAmount = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
     }
@@ -166,12 +201,16 @@ public class PlayerGrabbingModule : MonoBehaviour
         throwCanvas.SetActive(false);
     }
 
+    public void ReleaseUncumberingFromGrabbable()
+    {
+        weightManager.RemoveItemWeight(GetGrabbable(),GetPlayerName());
+    }
 
     public void Grab()
     {
         if (GetGrabbable() == null) return;
         if (isGrabbing == false)  return;
-
+        if (GetGrabbable().State == ItemState.Grabbed)  return;
         GetGrabbable().Grab(pointTarget);
         isGrabbing = false;
     }
@@ -180,10 +219,9 @@ public class PlayerGrabbingModule : MonoBehaviour
     {
         if(!GetGrabbable().Data.isStorable)return;
         Item item = GetGrabbable() as Item;
-        string playerName = playerController.SkinnedMeshRenderer.sharedMesh.name;
-        if(!weightManager.CheckIfItemCanBeAdded(item,playerName))return;
-
-        weightManager.AddItemWeight(item,playerName);
+        if(!weightManager.CheckIfItemCanBeAdded(item,GetPlayerName()))return;
+        audioManager.PlaySoundEffect(storingItemsSound);
+        weightManager.AddItemWeight(item,GetPlayerName());
         backpack.AddItemToBackPack(item);
     }
 }

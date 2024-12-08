@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Cup
   m_EditorClassIdentifier: 
   Name: Cup
-  Points: 25
+  Heures: 0
   isBreakable: 1
-  breakingSpeed: 6
+  breakingSpeed: 1
   breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}
   isThrowable: 1
-  isStorable: 1
-  weight: 50
-  isCollectable: 1
-  Image: {fileID: 21300000, guid: 52aa9d200a0da3547827e00d7bad201b, type: 3}
+  isStorable: 0
+  weight: 1
+  isCollectable: 0
+  Image: {fileID: 0}

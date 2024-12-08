@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Bone
   m_EditorClassIdentifier: 
   Name: Bone
-  Points: 0
+  Heuries: 0
   isBreakable: 0
+  breakingSpeed: 3
+  breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}
   isThrowable: 1
   isStorable: 0
+  weight: 1
+  isCollectable: 0
+  Image: {fileID: 0}

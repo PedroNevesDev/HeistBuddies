@@ -27,6 +27,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private float weightUpdateSpeed;
     [SerializeField] private Gradient weightColors;
 
+    [Header("Currency")]
+    [SerializeField] private TextMeshProUGUI currencyText;
+
     float lockWeightTarget = 0f;
     float pickWeightTarget = 0f;
     
@@ -73,11 +76,14 @@ public class UIManager : Singleton<UIManager>
         {
             GameObject newItem = Instantiate(ItemListPrefab, ItemHolder.transform);
             var itemUI = newItem.GetComponent<ItemToPickupUI>();
-            itemUI.Populate(itemData.Name, itemData.Points);
+            itemUI.Populate(itemData.Name, itemData.Heuries);
             uiItemDictionary.Add(itemData,itemUI);
         }
     }
-
+    public void UpdateCurrency(int value)
+    {
+        currencyText.text = value.ToString();
+    }
     void UpdateListAlpha()
     {
         itemListForFade.alpha = Mathf.Lerp(itemListForFade.alpha,desiredAlpha,(desiredAlpha==1?itemListFadeInSpeed:itemListFadeOutSpeed )*Time.deltaTime);

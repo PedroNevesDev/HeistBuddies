@@ -18,22 +18,38 @@ public class PlayerMovementModule : MonoBehaviour
 
     Vector2 moveInput = Vector2.zero;
 
+    float overcumberedPercentage = 0f;
+    [SerializeField,Range(0,100)] float maxOvercumberedPercentage = 80;
     public Vector2 MoveInput { get => moveInput; set => moveInput = value; }
 
     public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
 
     GroundDetection myGroundDetection;
+
+    PlayerController playerController;
+
+    WeightManager weightManager;
     void Start()
     {
         myGroundDetection = GetComponent<GroundDetection>();
+        playerController = GetComponent<PlayerController>();
+        weightManager = WeightManager.Instance;
     }
     private void FixedUpdate()
     {
+        CheckOvercumberValue();
         Move();
         SpeedControl();
     }
+
+    void CheckOvercumberValue()
+    {
+        string playerName = playerController.SkinnedMeshRenderer.sharedMesh.name;
+        overcumberedPercentage = weightManager.GetWeightPercentage(playerName);
+    }
     public void Move()
     {
+        float speedPlusOvercumbered = moveSpeed - (overcumberedPercentage*maxOvercumberedPercentage/100*moveSpeed);
         //Getting the main camera directions
         Quaternion rotation = Quaternion.Euler(0,Camera.main.transform.rotation.eulerAngles.y,0); 
         
@@ -69,11 +85,12 @@ public class PlayerMovementModule : MonoBehaviour
         }
         
         // Applying the move direction to the rigidbody
-        rb.AddForce(move * moveSpeed,ForceMode.VelocityChange); 
+        rb.AddForce(move * speedPlusOvercumbered,ForceMode.VelocityChange); 
     }
     public void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+        float overcumberedAffectedMagnitude = maxSpeedMagnitude-(overcumberedPercentage*maxOvercumberedPercentage/100*maxSpeedMagnitude);
 
         if (flatVel.magnitude > maxSpeedMagnitude)
         {

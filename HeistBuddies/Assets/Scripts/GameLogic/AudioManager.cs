@@ -13,15 +13,21 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] bool defaultMusicLoop = true;
     [SerializeField] float timerUntilMusicVolumeNormalize;
 
+    [Header("DefaultAmbientSound")]
+    [SerializeField] AudioClip defaultAmbient;
+    [SerializeField] bool ambientLoop = true;
+
     [Header("VolumeSettings")]
     [SerializeField,Range(0,1)] float musicVolumeWhileEffect = 0.3f;
     [SerializeField,Range(0,1)] float musicDefaultVolume = 1f;
+    [SerializeField,Range(0,1)] float ambientDefaultVolume = 1f;
     [SerializeField,Range(0,1)] float effectDefaultVolume = 1f;
     [SerializeField] float musicVolumeSwitchSpeed = 5;
     float timer;
     float pretendedVolume;
     List<AudioSource> soundEffect = new List<AudioSource>();
     AudioSource currentMusic;
+    AudioSource currentAmbient;
 
     private void OnValidate() 
     {
@@ -37,6 +43,7 @@ public class AudioManager : Singleton<AudioManager>
     {
 
         ChangeMusic(defaultMusic);
+        ChangeAmbient(defaultAmbient);
         pretendedVolume = musicDefaultVolume;
     }
 
@@ -92,6 +99,18 @@ public class AudioManager : Singleton<AudioManager>
         currentMusic.loop = defaultMusicLoop;
         currentMusic.pitch = pitch;
         currentMusic.Play();
+    }
+        public void ChangeAmbient(AudioClip musicToPlay)
+    {
+        if(!musicToPlay) 
+        { return; }
+        if(!currentAmbient)
+            currentAmbient = gameObject.AddComponent<AudioSource>();
+        currentAmbient.Stop();
+        currentAmbient.clip = musicToPlay;
+        currentAmbient.volume = ambientDefaultVolume;
+        currentAmbient.loop = ambientLoop;
+        currentAmbient.Play();
     }
 
 }

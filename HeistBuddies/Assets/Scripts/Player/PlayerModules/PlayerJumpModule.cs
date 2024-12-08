@@ -11,17 +11,25 @@ public class PlayerJumpModule : MonoBehaviour
 
     [SerializeField] Balance balanceForDeactivation;
     GroundDetection myGroundDetection;
-    bool isJumping = false;
-    public void OnJump(InputAction.CallbackContext context) => Jump();
+
+    bool jump;
+    public void OnJump(InputAction.CallbackContext context) => jump = context.performed;
 
     void Start()
     {
         myGroundDetection = GetComponent<GroundDetection>();
     }
+    void Update()
+    {
+        Jump();        
+    }
+
     void Jump()
     {
         if(!rb||!myGroundDetection.CheckForGround()) return;
+        if(jump==false)return;
         balanceForDeactivation.gameObject.SetActive(false);
-        rb.AddForce(jumpForce*Vector3.up,ForceMode.Impulse);
+        rb.AddForce(jumpForce*100*Vector3.up,ForceMode.Impulse);
+        jump=false;
     }
 }

@@ -10,7 +10,7 @@ public class EnvironmentDetectionModule : MonoBehaviour
     [Header("Detection Box Settings")]
     [SerializeField] private Vector3 boxSize = new Vector3(1, 1, 1);
     [SerializeField] private Vector3 boxOffset = new Vector3(0, 0, 1);
-    [SerializeField] private LayerMask grababbleDetectionLayer;
+    [SerializeField] private List<LayerMask> listOfGrabbables = new List<LayerMask>();
     [SerializeField] private LayerMask interactableDetectionLayer;
     [SerializeField] private Item currentGrabbable = null;
     private IInteractable currentInteractable = null;
@@ -99,6 +99,13 @@ public class EnvironmentDetectionModule : MonoBehaviour
     public void CheckInFront()
     {
         Vector3 boxCenter = rbBoxOrigin.position + rbBoxOrigin.transform.TransformDirection(boxOffset);
+
+        LayerMask grababbleDetectionLayer = listOfGrabbables[0];
+        if(listOfGrabbables.Count>1)
+        for(int i = 1;i<listOfGrabbables.Count;i++)
+        {
+            grababbleDetectionLayer = grababbleDetectionLayer|listOfGrabbables[i];
+        }
         List<Collider> grabbables = new List<Collider>(Physics.OverlapBox(boxCenter, boxSize / 2, rbBoxOrigin.transform.rotation, grababbleDetectionLayer));
 
         if (grabbables.Count > 0)

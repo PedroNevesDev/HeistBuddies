@@ -14,10 +14,10 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
     [Header("Item Data")]
     [SerializeField] private ItemData itemData;
 
-
-
     [Header("Item State")]
     [SerializeField] private ItemState state = ItemState.Idle;
+
+    LayerMask startingLayer;
 
     private Rigidbody rb;
 
@@ -36,6 +36,8 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
             Debug.Log("No ItemData assigned!");
             return;
         }
+
+        startingLayer = gameObject.layer;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,12 +67,14 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
 
         this.transform.SetParent(target);
         this.transform.position = target.position;
+        gameObject.layer = LayerMask.NameToLayer("GrabbedItem");
     }
 
     public void Release()
     {
         state = ItemState.Idle;
         transform.SetParent(null);
+        gameObject.layer = LayerMask.NameToLayer("Item");
     }
 
 
