@@ -51,10 +51,6 @@ public class PlayerGrabbingModule : MonoBehaviour
     public float positionDamper = 10f; // Damping for smooth rotation
 
     PlayerController playerController;
-
-    WeightManager weightManager;
-    
-
     JointDrive jd1;
     JointDrive jd2;
 
@@ -71,7 +67,6 @@ public class PlayerGrabbingModule : MonoBehaviour
         backpack = GetComponent<PlayerBackpackModule>();
         environmentDetectionModule = GetComponent<EnvironmentDetectionModule>();
         playerController = GetComponent<PlayerController>();
-        weightManager = WeightManager.Instance;
         audioManager = AudioManager.Instance;
     }
 
@@ -201,7 +196,7 @@ void PointArms()
 
     public void ReleaseUncumberingFromGrabbable()
     {
-        weightManager.RemoveItemWeight(GetGrabbable(),GetPlayerName());
+        backpack.RemoveItemWeight(GetGrabbable());
     }
 
     public void Grab()
@@ -217,9 +212,9 @@ void PointArms()
     {
         if(!GetGrabbable().Data.isStorable)return;
         Item item = GetGrabbable() as Item;
-        if(!weightManager.CheckIfItemCanBeAdded(item,GetPlayerName()))return;
+        if(!backpack.CheckIfItemCanBeAdded(item))return;
         audioManager.PlaySoundEffect(storingItemsSound);
-        weightManager.AddItemWeight(item,GetPlayerName());
+        backpack.AddItemWeight(item);
         backpack.AddItemToBackPack(item);
     }
     void OnDrawGizmos()

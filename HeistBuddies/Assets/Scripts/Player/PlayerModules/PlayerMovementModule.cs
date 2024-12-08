@@ -28,12 +28,12 @@ public class PlayerMovementModule : MonoBehaviour
 
     PlayerController playerController;
 
-    WeightManager weightManager;
+    PlayerBackpackModule backpack;
     void Start()
     {
         myGroundDetection = GetComponent<GroundDetection>();
         playerController = GetComponent<PlayerController>();
-        weightManager = WeightManager.Instance;
+        backpack= GetComponent<PlayerBackpackModule>();
     }
     private void FixedUpdate()
     {
@@ -45,7 +45,7 @@ public class PlayerMovementModule : MonoBehaviour
     void CheckOvercumberValue()
     {
         string playerName = playerController.SkinnedMeshRenderer.sharedMesh.name;
-        overcumberedPercentage = weightManager.GetWeightPercentage(playerName);
+        overcumberedPercentage = backpack.GetWeightPercentage();
     }
     public void Move()
     {

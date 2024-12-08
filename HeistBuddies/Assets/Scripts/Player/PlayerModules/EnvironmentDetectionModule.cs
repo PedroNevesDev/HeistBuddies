@@ -43,7 +43,7 @@ public class EnvironmentDetectionModule : MonoBehaviour
             SetupTextForGrabbables();
 
         }
-        else if(currentInteractable!=null)
+        else if(currentInteractable!=null&&currentInteractable.ShouldBeInteractedWith)
         {
             SetupTextForInteractables();
         }
@@ -137,7 +137,6 @@ public class EnvironmentDetectionModule : MonoBehaviour
                 {
                     currentInteractable = interactable;
                 }
-                print("detected");
                 return;
             }
             
@@ -149,10 +148,6 @@ public class EnvironmentDetectionModule : MonoBehaviour
         {
             currentInteractable = null;
         }
-    }
-    public void EmptyParent()
-    {
-        
     }
 
     void AddText(string text)

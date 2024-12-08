@@ -22,7 +22,7 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] LockPicking lockPicking;
     [SerializeField] string doorInteractionName = "Lockpick";
     public bool ShouldBeInteractedWith{ get =>doorState == DoorState.Closed;}
-    public bool IsBeingInteractedWith{ get =>lockPicking!=null&&lockPicking.gameObject.activeSelf;}
+    public bool IsBeingInteractedWith{ get =>lockPicking==null&&lockPicking.gameObject.activeSelf;}
     public string InteractionName{ get => doorInteractionName;}
     public GameObject GetGameObject{ get=> gameObject;}
 

@@ -98,9 +98,9 @@ public class UIManager : Singleton<UIManager>
         timer =timeUntilFadeOut;
     }
 
-    public void UpdateWeight(float fillAmount, bool isItLock)
+    public void UpdateWeight(float fillAmount, string characterName)
     {
-        if(isItLock)
+        if(characterName.Contains("Lock"))
         {
             lockWeightTarget = fillAmount;
         }

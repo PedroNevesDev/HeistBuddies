@@ -6,8 +6,19 @@ using UnityEngine;
 public class PlayerBackpackModule : MonoBehaviour
 {
     [Header("Backpack Settings")]
+    float currentWeight;
+    [SerializeField] float maxWeightValue = 50;
     [SerializeField] private List<Item> items = new List<Item>();
+    UIManager uiManager;
 
+    PlayerController playerController;
+
+    public string GetPlayerName()=>playerController.SkinnedMeshRenderer.sharedMaterial.name;
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+        uiManager = UIManager.Instance;
+    }
     public void AddItemToBackPack(Item item)
     {
         bool itemExists = items.Any(existingItem => existingItem.Id == item.Id);
@@ -34,4 +45,42 @@ public class PlayerBackpackModule : MonoBehaviour
 
         return totalPoints;
     }
+
+
+    public bool CheckIfItemCanBeAdded(Item item)
+    {
+        if(!item)return false;
+        return item.Data.weight+currentWeight<=maxWeightValue;
+    }
+
+    public void AddItemWeight(Item item)
+    {
+        float itemWeight = item.Data.weight;
+
+        currentWeight+=itemWeight;
+        UpdateUI();
+    }
+    public void RemoveItemWeight(Item item)
+    {
+        float itemWeight = item.Data.weight;
+        currentWeight-=itemWeight;
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        uiManager.UpdateWeight(currentWeight/maxWeightValue,GetPlayerName());
+    }
+
+    public void ClearWeight()
+    {
+        currentWeight=0;
+        UpdateUI();
+    }
+
+    public float GetWeightPercentage()
+    {
+        return currentWeight/maxWeightValue;
+    }
 }
+
