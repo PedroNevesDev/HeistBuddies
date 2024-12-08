@@ -29,6 +29,7 @@ public class Van : MonoBehaviour
             if(backpackModule!=null)
             {
                 gameManager.AddScore(backpackModule.ClearItemsFromBackpack());
+                backpackModule.ClearWeight();
             }
         }
         Item item = other.GetComponent<Item>();
