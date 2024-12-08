@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CubeItemData
   m_EditorClassIdentifier: 
   Name: Cube
-  Heures: 0
+  Heuries: 0
+  Particle: {fileID: 8115919215319097803, guid: 4530960f90a61064d985234e55f9d39d, type: 3}
   isBreakable: 1
   breakingSpeed: 3
   breakingSound: {fileID: 0}

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eade8d8da463c3a4ea24b33938d97eb9, type: 3}
-  m_Name: Vase
+  m_Name: Tire
   m_EditorClassIdentifier: 
-  Name: Vase
-  Heuries: 5
+  Name: 
+  Heuries: 0
   Particle: {fileID: 8115919215319097803, guid: 4530960f90a61064d985234e55f9d39d, type: 3}
-  isBreakable: 1
-  breakingSpeed: 3
-  breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}
+  isBreakable: 0
+  breakingSpeed: 1
+  breakingSound: {fileID: 0}
   isThrowable: 1
   isStorable: 0
   weight: 0
-  isCollectable: 1
+  isCollectable: 0
   Image: {fileID: 0}

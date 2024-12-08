@@ -47,6 +47,11 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
             float colisionSpeed = rb.angularVelocity.magnitude;
             if(colisionSpeed>= itemData.breakingSpeed)
             {
+
+                Vector3 hitPoint = collision.contacts[0].point;
+                GameObject particleInst = Instantiate(itemData.Particle, hitPoint, Quaternion.identity);
+                Destroy(particleInst, 1f);
+
                 UIManager uiManager = UIManager.Instance;
                 uiManager.uiItemDictionary.TryGetValue(itemData,out ItemToPickupUI itemUI);
                 itemUI?.CheckWrongMark();

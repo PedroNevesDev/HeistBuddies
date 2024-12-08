@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Cup
   m_EditorClassIdentifier: 
   Name: Cup
-  Heures: 0
+  Heuries: 0
+  Particle: {fileID: 8115919215319097803, guid: 4530960f90a61064d985234e55f9d39d, type: 3}
   isBreakable: 1
   breakingSpeed: 1
   breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}

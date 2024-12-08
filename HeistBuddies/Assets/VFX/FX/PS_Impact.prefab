@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 939699198797438611}
   - component: {fileID: 5972415080222948153}
   - component: {fileID: 1535956996181781055}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PS_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4911,7 +4911,7 @@ GameObject:
   - component: {fileID: 6223196325855783240}
   - component: {fileID: 5543232213431559725}
   - component: {fileID: 1338996345681761574}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PS_Lines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4950,7 +4950,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9820,7 +9820,7 @@ GameObject:
   - component: {fileID: 5865372033940504599}
   - component: {fileID: 1340254067885121688}
   - component: {fileID: 4030051821783181397}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PS_Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9859,9 +9859,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

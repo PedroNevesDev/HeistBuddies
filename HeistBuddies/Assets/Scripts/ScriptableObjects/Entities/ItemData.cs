@@ -8,6 +8,7 @@ public class ItemData : ScriptableObject
     [Header("General Settings")]
     public string Name;
     public int Heuries;
+    public GameObject Particle;
 
     [Header("Item Conditions")]
     public bool isBreakable = false;

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Kitchen Clock
   Heuries: 15
+  Particle: {fileID: 8115919215319097803, guid: 4530960f90a61064d985234e55f9d39d, type: 3}
   isBreakable: 1
   breakingSpeed: 8
   breakingSound: {fileID: 0}
