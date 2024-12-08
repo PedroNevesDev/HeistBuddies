@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Console
   m_EditorClassIdentifier: 
   Name: Console
-  Heures: 400
+  Heuries: 400
   isBreakable: 1
   breakingSpeed: 8
   breakingSound: {fileID: 0}

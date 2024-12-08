@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Armchair
   m_EditorClassIdentifier: 
   Name: Armchair
-  Heures: 185
+  Heuries: 185
   isBreakable: 0
   breakingSpeed: 1
   breakingSound: {fileID: 0}

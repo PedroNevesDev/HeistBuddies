@@ -361,7 +361,7 @@
                 {
                     "name": "",
                     "id": "eac728af-607b-4fc8-b5d2-47543e3f69ee",
-                    "path": "<Keyboard>/rightAlt",
+                    "path": "<Keyboard>/rightCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Player2",

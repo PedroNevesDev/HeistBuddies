@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Couch
   m_EditorClassIdentifier: 
   Name: Couch
-  Heures: 800
+  Heuries: 800
   isBreakable: 0
   breakingSpeed: 1
   breakingSound: {fileID: 0}

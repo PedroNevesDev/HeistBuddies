@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bed
   m_EditorClassIdentifier: 
   Name: Bed
-  Heures: 350
+  Heuries: 350
   isBreakable: 0
   breakingSpeed: 1
   breakingSound: {fileID: 0}

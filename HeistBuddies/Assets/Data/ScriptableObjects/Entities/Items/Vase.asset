@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vase
   m_EditorClassIdentifier: 
   Name: Vase
-  Heures: 5
+  Heuries: 5
   isBreakable: 1
   breakingSpeed: 3
   breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jewelry
   m_EditorClassIdentifier: 
   Name: Jewelry
-  Heures: 750
+  Heuries: 750
   isBreakable: 1
   breakingSpeed: 3
   breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}

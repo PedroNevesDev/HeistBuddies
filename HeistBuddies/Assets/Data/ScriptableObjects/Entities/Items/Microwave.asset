@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Microwave
   m_EditorClassIdentifier: 
   Name: Microwave
-  Heures: 100
+  Heuries: 100
   isBreakable: 1
   breakingSpeed: 9
   breakingSound: {fileID: 0}

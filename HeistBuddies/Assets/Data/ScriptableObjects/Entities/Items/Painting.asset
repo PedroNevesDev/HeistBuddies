@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Painting
   m_EditorClassIdentifier: 
   Name: Painting
-  Heures: 20
+  Heuries: 20
   isBreakable: 0
   breakingSpeed: 1
   breakingSound: {fileID: 0}

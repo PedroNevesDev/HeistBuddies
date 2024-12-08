@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Computer
   m_EditorClassIdentifier: 
   Name: Computer
-  Heures: 1200
+  Heuries: 1200
   isBreakable: 1
   breakingSpeed: 9
   breakingSound: {fileID: 8300000, guid: cf2e1980cf1fa1d4e88b904783fd45b4, type: 3}

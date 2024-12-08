@@ -52,6 +52,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController playerController)
     {
+        if(!lockPicking) return;
         if (ShouldBeInteractedWith) 
         {
             if(IsBeingInteractedWith)

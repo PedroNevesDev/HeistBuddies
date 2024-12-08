@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kitchen Clock
   m_EditorClassIdentifier: 
   Name: Kitchen Clock
-  Heures: 15
+  Heuries: 15
   isBreakable: 1
   breakingSpeed: 8
   breakingSound: {fileID: 0}

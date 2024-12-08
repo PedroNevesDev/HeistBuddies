@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     public void AddScore(int valueToAdd)
     {
         currentScore+=valueToAdd;
-        uiManager.UpdateCurrency(valueToAdd);
+        uiManager.UpdateCurrency(currentScore);
     }
 
     public List<ItemData> GetItems()

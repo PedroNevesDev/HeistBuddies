@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OldTV
   m_EditorClassIdentifier: 
   Name: OldTV
-  Heures: 150
+  Heuries: 150
   isBreakable: 1
   breakingSpeed: 15
   breakingSound: {fileID: 0}
