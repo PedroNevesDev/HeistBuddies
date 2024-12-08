@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] SkinnedMeshRenderer skinnedMeshRenderer;
 
+    [SerializeField] GameObject puffParticle;
+
     public void SetMesh(Mesh mesh)=> skinnedMeshRenderer.sharedMesh = mesh;
 
     #endregion
@@ -143,6 +145,7 @@ public class PlayerController : MonoBehaviour
         }
         balance.ShouldBalance = true;
         wasTeleported = true;
+        Instantiate(puffParticle,rb.transform.position,Quaternion.identity);
     }
 
     #endregion

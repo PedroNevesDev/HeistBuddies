@@ -985,6 +985,7 @@ MonoBehaviour:
   - {fileID: 2752483070649620546}
   - {fileID: 7509423298780664186}
   skinnedMeshRenderer: {fileID: 8426428475097429531}
+  puffParticle: {fileID: 2039233256055564183, guid: 4fb1c1e4686dc8b4fb39df9fcedd079e, type: 3}
 --- !u!114 &8808667950619304722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07fe670c5d97064eb141dd2f8c51708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxWeightValue: 50
   items: []
 --- !u!114 &3549202150260482220
 MonoBehaviour:
