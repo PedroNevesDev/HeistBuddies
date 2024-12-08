@@ -13,7 +13,7 @@ public class PlayerBackpackModule : MonoBehaviour
 
     PlayerController playerController;
 
-    public string GetPlayerName()=>playerController.SkinnedMeshRenderer.sharedMaterial.name;
+    public string GetPlayerName()=>playerController.SkinnedMeshRenderer.sharedMesh.name;
     void Start()
     {
         playerController = GetComponent<PlayerController>();

@@ -113,11 +113,9 @@ public class EnvironmentDetectionModule : MonoBehaviour
             if(currentGrabbable!=null)
             {
                 Collider myCol = currentGrabbable.GetComponent<Collider>();
-                if(currentInteractable!=null)
-                {
-                    if(grabbables.Contains(myCol))
-                        return;
-                }
+                if(grabbables.Contains(myCol))
+                    return;
+
             }
 
             Item grabbable = grabbables[0].GetComponent<Item>();
