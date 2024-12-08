@@ -30,6 +30,6 @@ public class PlayerInteractModule : MonoBehaviour
     {
         if(!onInteract)return;
         if(environmentDetectionModule.CurrentInteractable==null)return;
-        environmentDetectionModule.CurrentInteractable.Interact(playerController);
+        environmentDetectionModule.CurrentInteractable.Interact();
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 150301802183610084}
   - component: {fileID: 7675902415008886208}
   - component: {fileID: 4919973849273143844}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PS_Stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4920,7 +4920,7 @@ GameObject:
   - component: {fileID: 8003201256325926216}
   - component: {fileID: 4158151531746908205}
   - component: {fileID: 7735772951757968045}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PS_Head_Bonk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4958,9 +4958,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

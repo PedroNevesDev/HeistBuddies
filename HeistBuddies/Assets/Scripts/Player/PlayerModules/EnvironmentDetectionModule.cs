@@ -150,6 +150,10 @@ public class EnvironmentDetectionModule : MonoBehaviour
             currentInteractable = null;
         }
     }
+    public void EmptyParent()
+    {
+        
+    }
 
     void AddText(string text)
     {

@@ -50,7 +50,7 @@ public class Door : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact(PlayerController playerController)
+    public void Interact()
     {
         if(!lockPicking) return;
         if (ShouldBeInteractedWith) 
@@ -61,7 +61,6 @@ public class Door : MonoBehaviour, IInteractable
             }
             else
             {
-                currentPlayerPosition = playerController.transform.position;
                 lockPicking.OnSuccess += OpenDoor;
                 lockPicking.gameObject.SetActive(true);
             }
@@ -79,24 +78,10 @@ public class Door : MonoBehaviour, IInteractable
 
     public void OpenDoor()
     {
-        Vector3 doorToPlayer = currentPlayerPosition - transform.position;
-        doorToPlayer.y = 0;
 
-        float direction = Vector3.Dot(transform.right, doorToPlayer.normalized);
 
-        if (direction > 0)
-        {
-            // Player is on the right, open door to the left
-            jointLimits.min = -90;
-            jointLimits.max = 0;
-        }
-        else
-        {
-            // Player is on the left, open door to the right
-            jointLimits.min = 0;
-            jointLimits.max = 90;
-        }
-
+        jointLimits.min = -90;
+        jointLimits.max = 90;
         joint.limits = jointLimits;
         doorState = DoorState.Opened;
         currentPlayerPosition = Vector3.zero;

@@ -130,30 +130,28 @@ void PointArms()
         rightForearmJoint.slerpDrive = jd2;
         return;
     }
-
+    var step = 5 * Time.deltaTime;
     // Calculate direction to target for upper arms
-    Vector3 rightDirectionToTarget = target.localPosition - rightArmJoint.transform.localPosition;
-    Vector3 leftDirectionToTarget = target.localPosition - leftArmJoint.transform.localPosition;
+    Vector3 rightDirectionToTarget = target.position - rightArmJoint.transform.position;
+    Vector3 leftDirectionToTarget = target.position - leftArmJoint.transform.position;
 
-    // Create a rotation for upper arms
-    Quaternion rightUpperArmTargetRotation = Quaternion.LookRotation(rightDirectionToTarget);
-    Quaternion leftUpperArmTargetRotation = Quaternion.LookRotation(leftDirectionToTarget);
+    Quaternion rightUpperArmTargetRotation = Quaternion.Inverse(rightArmJoint.transform.rotation) * Quaternion.LookRotation(rightDirectionToTarget, rightArmJoint.transform.right);
+    Quaternion leftUpperArmTargetRotation = Quaternion.Inverse(leftArmJoint.transform.rotation) * Quaternion.LookRotation(leftDirectionToTarget, leftArmJoint.transform.right);
 
-    // Adjust for upper arm joints' local space
-    rightArmJoint.targetRotation = Quaternion.Inverse(rightArmJoint.transform.localRotation) * rightUpperArmTargetRotation;
-    leftArmJoint.targetRotation = Quaternion.Inverse(leftArmJoint.transform.localRotation) * leftUpperArmTargetRotation;
+    rightArmJoint.targetRotation = Quaternion.Slerp(rightArmJoint.targetRotation, rightUpperArmTargetRotation, step);
+    leftArmJoint.targetRotation = Quaternion.Slerp(leftArmJoint.targetRotation, leftUpperArmTargetRotation, step);
 
     // If forearms exist, calculate direction and rotation for them too
     if (rightForearmJoint != null && leftForearmJoint != null)
     {
-        Vector3 rightForearmDirectionToTarget = target.localPosition - rightForearmJoint.transform.localPosition;
-        Vector3 leftForearmDirectionToTarget = target.localPosition - leftForearmJoint.transform.localPosition;
+        Vector3 rightForearmDirectionToTarget = target.position - rightForearmJoint.transform.position;
+        Vector3 leftForearmDirectionToTarget = target.position - leftForearmJoint.transform.position;
 
-        Quaternion rightForearmTargetRotation = Quaternion.LookRotation(rightForearmDirectionToTarget);
-        Quaternion leftForearmTargetRotation = Quaternion.LookRotation(leftForearmDirectionToTarget);
+        Quaternion rightForearmTargetRotation = Quaternion.Inverse(rightForearmJoint.transform.rotation) * Quaternion.LookRotation(rightForearmDirectionToTarget, rightForearmJoint.transform.right);
+        Quaternion leftForearmTargetRotation = Quaternion.Inverse(leftForearmJoint.transform.rotation) * Quaternion.LookRotation(leftForearmDirectionToTarget, leftForearmJoint.transform.right);
 
-        rightForearmJoint.targetRotation = Quaternion.Inverse(rightForearmJoint.transform.localRotation) * rightForearmTargetRotation;
-        leftForearmJoint.targetRotation = Quaternion.Inverse(leftForearmJoint.transform.localRotation) * leftForearmTargetRotation;
+        rightForearmJoint.targetRotation = Quaternion.Slerp(rightForearmJoint.targetRotation, rightForearmTargetRotation, step);
+        leftForearmJoint.targetRotation = Quaternion.Slerp(leftForearmJoint.targetRotation, leftForearmTargetRotation, step);
     }
 
     print("Arms pointing to target");
@@ -224,4 +222,40 @@ void PointArms()
         weightManager.AddItemWeight(item,GetPlayerName());
         backpack.AddItemToBackPack(item);
     }
+    void OnDrawGizmos()
+{
+    if (!target)
+    {
+        return; // No target to draw lines to
+    }
+
+    // Check if the joints are assigned
+    if (rightArmJoint != null && leftArmJoint != null)
+    {
+        // Draw line from right arm to target
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(rightArmJoint.transform.position, target.position);
+
+        // Draw line from left arm to target
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(leftArmJoint.transform.position, target.position);
+
+        // If forearms exist, visualize them as well
+        if (rightForearmJoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(rightForearmJoint.transform.position, target.position);
+        }
+
+        if (leftForearmJoint != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(leftForearmJoint.transform.position, target.position);
+        }
+    }
+    else
+    {
+        Debug.LogWarning("One or more arm joints are not assigned.");
+    }
+}
 }

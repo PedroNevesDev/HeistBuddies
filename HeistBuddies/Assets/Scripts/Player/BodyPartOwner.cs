@@ -1,4 +1,3 @@
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class BodyPartOwner : MonoBehaviour
@@ -7,7 +6,8 @@ public class BodyPartOwner : MonoBehaviour
     PlayerController myOwner;
     ConfigurableJoint cj;
 
-    [SerializeField]bool adjustJoint = false;
+    [SerializeField] bool adjustJoint = false;
+    [SerializeField] GameObject ps;
 
     void Start()
     {
@@ -36,6 +36,14 @@ public class BodyPartOwner : MonoBehaviour
         if (myOwner.WasGrabbed && !myOwner.WasTeleported)
         {
             myOwner.TeleportPlayer();
+        }
+        BodyPartOwner bodyPartOwner = collision.gameObject.GetComponent<BodyPartOwner>();
+        if(ps&&bodyPartOwner?.myOwner!=myOwner)
+        {
+            Vector3 hitPoint = collision.contacts[0].point;
+            print("BONK");
+            GameObject go =Instantiate(ps,hitPoint,Quaternion.identity);
+            Destroy(go,0.7f);
         }
     }
 }

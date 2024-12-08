@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -18,6 +19,13 @@ public class GameManager : Singleton<GameManager>
         foreach(ItemData item in GetItems())
         {
             levelTotalScore +=item.Heuries;
+        }
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R)||Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
