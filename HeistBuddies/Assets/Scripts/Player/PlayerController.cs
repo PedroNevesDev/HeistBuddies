@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
 
     public void LaunchPlayer(float forceUp, float forceForward)
     {
+        
         for (int i = 0; i < bodyParts.Length; i++)
         {
             Rigidbody rigidbody = bodyParts[i].GetComponent<Rigidbody>();
