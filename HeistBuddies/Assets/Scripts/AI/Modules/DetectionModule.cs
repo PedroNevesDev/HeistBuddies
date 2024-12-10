@@ -159,7 +159,7 @@ public class DetectionModule : AIModule
         if (isDoor)
         {
             float distanceToDoor = Vector3.Distance(transform.position, door.transform.position);
-            bool canOpen = distanceToDoor <= grabbingRadius;
+            bool canOpen = distanceToDoor <= grabbingRadius + 0.5f;
 
             if (canOpen && door.UseState)
             {
