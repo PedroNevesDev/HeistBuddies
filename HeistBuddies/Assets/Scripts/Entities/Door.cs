@@ -25,6 +25,7 @@ public class Door : MonoBehaviour, IInteractable
     public bool IsBeingInteractedWith{ get =>lockPicking==null&&lockPicking.gameObject.activeSelf;}
     public string InteractionName{ get => doorInteractionName;}
     public GameObject GetGameObject{ get=> gameObject;}
+    public bool UseState { get => useState; set => useState = value; }
 
     int currentAttemps;
 

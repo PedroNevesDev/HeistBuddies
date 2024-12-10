@@ -21,4 +21,6 @@ public class ItemData : ScriptableObject
 
     [Header("Item Logo")]
     public Sprite Image;
+
+    public PositionEvent positionEvent;
 }

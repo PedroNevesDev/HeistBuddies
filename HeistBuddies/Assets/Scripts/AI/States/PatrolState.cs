@@ -29,6 +29,8 @@ public class PatrolState : AIState
 
     public override void OnStateUpdate()
     {
+        base.OnStateUpdate();
+
         if (isIdling)
         {
             idleTimer += Time.deltaTime;

@@ -87,6 +87,8 @@ public class DetectionModule : AIModule
 
                     break; // Exit after handling the first detected player
                 }
+
+                TryDetectDoor(hit);
             }
             else if (detectionType == DetectionType.Dog)
             {
@@ -148,6 +150,23 @@ public class DetectionModule : AIModule
             return true;
         }
         return false;
+    }
+
+    private void TryDetectDoor(Collider hit)
+    {
+        bool isDoor = hit.TryGetComponent<Door>(out Door door);
+
+        if (isDoor)
+        {
+            float distanceToDoor = Vector3.Distance(transform.position, door.transform.position);
+            bool canOpen = distanceToDoor <= grabbingRadius;
+
+            if (canOpen && door.UseState)
+            {
+                door.OpenDoor();
+            }
+
+        }
     }
 
     private void OnPlayerGrabbable(PlayerController player)

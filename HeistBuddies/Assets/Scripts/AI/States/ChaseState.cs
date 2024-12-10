@@ -18,6 +18,8 @@ public class ChaseState : AIState
 
     public override void OnStateUpdate()
     {
+        base.OnStateUpdate();
+
         if (detectionModule.DetectedPlayer != null)
         {
             agent.destination = detectionModule.DetectedPlayer.position;
