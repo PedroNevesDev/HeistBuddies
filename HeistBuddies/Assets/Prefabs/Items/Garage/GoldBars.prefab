@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldBars
       objectReference: {fileID: 0}
+    - target: {fileID: 1347364816657149751, guid: 83ba97c85e604c9499b4c3bb7b67042b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943977879614063917, guid: 83ba97c85e604c9499b4c3bb7b67042b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
