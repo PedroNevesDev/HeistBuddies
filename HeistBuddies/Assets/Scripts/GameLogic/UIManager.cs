@@ -7,7 +7,9 @@ using System.Collections.Generic;
 public class UIManager : Singleton<UIManager>
 {
     [Header("Timer Text")]
-    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private RectTransform arrowTransform;
+    [SerializeField] private float minAngle = -80f;
+    [SerializeField] private float maxAngle = 80f;
 
     [Header("Item List")]
     [SerializeField] private GameObject ItemHolder;
@@ -55,13 +57,13 @@ public class UIManager : Singleton<UIManager>
 
         UpdateListAlpha();
     }
-    public void UpdateTimer(float currentTime)
-    {
-        int hours = Mathf.FloorToInt(currentTime);
-        int minutes = Mathf.FloorToInt((currentTime - hours) * 60f);
 
-        string formattedTime = string.Format("{0:00}:{1:00}", hours, minutes);
-        timerText.text = formattedTime;
+    public void UpdateTimer(float currentTime, float startHour, float endHour)
+    {
+        float dayProgress = Mathf.InverseLerp(startHour, endHour, currentTime);
+        float arrowAngle = Mathf.Lerp(minAngle, maxAngle, dayProgress);
+
+        arrowTransform.rotation = Quaternion.Euler(0f, 0f, arrowAngle);
     }
 
     public void UpdateItemList()

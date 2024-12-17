@@ -39,6 +39,16 @@ public abstract class AIState : MonoBehaviour
     }
 
     public virtual void OnStateEnter() { }
-    public virtual void OnStateUpdate() { }
+
+    public virtual void OnStateUpdate() 
+    {
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            Vector3 position = new Vector3(agent.destination.x, 0f, agent.destination.z);
+            brain.transform.LookAt(agent.destination);
+            brain.transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        }
+    }
+
     public virtual void OnStateExit() { }
 }

@@ -23,3 +23,4 @@ MonoBehaviour:
   weight: 15
   isCollectable: 1
   Image: {fileID: 0}
+  positionEvent: {fileID: 11400000, guid: 56fba492fb237874cad65c184c13640a, type: 2}

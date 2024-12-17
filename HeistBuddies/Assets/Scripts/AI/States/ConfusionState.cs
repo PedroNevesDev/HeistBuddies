@@ -25,6 +25,8 @@ public class ConfusionState : AIState
 
     public override void OnStateUpdate()
     {
+        base.OnStateUpdate();
+
         confusionTimer -= Time.deltaTime;
 
         if (agent.remainingDistance <= agent.stoppingDistance)

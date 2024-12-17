@@ -56,6 +56,11 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
                 uiManager.uiItemDictionary.TryGetValue(itemData,out ItemToPickupUI itemUI);
                 itemUI?.CheckWrongMark();
                 AudioManager.Instance.PlaySoundEffect(itemData.breakingSound);
+
+                Vector3 pos = new Vector3(transform.position.x, 0f, transform.position.z);
+                PositionEventData eventData = new PositionEventData(null, pos, transform);
+                itemData.positionEvent.Invoke(eventData);
+
                 print(this.name + " broke at " + colisionSpeed + "km/h");
                 Destroy(gameObject);
             }

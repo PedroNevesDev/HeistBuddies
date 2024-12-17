@@ -11,6 +11,7 @@ public class AIBrainGuard : AIBrain
     [SerializeField] private PlayerFoundEvent PlayerFoundEvent;
     [SerializeField] private PlayerLostEvent PlayerLostEvent;
     [SerializeField] private PlayerGrabbedEvent PlayerGrabbedEvent;
+    [SerializeField] private PositionEvent PositionEvent;
 
     protected override void OnEnable()
     {
@@ -19,6 +20,8 @@ public class AIBrainGuard : AIBrain
         PlayerFoundEvent.Subscribe(OnPlayerFound);
         PlayerLostEvent.Subscribe(OnPlayerLost);
         PlayerGrabbedEvent.Subscribe(OnPlayerGrabbed);
+
+        PositionEvent.Subscribe(OnPositionEvent);
     }
 
     protected override void OnDisable()
@@ -28,6 +31,8 @@ public class AIBrainGuard : AIBrain
         PlayerFoundEvent.Unsubscribe(OnPlayerFound);
         PlayerLostEvent.Unsubscribe(OnPlayerLost);
         PlayerGrabbedEvent.Unsubscribe(OnPlayerGrabbed);
+
+        PositionEvent.Unsubscribe(OnPositionEvent);
     }
 
     public void EnableAlertPanel() => alertPanel.SetActive(true);
@@ -79,6 +84,16 @@ public class AIBrainGuard : AIBrain
             SetCanDetect(false);
             TransitionToState(AIStateType.Grab);
         }
+    }
+
+    private void OnPositionEvent(EventData eventData)
+    {
+        if (eventData is PositionEventData positionData)
+        {
+            SetInvestigateTarget(positionData.Position);
+        }
+
+        TransitionToState(AIStateType.Investigate);
     }
 
     #endregion

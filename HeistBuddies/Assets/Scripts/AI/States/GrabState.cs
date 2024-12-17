@@ -28,6 +28,8 @@ public class GrabState : AIState
 
     public override void OnStateUpdate()
     {
+        base.OnStateUpdate();
+
         if (player.WasTeleported)
         {
             brain.TransitionToState(AIStateType.Patrol);

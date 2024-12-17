@@ -7,7 +7,7 @@ public class InvestigateState : AIState
 
     [Header("Investigate Settings")]
     [SerializeField] private float investigationDuration = 5f;
-    private bool isInLocation = false;
+    [SerializeField] private bool isInLocation = false;
     private float investigationTimer = 0f;
     private Vector3 investigatePosition = Vector3.zero;
 
@@ -25,13 +25,15 @@ public class InvestigateState : AIState
 
     public override void OnStateUpdate()
     {
+        base.OnStateUpdate();
+
         if (isInLocation)
             investigationTimer -= Time.deltaTime;
 
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             isInLocation = true;
-            investigatePosition = AIHelpers.GetRandomSearchPosition(2f, transform);
+            investigatePosition = AIHelpers.GetRandomSearchPosition(1f, transform);
             agent.destination = investigatePosition;
         }
 

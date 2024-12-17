@@ -29,7 +29,7 @@ public class TimeManager : MonoBehaviour
         float totalHours = endHour - startHour;
         float cycleSpeed = totalHours / (cycleDuration * 60f); // Speed adjusted for negative progress
         currentTime += cycleSpeed * Time.deltaTime; // Decrease currentTime
-        UIManager.Instance.UpdateTimer(currentTime);
+        UIManager.Instance.UpdateTimer(currentTime, startHour, endHour);
 
         if (currentTime >= endHour) // Loop back to startHour
         {
