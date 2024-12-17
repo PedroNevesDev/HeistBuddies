@@ -33,17 +33,17 @@ public class TimeManager : MonoBehaviour
 
         if (currentTime >= endHour) // Loop back to startHour
         {
-            currentTime = startHour;
+            GameManager.Instance.GameOver();
         }
 
         // Calculate day progress (reversed)
         float dayProgress = Mathf.InverseLerp(startHour, endHour, currentTime);
         float intensity = Mathf.Lerp(minIntensity, maxIntensity, lightIntensity.Evaluate(dayProgress));
-        float sunAngle = Mathf.Lerp(90f, -90f, dayProgress); // Sun angle adjusted for reverse direction
+        float sunAngle = Mathf.Lerp(0f, 90f, dayProgress); // Sun angle adjusted for reverse direction
 
         directionalLight.intensity = intensity;
         directionalLight.color = lightColor.Evaluate(dayProgress);
-        directionalLight.transform.rotation = Quaternion.Euler(new Vector3(sunAngle, -30f, 170f));
+        directionalLight.transform.rotation = Quaternion.Euler(new Vector3(sunAngle, -30f, 0f));
     }
 
 }

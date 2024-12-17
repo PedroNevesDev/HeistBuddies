@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -10,6 +11,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private RectTransform arrowTransform;
     [SerializeField] private float minAngle = -80f;
     [SerializeField] private float maxAngle = 80f;
+
+    [Header("Pause Panel")]
+    [SerializeField] private GameObject pausePanel;
+
+    [Header("GameOver Panel")]
+    [SerializeField] private GameObject gameOverPanel;
 
     [Header("Item List")]
     [SerializeField] private GameObject ItemHolder;
@@ -110,5 +117,16 @@ public class UIManager : Singleton<UIManager>
         {
             pickWeightTarget = fillAmount;
         }
+    }
+
+    public void ShowPausePanel(bool condition)
+    {
+        if (condition) pausePanel.SetActive(true);
+        else pausePanel.SetActive(false);
+    }
+
+    public void ShowGameOverPanel()
+    {
+        gameOverPanel.SetActive(true);
     }
 }

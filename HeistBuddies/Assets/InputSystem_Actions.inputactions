@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "4323a659-cde5-430d-9f94-b08a2a38f899",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -205,6 +214,17 @@
                     "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78d5ce89-bf1f-4070-8c6c-7c822053c284",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Player1",
+                    "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -252,6 +272,15 @@
                     "name": "Throw",
                     "type": "Button",
                     "id": "07a5dd0d-000f-4cc2-bd8b-cbcb58b3af4e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "aef58ff1-a185-4838-a4e3-1a6782fce2b7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -412,6 +441,17 @@
                     "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f24781de-6d68-4e95-9722-e78afe65aae5",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Player2",
+                    "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -459,6 +499,15 @@
                     "name": "Throw",
                     "type": "Button",
                     "id": "a3fe6b4f-3760-4637-aeef-5a965e8f9559",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "414a1cec-f718-4b5a-8007-c0e5a85defcc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -518,6 +567,17 @@
                     "processors": "",
                     "groups": ";KeyboardMouseGamepad;Multiplayer",
                     "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5c7f704-cb10-41d0-9e19-4b2f168f7ac8",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Multiplayer",
+                    "action": "PauseGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

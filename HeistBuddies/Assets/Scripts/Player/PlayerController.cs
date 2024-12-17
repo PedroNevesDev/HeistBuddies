@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,6 +42,12 @@ public class PlayerController : MonoBehaviour
     public Modules PlayerModules { get => playerModules; set => playerModules = value; }
     public Balance Balance { get => balance; set => balance = value; }
     public SkinnedMeshRenderer SkinnedMeshRenderer { get => skinnedMeshRenderer; set => skinnedMeshRenderer = value; }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        GameManager.Instance.TogglePause();
+        Debug.Log("Pause Triggered");
+    }
 
     #endregion
 

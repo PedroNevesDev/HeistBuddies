@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -13,17 +14,22 @@ public class GameManager : Singleton<GameManager>
     [Header("Game Items")]
     public List<ItemData> Items = new List<ItemData>();
 
+    private bool isPaused = false;
+
     void Start()
     {
+        Time.timeScale = 1;
+
         uiManager = UIManager.Instance;
         foreach(ItemData item in GetItems())
         {
             levelTotalScore +=item.Heuries;
         }
     }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R)||Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(0);
         }
@@ -38,5 +44,32 @@ public class GameManager : Singleton<GameManager>
     public List<ItemData> GetItems()
     {
         return Items;
+    }
+
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+            UIManager.Instance.ShowPausePanel(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            UIManager.Instance.ShowPausePanel(false);
+        }
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        UIManager.Instance.ShowGameOverPanel();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
