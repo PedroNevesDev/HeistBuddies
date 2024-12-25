@@ -1309,6 +1309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseBlockoutFloorFix
       objectReference: {fileID: 0}
+    - target: {fileID: 2550463727306718371, guid: f4d82d36d1a77a24aa7ed737952f6fb3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2623598023128095222, guid: f4d82d36d1a77a24aa7ed737952f6fb3, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1320,7 +1324,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2550463727306718371, guid: f4d82d36d1a77a24aa7ed737952f6fb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1140279783}
   m_SourcePrefab: {fileID: 100100000, guid: f4d82d36d1a77a24aa7ed737952f6fb3, type: 3}
 --- !u!4 &168233535 stripped
 Transform:
@@ -12079,6 +12086,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1140279781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2550463727306718371, guid: f4d82d36d1a77a24aa7ed737952f6fb3, type: 3}
+  m_PrefabInstance: {fileID: 168233534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1140279783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140279781}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 95.50921, y: 78.810646, z: 0.000005949986}
+  m_Center: {x: -3.8057213, y: -5.6147895, z: -0.00009904975}
 --- !u!1 &1150092102 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 284585312572080734, guid: 381e2bc82c55cf54d8e0494341cfa57e, type: 3}
