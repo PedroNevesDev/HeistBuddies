@@ -36,6 +36,7 @@ public class TransparentWallDetection : MonoBehaviour
         {
             if (!oldColliders.Contains(newCollider))
             {
+                print(newCollider+" was detected");
                 newCollider.GetComponent<TransparentWallBehaviour>()?.ListOfDetectorsBehindWalls.Add(this);
             }
         }
