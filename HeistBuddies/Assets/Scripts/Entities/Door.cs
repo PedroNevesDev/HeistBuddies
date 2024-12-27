@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public enum DoorState
@@ -13,59 +14,88 @@ public class Door : MonoBehaviour, IInteractable
 
     [Header("Door Settings")]
     [SerializeField] private bool useState = false;
-
     private HingeJoint joint;
-    private JointLimits jointLimits;
 
     [Header("Door Interact")]
-    [SerializeField] bool useInteraction;
-    [SerializeField] int howManyAttempsUntilUnlocked;
+    [SerializeField]bool canInteract;
+    [SerializeField] PlayerGrabbedEvent playerGrabbedEvent;
     [SerializeField] LockPicking lockPicking;
     [SerializeField] string doorInteractionName = "Lockpick";
-    public bool ShouldBeInteractedWith{ get =>useInteraction&&doorState == DoorState.Closed;}
-    public bool IsBeingInteractedWith{ get =>lockPicking!=null&&lockPicking.gameObject.activeSelf;}
+
     public string InteractionName{ get => doorInteractionName;}
     public GameObject GetGameObject{ get=> gameObject;}
     public bool UseState { get => useState; set => useState = value; }
 
-    int currentAttemps;
+    string cantBeLockpickedBy;
+    string whoIsInteracting;
+    public string WhoIsInteracting { get => whoIsInteracting; set => whoIsInteracting = value; }
+    JointLimits openedLimits;
+    JointLimits closedLimits;
 
-    Vector3 currentPlayerPosition;
+    public bool CanInteract(PlayerController player)
+    {
+        string playerName = player.SkinnedMeshRenderer.sharedMesh.name;
+        bool shouldPlayerBeBlockedFromInteracting = cantBeLockpickedBy==playerName;
+        bool itsTheSamePlayer = whoIsInteracting==null||whoIsInteracting==playerName;
+        return doorState!=DoorState.Opened&&!shouldPlayerBeBlockedFromInteracting && itsTheSamePlayer;
+    }
     private void Start()
     {
         joint = GetComponent<HingeJoint>();
-        jointLimits = joint.limits;
 
-        Initialize();
+        InitializeLimits();
+
+        UpdateState();
+
+        playerGrabbedEvent?.Subscribe(LockDoorAfterPlayerWasGrabbed);
     }
-    private void Initialize()
+    private void InitializeLimits()
     {
-        if (useState)
-        {
-            JointLimits limits = joint.limits;
-            limits.min = 0;
-            limits.max = 0;
-            limits.bounciness = 0;
-            limits.bounceMinVelocity = 0;
+            closedLimits = joint.limits;
+            closedLimits.min = 0;
+            closedLimits.max = 0;
+            closedLimits.bounciness = 0;
+            closedLimits.bounceMinVelocity = 0;
 
-            joint.limits = limits;
+            openedLimits = joint.limits;
+            openedLimits.min = -90;
+            openedLimits.max = 90;
+            openedLimits.bounciness = 0;
+            openedLimits.bounceMinVelocity = 0;
+    }
+    public void ChangeState(DoorState state)
+    {
+        doorState = useState?state:DoorState.Opened;
+        UpdateState();
+    }
+    void UpdateState()
+    {
+        switch(doorState)
+        {
+            case DoorState.Closed:
+            joint.limits = closedLimits;
+            break;
+            case DoorState.Opened:
+            joint.limits = openedLimits;
+            break;
         }
     }
-
-    public void Interact()
+    public void Interact(PlayerController player)
     {
-        if(!lockPicking) return;
-        if (ShouldBeInteractedWith) 
+        if(whoIsInteracting==null)
         {
-            if(IsBeingInteractedWith)
-            {
-                lockPicking.CheckForOverlap();
-            }
-            else
-            {
-                lockPicking.OnSuccess += OpenDoor;
-                lockPicking.gameObject.SetActive(true);
-            }
+            whoIsInteracting = player.SkinnedMeshRenderer.sharedMesh.name;;
+        }
+        if(!CanInteract(player))return;
+        
+        if(lockPicking.gameObject.activeSelf==true)
+        {
+            lockPicking.CheckForOverlap();
+        }
+        else
+        {
+            lockPicking.OnSuccess += OpenDoor;
+            lockPicking.gameObject.SetActive(true);
         }
     }
 
@@ -75,18 +105,23 @@ public class Door : MonoBehaviour, IInteractable
     {
         lockPicking.OnSuccess -= OpenDoor;
         lockPicking.gameObject.SetActive(false);
-        print("triggered");
+        whoIsInteracting = null;
+        print("Stop");
     }
 
     public void OpenDoor()
     {
+        ChangeState(DoorState.Opened);
+        cantBeLockpickedBy = null;
+    }
 
-
-        jointLimits.min = -90;
-        jointLimits.max = 90;
-        joint.limits = jointLimits;
-        doorState = DoorState.Opened;
-        currentPlayerPosition = Vector3.zero;
+    public void LockDoorAfterPlayerWasGrabbed(EventData eventData)
+    {
+        ChangeState(DoorState.Closed);
+        if(eventData is PlayerControllerEventData data)
+        {
+            cantBeLockpickedBy = data.PlayerController.SkinnedMeshRenderer.sharedMesh.name;
+        }
     }
 
 }

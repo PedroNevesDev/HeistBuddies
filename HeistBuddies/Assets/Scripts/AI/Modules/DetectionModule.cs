@@ -176,7 +176,7 @@ public class DetectionModule : AIModule
 
         if (!wasPlayerGrabbable)
         {
-            var eventData = new PositionEventData(brain, player.Rb.position, player.Rb.transform);
+            var eventData = new PlayerControllerEventData(brain, player);
             PlayerGrabbedEvent.Invoke(eventData);
         }
     }

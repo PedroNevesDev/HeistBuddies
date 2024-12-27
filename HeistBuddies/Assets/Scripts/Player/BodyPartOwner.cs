@@ -41,7 +41,6 @@ public class BodyPartOwner : MonoBehaviour
         if(ps&&bodyPartOwner?.myOwner!=myOwner)
         {
             Vector3 hitPoint = collision.contacts[0].point;
-            print("BONK");
             GameObject go =Instantiate(ps,hitPoint,Quaternion.identity);
             Destroy(go,0.7f);
         }

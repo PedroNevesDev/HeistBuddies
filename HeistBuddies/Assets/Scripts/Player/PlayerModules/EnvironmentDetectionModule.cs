@@ -23,10 +23,11 @@ public class EnvironmentDetectionModule : MonoBehaviour
     public Item CurrentGrabbable { get => currentGrabbable; set => currentGrabbable = value; }
     public IInteractable CurrentInteractable { get => currentInteractable; set => currentInteractable = value; }
 
+    PlayerController playerController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -43,7 +44,7 @@ public class EnvironmentDetectionModule : MonoBehaviour
             SetupTextForGrabbables();
 
         }
-        else if(currentInteractable!=null&&currentInteractable.ShouldBeInteractedWith)
+        else if(currentInteractable!=null&&currentInteractable.CanInteract(playerController))
         {
             SetupTextForInteractables();
         }
@@ -139,23 +140,25 @@ public class EnvironmentDetectionModule : MonoBehaviour
         if (interactables.Count > 0)
         {
             IInteractable interactable = interactables[0].GetComponent<IInteractable>();
-            if (interactable != null&&interactable.ShouldBeInteractedWith&&!interactable.IsBeingInteractedWith)
+
+            if (interactable != null)
             {
-                if (currentInteractable != interactable)
-                {
+                if(currentInteractable != interactable&&interactable.CanInteract(playerController))
                     currentInteractable = interactable;
-                }
                 return;
             }
             
         }
-
-
-
+ 
         if (currentInteractable != null)
         {
+            if(currentInteractable.CanInteract(playerController))
+            {
+                currentInteractable.StopInteraction();
+            }
             currentInteractable = null;
         }
+
     }
 
     void AddText(string text)

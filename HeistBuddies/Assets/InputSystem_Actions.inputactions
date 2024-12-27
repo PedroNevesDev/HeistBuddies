@@ -29,7 +29,7 @@
                     "id": "45fec2d0-4c67-4433-87ab-2e54102f02ce",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -256,7 +256,7 @@
                     "id": "4b65de0a-c58c-4be4-83ad-840d688727af",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -483,7 +483,7 @@
                     "id": "962a88e6-af15-4db7-9f0d-7b8b7d6f1c96",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {

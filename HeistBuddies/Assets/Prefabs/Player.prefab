@@ -1264,7 +1264,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
-  raycastDistance: 0.6
+  raycastDistance: 0.5
   origin: {fileID: 4694388820961216695}
   balance: {fileID: 8441277467552499185}
   ignoreMask:

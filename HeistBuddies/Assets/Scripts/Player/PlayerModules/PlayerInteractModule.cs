@@ -5,12 +5,10 @@ using UnityEngine.InputSystem;
 public class PlayerInteractModule : MonoBehaviour
 {
     EnvironmentDetectionModule environmentDetectionModule;
-    bool onInteract;
-    public void OnInteract(InputAction.CallbackContext context) => onInteract = context.performed;
 
     PlayerController playerController;
-
     bool shouldInteract;
+    public void OnInteract(InputAction.CallbackContext context) => shouldInteract = context.performed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,16 +18,17 @@ public class PlayerInteractModule : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         Interact();
     }
-
-    void Interact()
+    public void Interact() 
     {
-        if(!onInteract)return;
+        if(!shouldInteract)return;
+        shouldInteract=false;
         if(environmentDetectionModule.CurrentInteractable==null)return;
-        environmentDetectionModule.CurrentInteractable.Interact();
+        
+        environmentDetectionModule.CurrentInteractable.Interact(playerController);
     }
 }
