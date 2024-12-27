@@ -21,9 +21,13 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
 
     private Rigidbody rb;
 
+    PlayerController owner;
+
+
     public Guid Id { get; private set; }
     public ItemData Data { get => itemData; private set => itemData = value; }
     public ItemState State { get => state; set => state = value; }
+    public PlayerController Owner { get => owner; set => owner = value; }
 
     private void Awake()
     {
@@ -69,8 +73,9 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
 
     #region IGrabbable
 
-    public void Grab(Transform target)
+    public void Grab(Transform target, PlayerController whoGrabbedMe)
     {
+        owner = whoGrabbedMe;
         state = ItemState.Grabbed;
 
         rb.isKinematic = true;
@@ -82,6 +87,7 @@ public class Item : MonoBehaviour, IGrabbable, IThrowable
 
     public void Release()
     {
+        owner = null;
         state = ItemState.Idle;
         transform.SetParent(null);
         gameObject.layer = LayerMask.NameToLayer("Item");

@@ -165,16 +165,29 @@ public class PlayerController : MonoBehaviour
         [SerializeField] PlayerMovementModule movementModule;
         [SerializeField] PlayerGrabbingModule grabbingModule;
         [SerializeField] PlayerBackpackModule backpackModule;
+        [SerializeField] PlayerInteractModule interactModule;
+        [SerializeField] PlayerJumpModule jumpModule;
+        [SerializeField] EnvironmentDetectionModule environmentDetectionModule;
+        [SerializeField] GroundDetection groundDetection;
+    
 
         public PlayerMovementModule MovementModule { get => movementModule; set => movementModule = value; }
         public PlayerGrabbingModule GrabbingModule { get => grabbingModule; set => grabbingModule = value; }
         public PlayerBackpackModule BackpackModule { get => backpackModule; set => backpackModule = value; }
+        public PlayerInteractModule InteractModule { get => interactModule; set => interactModule = value; }
+        public PlayerJumpModule JumpModule { get => jumpModule; set => jumpModule = value; }
+        public EnvironmentDetectionModule EnvironmentDetectionModule { get => environmentDetectionModule; set => environmentDetectionModule = value; }
+        public GroundDetection GroundDetection { get => groundDetection; set => groundDetection = value; }
 
         public void FindModules(PlayerController pc)
         {
             movementModule = pc.GetComponent<PlayerMovementModule>();
             grabbingModule = pc.GetComponent<PlayerGrabbingModule>();
             backpackModule = pc.GetComponent<PlayerBackpackModule>();
+            interactModule = pc.GetComponent<PlayerInteractModule>();
+            jumpModule = pc.GetComponent<PlayerJumpModule>();
+            environmentDetectionModule = pc.GetComponent<EnvironmentDetectionModule>();
+            groundDetection = pc.GetComponent<GroundDetection>();
         }
     }
     #endregion

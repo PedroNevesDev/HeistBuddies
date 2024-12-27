@@ -124,7 +124,7 @@ void PointArms()
         }
         fillThrowUi.fillAmount = exponentialCurve.Evaluate(currentHoldingDuration/maxHoldingDuration);
     }
-    void DeactivateThrowUI()
+    public void DeactivateThrowUI()
     {
         shouldDecrease = false;
         fillThrowUi.fillAmount = 0;
@@ -142,7 +142,7 @@ void PointArms()
         if (GetGrabbable() == null) return;
         if (isGrabbing == false)  return;
         if (GetGrabbable().State == ItemState.Grabbed)  return;
-        GetGrabbable().Grab(pointTarget);
+        GetGrabbable().Grab(pointTarget,playerController);
         isGrabbing = false;
     }
 

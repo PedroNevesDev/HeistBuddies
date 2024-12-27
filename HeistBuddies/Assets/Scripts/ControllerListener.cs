@@ -59,43 +59,49 @@ public class ControllerListener : MonoBehaviour
 
     void SwitchControlSchemes()
     {
-        // Quick summary here: the controlSchemes "Player1" or "Player2" are the control shemes for the singleplayer
-        // as for the multiplayer they can have the control scheme "Multiplayer" since they are connected to different devices(gamepads)
+    InputDevice[] p1Devices = GetConnectedDevices(0); // Devices for Player 1
+    InputDevice[] p2Devices = GetConnectedDevices(1); // Devices for Player 2
 
-        // Changing Controller Schemes depending on the boolean. true == multiplayer, false == singleplayer  
-        p1.SwitchCurrentControlScheme(multiplayer?"Multiplayer":"Player"+(p1.playerIndex+1), GetConnectedDevices(p1.playerIndex));
-        p2.SwitchCurrentControlScheme(multiplayer?"Multiplayer":"Player"+(p2.playerIndex+1), GetConnectedDevices(p1.playerIndex));
+    // Assign control schemes based on multiplayer status
+    p1.SwitchCurrentControlScheme(multiplayer ? "Multiplayer" : "Player1", p1Devices);
+    p2.SwitchCurrentControlScheme(multiplayer ? "Multiplayer" : "Player2", p2Devices);
     }
 
     // Just a quick and easy way to get access to the default singleplayer devices without repiting the code
     InputDevice[] GetConnectedDevices(int playerInputIndex)
     {
-        List<InputDevice> devices = new List<InputDevice>();
-        // Update numberOfPads so that it doesnt call OnDeviceChange multiple times
-        numberOfGamepads=Gamepad.all.Count; 
-        // Assigning multiplayer bool for better readability 
-        multiplayer=numberOfGamepads>=2; 
 
-        if(multiplayer) //Checks multiplayer has been triggered (condition : having more than one gamepad connected)
-        {
-            devices.Add(Gamepad.all[playerInputIndex]);
-        }
-        else 
-        {
-            if(Keyboard.current!=null) devices.Add(Keyboard.current);
-            if(numberOfGamepads==1) devices.Add(Gamepad.all[0]);            
-        }
-        
-        Debugging();
-        return devices.ToArray();
-    }
+    List<InputDevice> devices = new List<InputDevice>();
+    numberOfGamepads = Gamepad.all.Count;
 
-
-
-    void Debugging()
+    if (multiplayer)
     {
-        if(!debugMode) return;
-        print("Gamepad count: " + numberOfGamepads);
-        print("Multiplayer Mode: " + multiplayer);
+        if (playerInputIndex < numberOfGamepads)
+        {
+            devices.Add(Gamepad.all[playerInputIndex]); // Assign specific gamepad
+        }
     }
-}
+    else
+    {
+        if (Keyboard.current != null) devices.Add(Keyboard.current);
+        if (numberOfGamepads == 1) devices.Add(Gamepad.all[0]);
+    }
+
+    Debugging(devices);
+    return devices.ToArray();
+    }
+
+
+
+    void Debugging(List<InputDevice> devices)
+    {
+        if (!debugMode) return;
+
+        Debug.Log($"Gamepad count: {numberOfGamepads}");
+        Debug.Log($"Multiplayer Mode: {multiplayer}");
+        foreach (var device in devices)
+        {
+            Debug.Log($"Assigned Device: {device.name} ({device.deviceId})");
+        }
+    }
+    }

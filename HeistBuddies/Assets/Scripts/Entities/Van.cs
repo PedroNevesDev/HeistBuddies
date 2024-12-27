@@ -37,6 +37,7 @@ public class Van : MonoBehaviour
             rb.isKinematic = true;
         if(item&&item.Data.isCollectable)
         {
+            item.Owner?.PlayerModules.GrabbingModule.DeactivateThrowUI();
             uiManager.uiItemDictionary.TryGetValue(item.Data,out ItemToPickupUI itemUI);
             itemUI.CheckRightMark();
 

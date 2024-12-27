@@ -112,7 +112,6 @@ public class LockPicking : MonoBehaviour
                 {
                     hitTargets.Add(closestTarget);
                     closestTarget.GetComponent<LockpickPin>().UnlockPin(true);
-                    Debug.Log($"Hit target at {closestTarget.anchoredPosition}");
                     currentPin++;
                 }
                 else
@@ -130,7 +129,6 @@ public class LockPicking : MonoBehaviour
         {
             onSuccess.Invoke();
 
-            Debug.Log("Door is open");
 
             gameObject.SetActive(false);
         }
