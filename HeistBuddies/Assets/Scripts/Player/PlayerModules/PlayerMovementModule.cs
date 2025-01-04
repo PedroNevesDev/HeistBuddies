@@ -14,7 +14,9 @@ public class PlayerMovementModule : MonoBehaviour
     [SerializeField] Transform orientation;
 
     // Animator of the animated rig. Lets you change the animation 
-    [SerializeField] Animator animator; 
+    [SerializeField] Animator animator;
+
+    [SerializeField] private ParticleSystem trailEffect;
 
     Vector2 moveInput = Vector2.zero;
 
@@ -72,16 +74,31 @@ public class PlayerMovementModule : MonoBehaviour
             if(myGroundDetection.CheckForGround())
             {
                 animator.SetBool("Moving",true);
+
+                if (!trailEffect.isPlaying)
+                {
+                    trailEffect.Play();
+                }
             }
             else
             {
                 animator.SetBool("Moving",false);
+
+                if (trailEffect.isPlaying)
+                {
+                    trailEffect.Stop();
+                }
             }
         }
         else
         {
             // Makes the character go into Idle animation
-            animator.SetBool("Moving",false); 
+            animator.SetBool("Moving",false);
+
+            if (trailEffect.isPlaying)
+            {
+                trailEffect.Stop();
+            }
         }
         
         // Applying the move direction to the rigidbody
