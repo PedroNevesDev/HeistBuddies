@@ -13,7 +13,7 @@ public class Van : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward*300,ForceMode.Impulse);
+        rb.AddForce(-transform.up*300,ForceMode.Impulse);
         gameManager = GameManager.Instance;
         uiManager = UIManager.Instance;
         audioManager = AudioManager.Instance;
