@@ -40251,12 +40251,12 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7913162772879272824}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: -0.57, y: -1.43, z: -1.11}
-  m_Axis: {x: 0, y: 0, z: -1}
+  m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 1
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -40268,8 +40268,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: -6.9730234
-    max: 129.23808
+    min: -97.25639
+    max: 65.198654
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -40295,7 +40295,7 @@ HingeJoint:
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
   m_Spring:
-    spring: 0
+    spring: 1
     damper: 0
     targetPosition: 0
   m_UseMotor: 0
@@ -40307,8 +40307,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: -123.50238
-    max: 27.287071
+    min: -69.95254
+    max: 87.07867
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
