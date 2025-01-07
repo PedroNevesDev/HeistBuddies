@@ -92,6 +92,7 @@ public class PatrolState : AIState
         idleTimer = 0f;
         idleDuration = Random.Range(idleDurationRange.x, idleDurationRange.y);
         agent.isStopped = true;
+        print("Idling");
     }
 
     public void SetSinglePatrolPosition(Transform patrolPoint)

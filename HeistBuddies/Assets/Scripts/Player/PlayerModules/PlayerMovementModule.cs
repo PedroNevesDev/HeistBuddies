@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(PlayerBackpackModule)),RequireComponent(typeof(PlayerController)),RequireComponent(typeof(GroundDetection))]
 public class PlayerMovementModule : MonoBehaviour
@@ -17,6 +18,8 @@ public class PlayerMovementModule : MonoBehaviour
     [SerializeField] Animator animator;
 
     [SerializeField] private ParticleSystem trailEffect;
+    [SerializeField] private VisualEffect trailEffect2;
+
 
     Vector2 moveInput = Vector2.zero;
 
@@ -31,6 +34,7 @@ public class PlayerMovementModule : MonoBehaviour
     PlayerController playerController;
 
     PlayerBackpackModule backpack;
+
     void Start()
     {
         myGroundDetection = GetComponent<GroundDetection>();
@@ -75,19 +79,17 @@ public class PlayerMovementModule : MonoBehaviour
             {
                 animator.SetBool("Moving",true);
 
-                if (!trailEffect.isPlaying)
-                {
-                    trailEffect.Play();
-                }
+
+                trailEffect2.SetFloat("ParticleRate",6);
+
             }
             else
             {
                 animator.SetBool("Moving",false);
 
-                if (trailEffect.isPlaying)
-                {
-                    trailEffect.Stop();
-                }
+
+                trailEffect2.SetFloat("ParticleRate",0);
+   
             }
         }
         else
@@ -95,10 +97,9 @@ public class PlayerMovementModule : MonoBehaviour
             // Makes the character go into Idle animation
             animator.SetBool("Moving",false);
 
-            if (trailEffect.isPlaying)
-            {
-                trailEffect.Stop();
-            }
+
+            trailEffect2.SetFloat("ParticleRate",0);
+            
         }
         
         // Applying the move direction to the rigidbody
