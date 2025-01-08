@@ -8,6 +8,8 @@ public class ItemToPickupUI : MonoBehaviour
     public Image wrongCheckMark;
     public TextMeshProUGUI Name;
 
+    public bool isCollected = false; 
+
     public void Populate( string name, int points)
     {
 
@@ -23,6 +25,7 @@ public class ItemToPickupUI : MonoBehaviour
     {
         UIManager.Instance.ShowList();
         rightCheckMark.gameObject.SetActive(true);
+        isCollected = true;
     }
 
 }

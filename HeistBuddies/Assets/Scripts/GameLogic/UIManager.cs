@@ -17,11 +17,12 @@ public class UIManager : Singleton<UIManager>
 
     [Header("GameOver Panel")]
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameWinPanel;
 
     [Header("Item List")]
     [SerializeField] private GameObject ItemHolder;
     [SerializeField] private GameObject ItemListPrefab;
-    public Dictionary<ItemData,ItemToPickupUI> uiItemDictionary = new Dictionary<ItemData, ItemToPickupUI>();
+    public Dictionary<ItemData, ItemToPickupUI> uiItemDictionary = new Dictionary<ItemData, ItemToPickupUI>();
     [SerializeField] private CanvasGroup itemListForFade;
     [SerializeField] private float itemListFadeInSpeed;
     [SerializeField] private float itemListFadeOutSpeed;
@@ -41,7 +42,7 @@ public class UIManager : Singleton<UIManager>
 
     float lockWeightTarget = 0f;
     float pickWeightTarget = 0f;
-    
+
     private void Start()
     {
         UpdateItemList();
@@ -128,5 +129,10 @@ public class UIManager : Singleton<UIManager>
     public void ShowGameOverPanel()
     {
         gameOverPanel.SetActive(true);
+    }
+
+    public void ShowGameWinPanel()
+    {
+        gameWinPanel.SetActive(true);
     }
 }

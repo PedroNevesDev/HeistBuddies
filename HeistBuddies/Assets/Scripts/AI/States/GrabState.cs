@@ -54,7 +54,7 @@ public class GrabState : AIState
         player.WasGrabbed = true;
 
         player.ChangePlayerBodyParts();
-        player.Balance.ShouldBalance = false;
+        //player.Balance.ShouldBalance = false;
 
         yield return new WaitForSeconds(0.1f);
 

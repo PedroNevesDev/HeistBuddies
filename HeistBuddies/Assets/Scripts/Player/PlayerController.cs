@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
     
     private IEnumerator Teleport()
     {
+        Instantiate(puffParticle, rb.transform.position, Quaternion.identity);
         wasTeleported = false;
         transform.GetChild(0).gameObject.SetActive(false);
 
@@ -151,7 +152,7 @@ public class PlayerController : MonoBehaviour
         {
             playerModules.MovementModule.enabled = true;
         }
-        balance.ShouldBalance = true;
+        //balance.ShouldBalance = true;
         wasTeleported = true;
         Instantiate(puffParticle,rb.transform.position,Quaternion.identity);
     }

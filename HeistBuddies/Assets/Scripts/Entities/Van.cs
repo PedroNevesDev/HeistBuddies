@@ -41,7 +41,9 @@ public class Van : MonoBehaviour
             uiManager.uiItemDictionary.TryGetValue(item.Data,out ItemToPickupUI itemUI);
             itemUI.CheckRightMark();
 
+
             gameManager.AddScore(item.Data.Heuries);
+            GameManager.Instance.CheckForItems(item.Data);
             Destroy(item.gameObject);
         }
     }

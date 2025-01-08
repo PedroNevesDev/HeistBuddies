@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Game Items")]
     public List<ItemData> Items = new List<ItemData>();
+    public int itemsGrabbed = 0;
 
     private bool isPaused = false;
 
@@ -39,6 +40,18 @@ public class GameManager : Singleton<GameManager>
     {
         currentScore+=valueToAdd;
         uiManager.UpdateCurrency(currentScore);
+    }
+
+    public void CheckForItems(ItemData data)
+    {
+        UIManager.Instance.uiItemDictionary.TryGetValue(data, out var item);
+        if (item.isCollected) itemsGrabbed++;
+
+        if (itemsGrabbed == Items.Count) 
+        {
+            Time.timeScale = 0;
+            UIManager.Instance.ShowGameWinPanel();
+        }
     }
 
     public List<ItemData> GetItems()

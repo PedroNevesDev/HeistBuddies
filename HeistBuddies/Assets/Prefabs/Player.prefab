@@ -1096,7 +1096,7 @@ MonoBehaviour:
   rb: {fileID: 4501275906084773058}
   wasTeleported: 0
   wasGrabbed: 0
-  balance: {fileID: 0}
+  balance: {fileID: 8441277467552499185}
   bodyParts:
   - {fileID: 3533729729565307143}
   - {fileID: 3284401909450547996}
