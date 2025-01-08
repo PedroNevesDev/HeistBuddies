@@ -30628,6 +30628,7 @@ MonoBehaviour:
   maxAngle: 80
   pausePanel: {fileID: 0}
   gameOverPanel: {fileID: 0}
+  gameWinPanel: {fileID: 0}
   ItemHolder: {fileID: 883345979}
   ItemListPrefab: {fileID: 4932069167589965992, guid: 3342e3eafcbd6b944b72b29fd1c5f08b, type: 3}
   itemListForFade: {fileID: 971794334}
@@ -30694,6 +30695,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 42aee0ba9d943784ba20cbc2c5b6e705, type: 2}
   - {fileID: 11400000, guid: 290d5ad20d0772b4a86a7078d5583606, type: 2}
   - {fileID: 11400000, guid: 592074fb9af588243bda490a12422666, type: 2}
+  itemsGrabbed: 0
 --- !u!64 &1366345615
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -42270,7 +42272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1820570684
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42303,6 +42305,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6190f00e352bb9d499254eaba92affa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputModule: {fileID: 483291111}
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1820570683}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2142026078}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1828841273}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1059473926}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 705449218}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2142026078}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1821085198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1839944675081185051, guid: 629ded28f5aea4d45bbf156608a86870, type: 3}
