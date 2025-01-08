@@ -5,6 +5,7 @@ public class Safe : MonoBehaviour, IInteractable
     [SerializeField] private GameObject door;
     private bool isOpen = false;
 
+    [SerializeField] private LockPicking lockPicking;
     public string InteractionName { get => "Open Safe"; }
 
     public GameObject GetGameObject { get => gameObject; }
@@ -13,14 +14,23 @@ public class Safe : MonoBehaviour, IInteractable
 
     public bool CanInteract(PlayerController player)
     {
-        if (isOpen) return false;
-        else return true;
-    }
 
+        return !isOpen;
+    }
     public void Interact(PlayerController player)
     {
-        if (!CanInteract(player)) return;
-
+        if(lockPicking.gameObject.activeSelf==true)
+        {
+            lockPicking.CheckForOverlap();
+        }
+        else
+        {
+            lockPicking.OnSuccess += OpenSafe;
+            lockPicking.gameObject.SetActive(true);
+        }
+    }
+    void OpenSafe()
+    {
         if (!isOpen)
         {
             isOpen = true;
