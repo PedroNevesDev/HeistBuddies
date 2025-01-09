@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class ControllerListener : MonoBehaviour
 {
-    [SerializeField] List<Mesh> randomPlayerMeshes = new List<Mesh>();
+    [SerializeField] Mesh lockMesh;
+    [SerializeField] Mesh pickMesh;
     public GameObject playerPrefab;
 
     public CinemachineTargetGroup cameraTargetGroup;
+
+    SelectionPersistantData spd;
 
     public Transform mapSpawnPoint;
     
@@ -19,6 +22,7 @@ public class ControllerListener : MonoBehaviour
     int numberOfGamepads = 0;
     void Start()
     {
+        spd = SelectionPersistantData.Instance;
         SpawnPlayers();
     }
     void Update()
@@ -32,12 +36,25 @@ public class ControllerListener : MonoBehaviour
     }
     void SpawnPlayers()
     {
+        Mesh mesh1;
+        Mesh mesh2;
+        if(spd.LockModel==1)
+        {
+            mesh1 = lockMesh;
+            mesh2 = pickMesh;
+        }
+        else
+        {
+            mesh2 = lockMesh;
+            mesh1 = pickMesh;
+        }
+
         // Instantiating player one
         p1 = PlayerInput.Instantiate(playerPrefab); 
         p1.transform.position = mapSpawnPoint.position + mapSpawnPoint.right*1;
         PlayerController pc1 = p1.GetComponent<PlayerController>();
         cameraTargetGroup.AddMember(pc1.Rb.transform,1,1);
-        pc1.SetMesh(GetRandomMesh());
+        pc1.SetMesh(mesh1);
         
 
         // Instantiating player two
@@ -45,16 +62,9 @@ public class ControllerListener : MonoBehaviour
         p2.transform.position = mapSpawnPoint.position + mapSpawnPoint.right*2;
         PlayerController pc2 = p2.GetComponent<PlayerController>();
         cameraTargetGroup.AddMember(pc2.Rb.transform,1,1);
-        pc2.SetMesh(GetRandomMesh());
+        pc2.SetMesh(mesh2);
 
         SwitchControlSchemes();
-    }
-
-    public Mesh GetRandomMesh()
-    {
-        Mesh mesh = randomPlayerMeshes[Random.Range(0,randomPlayerMeshes.Count)];
-        randomPlayerMeshes.Remove(mesh);
-        return mesh;
     }
 
     void SwitchControlSchemes()
@@ -71,24 +81,24 @@ public class ControllerListener : MonoBehaviour
     InputDevice[] GetConnectedDevices(int playerInputIndex)
     {
 
-    List<InputDevice> devices = new List<InputDevice>();
-    numberOfGamepads = Gamepad.all.Count;
+        List<InputDevice> devices = new List<InputDevice>();
+        numberOfGamepads = Gamepad.all.Count;
 
-    if (multiplayer)
-    {
-        if (playerInputIndex < numberOfGamepads)
+        if (multiplayer)
         {
-            devices.Add(Gamepad.all[playerInputIndex]); // Assign specific gamepad
+            if (playerInputIndex < numberOfGamepads)
+            {
+                devices.Add(Gamepad.all[playerInputIndex]); // Assign specific gamepad
+            }
         }
-    }
-    else
-    {
-        if (Keyboard.current != null) devices.Add(Keyboard.current);
-        if (numberOfGamepads == 1) devices.Add(Gamepad.all[0]);
-    }
+        else
+        {
+            if (Keyboard.current != null) devices.Add(Keyboard.current);
+            if (numberOfGamepads == 1) devices.Add(Gamepad.all[0]);
+        }
 
-    Debugging(devices);
-    return devices.ToArray();
+        Debugging(devices);
+        return devices.ToArray();
     }
 
 

@@ -29,8 +29,24 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject puffParticle;
 
-    public void SetMesh(Mesh mesh)=> skinnedMeshRenderer.sharedMesh = mesh;
+    public void SetMesh(Mesh playerMesh)
+    {
+        skinnedMeshRenderer.sharedMesh = playerMesh;
+        if(playerMesh.name == "PickModel")
+        {
+            pickBag.SetActive(true);
+            lockBag.SetActive(false);
+        }
+        else
+        {
+            pickBag.SetActive(false);
+            lockBag.SetActive(true);
+        }
 
+    } 
+
+    [SerializeField] GameObject pickBag;
+    [SerializeField] GameObject lockBag;
     #endregion
 
     #region Getters/Setters
