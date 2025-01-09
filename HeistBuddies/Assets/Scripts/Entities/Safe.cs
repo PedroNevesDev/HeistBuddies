@@ -40,6 +40,6 @@ public class Safe : MonoBehaviour, IInteractable
 
     public void StopInteraction()
     {
-    
+        
     }
 }

@@ -70,6 +70,7 @@ public class Door : MonoBehaviour, IInteractable
     }
     void UpdateState()
     {
+        if(joint)
         switch(doorState)
         {
             case DoorState.Closed:

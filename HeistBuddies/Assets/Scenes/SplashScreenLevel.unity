@@ -20539,7 +20539,8 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -4807176563209452138, guid: 57dd9bb3bed3be94287b2bef5728fbad, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2965796179517941442, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1727149886668198582, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
@@ -33437,6 +33438,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3822940087202814795, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4882627866721590575, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.31
@@ -33485,7 +33490,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2965796179517941442, guid: e37f04d8e61c5ba47aaeea43218e0b27, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
